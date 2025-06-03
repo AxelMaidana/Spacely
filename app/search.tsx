@@ -110,7 +110,7 @@ const SearchScreen = () => {
           <Text style={styles.sectionTitle}>Tus últimas búsquedas</Text>
           {ultimas.map((item) => (
             <View key={item} style={styles.recentItem}>
-              <MaterialIcons name="restaurant" size={20} color="#000" />
+              <MaterialIcons name="history" size={20} color="#000" />
               <Text style={styles.recentText}>{item}</Text>
               <TouchableOpacity onPress={() => borrarBusqueda(item)} style={{ marginLeft: 'auto' }}>
                 <Ionicons name="close" size={20} color="#888" />
