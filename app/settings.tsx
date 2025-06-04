@@ -3,12 +3,14 @@ import { StyleSheet, View, Text, Switch, ScrollView, TouchableOpacity } from 're
 import Animated, { FadeInUp } from 'react-native-reanimated';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { COLORS } from '@/constants/Colors';
-import { Bell, Moon, Shield, CircleHelp as HelpCircle, Info } from 'lucide-react-native';
+import { Bell, Moon, Shield, CircleHelp as HelpCircle, Info, ArrowLeft } from 'lucide-react-native';
+import { useNavigation } from '@react-navigation/native';
 
 export default function SettingsScreen() {
   const [notifications, setNotifications] = useState(true);
   const [darkMode, setDarkMode] = useState(false);
   const [biometrics, setBiometrics] = useState(false);
+  const navigation = useNavigation();
 
   const toggleNotifications = () => setNotifications(previous => !previous);
   const toggleDarkMode = () => setDarkMode(previous => !previous);
@@ -16,12 +18,12 @@ export default function SettingsScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Animated.View 
-        entering={FadeInUp.delay(100).duration(500)}
-        style={styles.header}
-      >
+      <View style={{ flexDirection: 'row', alignItems: 'center', paddingHorizontal: 16, paddingTop: 16 }}>
+        <TouchableOpacity onPress={() => navigation.goBack()} style={{ marginRight: 16 }}>
+          <ArrowLeft size={28} color={COLORS.text} />
+        </TouchableOpacity>
         <Text style={styles.title}>Settings</Text>
-      </Animated.View>
+      </View>
       
       <ScrollView style={styles.scrollView}>
         <Animated.View 
@@ -32,15 +34,15 @@ export default function SettingsScreen() {
           
           <View style={styles.settingItem}>
             <View style={styles.settingIconContainer}>
-              <Bell size={20} color={COLORS.primary} />
+              <Bell size={20} color={COLORS.PRIMARY_COLOR} />
             </View>
             <View style={styles.settingContent}>
               <Text style={styles.settingTitle}>Notifications</Text>
               <Text style={styles.settingDescription}>Receive app notifications</Text>
             </View>
             <Switch
-              trackColor={{ false: COLORS.border, true: COLORS.primaryLight }}
-              thumbColor={notifications ? COLORS.primary : COLORS.textTertiary}
+              trackColor={{ false: COLORS.border, true: COLORS.PRIMARY_COLOR_DARK }}
+              thumbColor={notifications ? COLORS.PRIMARY_COLOR : COLORS.textTertiary}
               onValueChange={toggleNotifications}
               value={notifications}
             />
@@ -48,15 +50,15 @@ export default function SettingsScreen() {
           
           <View style={styles.settingItem}>
             <View style={styles.settingIconContainer}>
-              <Moon size={20} color={COLORS.primary} />
+              <Moon size={20} color={COLORS.PRIMARY_COLOR} />
             </View>
             <View style={styles.settingContent}>
               <Text style={styles.settingTitle}>Dark Mode</Text>
               <Text style={styles.settingDescription}>Switch to dark theme</Text>
             </View>
             <Switch
-              trackColor={{ false: COLORS.border, true: COLORS.primaryLight }}
-              thumbColor={darkMode ? COLORS.primary : COLORS.textTertiary}
+              trackColor={{ false: COLORS.border, true: COLORS.PRIMARY_COLOR_DARK }}
+              thumbColor={darkMode ? COLORS.PRIMARY_COLOR : COLORS.textTertiary}
               onValueChange={toggleDarkMode}
               value={darkMode}
             />
@@ -71,15 +73,15 @@ export default function SettingsScreen() {
           
           <View style={styles.settingItem}>
             <View style={styles.settingIconContainer}>
-              <Shield size={20} color={COLORS.primary} />
+              <Shield size={20} color={COLORS.PRIMARY_COLOR} />
             </View>
             <View style={styles.settingContent}>
               <Text style={styles.settingTitle}>Biometric Login</Text>
               <Text style={styles.settingDescription}>Login with Face ID or Touch ID</Text>
             </View>
             <Switch
-              trackColor={{ false: COLORS.border, true: COLORS.primaryLight }}
-              thumbColor={biometrics ? COLORS.primary : COLORS.textTertiary}
+              trackColor={{ false: COLORS.border, true: COLORS.PRIMARY_COLOR_DARK }}
+              thumbColor={biometrics ? COLORS.PRIMARY_COLOR : COLORS.textTertiary}
               onValueChange={toggleBiometrics}
               value={biometrics}
             />
@@ -87,7 +89,7 @@ export default function SettingsScreen() {
           
           <TouchableOpacity style={styles.settingButton}>
             <View style={styles.settingIconContainer}>
-              <Shield size={20} color={COLORS.primary} />
+              <Shield size={20} color={COLORS.PRIMARY_COLOR} />
             </View>
             <View style={styles.settingContent}>
               <Text style={styles.settingTitle}>Change Password</Text>
@@ -104,7 +106,7 @@ export default function SettingsScreen() {
           
           <TouchableOpacity style={styles.settingButton}>
             <View style={styles.settingIconContainer}>
-              <HelpCircle size={20} color={COLORS.primary} />
+              <HelpCircle size={20} color={COLORS.PRIMARY_COLOR} />
             </View>
             <View style={styles.settingContent}>
               <Text style={styles.settingTitle}>Help & Support</Text>
@@ -114,7 +116,7 @@ export default function SettingsScreen() {
           
           <TouchableOpacity style={styles.settingButton}>
             <View style={styles.settingIconContainer}>
-              <Info size={20} color={COLORS.primary} />
+              <Info size={20} color={COLORS.PRIMARY_COLOR} />
             </View>
             <View style={styles.settingContent}>
               <Text style={styles.settingTitle}>About App</Text>

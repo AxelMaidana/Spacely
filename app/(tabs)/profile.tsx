@@ -35,7 +35,7 @@ export default function ProfileScreen() {
         <Text style={styles.userEmail}>{user?.email || 'user@example.com'}</Text>
         
         <TouchableOpacity style={styles.editProfileButton}>
-          <Edit size={16} color={COLORS.primary} />
+          <Edit size={16} color={COLORS.PRIMARY_COLOR} />
           <Text style={styles.editProfileText}>Edit Profile</Text>
         </TouchableOpacity>
       </Animated.View>
@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
     width: 104,
     height: 104,
     borderRadius: 52,
-    backgroundColor: COLORS.primary,
+    backgroundColor: COLORS.PRIMARY_COLOR,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -148,12 +148,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     borderRadius: 20,
     borderWidth: 1,
-    borderColor: COLORS.primary,
+    borderColor: COLORS.PRIMARY_COLOR,
   },
   editProfileText: {
     fontFamily: 'Inter-Medium',
     fontSize: 14,
-    color: COLORS.primary,
+    color: COLORS.PRIMARY_COLOR,
     marginLeft: 8,
   },
   statsContainer: {
