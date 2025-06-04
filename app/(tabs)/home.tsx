@@ -14,6 +14,8 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useAuth } from '@/hooks/useAuth';
 import { COLORS } from '@/constants/Colors';
 import { MaterialIcons, FontAwesome, Ionicons } from '@expo/vector-icons';
+import { Cog } from 'lucide-react-native';
+import { navigate } from 'expo-router/build/global-state/routing';
 
 const restaurants = [
   {
@@ -78,8 +80,10 @@ export default function HomeScreen() {
             <Text style={styles.greeting}>Hola, {user?.name || 'Gourmet'}</Text>
             <Text style={styles.welcomeBack}>¿Qué vas a comer hoy?</Text>
           </View>
-          <TouchableOpacity style={styles.profileButton}>
-            <FontAwesome name="user-circle" size={28} color={COLORS.text} />
+          <TouchableOpacity style={styles.settingsButton}
+            onPress={() => navigate('/settings')}
+          >
+            <Cog size={24} color={COLORS.textSecondary} />
           </TouchableOpacity>
         </Animated.View>
 
@@ -116,7 +120,7 @@ export default function HomeScreen() {
                 onPress={() => setSelectedCategory(category.id)}
               >
                 <MaterialIcons 
-                  name={categories.icon}
+                  name={category.icon as any}
                   size={24} 
                   color={selectedCategory === category.id ? '#FFF' : COLORS.textSecondary} 
                 />
@@ -191,8 +195,8 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.background,
   },
   scrollContent: {
-    padding: 16,
-    paddingBottom: 30,
+    padding: 6,
+    paddingBottom: 62,
   },
   header: {
     flexDirection: 'row',
@@ -211,7 +215,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: COLORS.textSecondary,
   },
-  profileButton: {
+  settingsButton: {
     padding: 8,
   },
   searchContainer: {

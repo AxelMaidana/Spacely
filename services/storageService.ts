@@ -79,7 +79,7 @@ export const storageService = {
    */
   getAllKeys: async (): Promise<string[]> => {
     try {
-      return await AsyncStorage.getAllKeys();
+      return Array.from(await AsyncStorage.getAllKeys());
     } catch (error) {
       console.error('Error getting all keys:', error);
       throw error;

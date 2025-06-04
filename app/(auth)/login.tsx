@@ -42,7 +42,7 @@ export default function Login() {
   useEffect(() => {
     // Animación al montar el componente
     circleScale.value = withTiming(0, {
-      duration: 1200,
+      duration: 5200,
       easing: Easing.out(Easing.exp)
     });
     
@@ -78,10 +78,6 @@ export default function Login() {
     transform: [{ scale: circleScale.value }],
   }));
 
-  const contentStyle = useAnimatedStyle(() => ({
-    opacity: contentOpacity.value,
-  }));
-
   return (
     <View style={styles.backgroundContainer}>
       {/* Círculo naranja que se contrae */}
@@ -101,78 +97,82 @@ export default function Login() {
         >
           <View style={styles.centerContainer}>
             {/* Logo de la app */}
-            <Animated.View 
-              style={[styles.logoContainer, contentStyle]}
-              entering={FadeIn.delay(300)}
-            >
-              <Image
-                source={require('@/assets/images/spacely1.png')}
-                style={styles.logoImage}
-                resizeMode="contain"
-              />
+            <Animated.View entering={FadeIn.delay(300)}>
+              <Animated.View 
+                style={[styles.logoContainer]}
+                entering={FadeIn.delay(300)}
+              >
+                <Image
+                  source={require('@/assets/images/spacely1.png')}
+                  style={styles.logoImage}
+                  resizeMode="contain"
+                />
+              </Animated.View>
             </Animated.View>
 
             {/* Formulario */}
-            <Animated.View 
-              style={[styles.formContainer, contentStyle]}
-              entering={FadeIn.delay(500)}
-            >
-              {error ? (
-                <View style={styles.errorContainer}>
-                  <Text style={styles.errorText}>{error}</Text>
+            <Animated.View entering={FadeIn.delay(500)}>
+              <Animated.View 
+                style={[styles.formContainer]}
+                entering={FadeIn.delay(500)}
+              >
+                {error ? (
+                  <View style={styles.errorContainer}>
+                    <Text style={styles.errorText}>{error}</Text>
+                  </View>
+                ) : null}
+
+                <Text style={styles.appTagline}>Discover the best restaurants</Text>
+
+                <Input
+                  label="Email"
+                  placeholder="your@email.com"
+                  value={email}
+                  onChangeText={setEmail}
+                  keyboardType="email-address"
+                  autoCapitalize="none"
+                  containerStyle={styles.inputContainer}
+                />
+
+                <Input
+                  label="Password"
+                  placeholder="••••••••"
+                  value={password}
+                  onChangeText={setPassword}
+                  secureTextEntry={!showPassword}
+                  containerStyle={styles.inputContainer}
+                  rightIcon={
+                    <TouchableOpacity onPress={togglePasswordVisibility}>
+                      {showPassword ? (
+                        <EyeOff size={20} color="#888" />
+                      ) : (
+                        <Eye size={20} color="#888" />
+                      )}
+                    </TouchableOpacity>
+                  }
+                />
+
+                <TouchableOpacity style={styles.forgotPassword}>
+                  <Text style={styles.forgotPasswordText}>Forgot Password?</Text>
+                </TouchableOpacity>
+
+                <Button 
+                  label={isLoading ? "Signing in..." : "Sign In"}
+                  onPress={handleLogin}
+                  disabled={isLoading}
+                  style={styles.loginButton}
+                  icon={isLoading ? <ActivityIndicator size="small" color="#FFF" /> : null}
+                />
+
+                <View style={styles.signupContainer}>
+                  <Text style={styles.signupText}>Don't have an account? </Text>
+                  <Link href="/(auth)/register" asChild>
+                    <TouchableOpacity>
+                      <Text style={styles.signupLink}>Sign Up</Text>
+                    </TouchableOpacity>
+                  </Link>
                 </View>
-              ) : null}
-
-              <Text style={styles.appTagline}>Discover the best restaurants</Text>
-
-              <Input
-                label="Email"
-                placeholder="your@email.com"
-                value={email}
-                onChangeText={setEmail}
-                keyboardType="email-address"
-                autoCapitalize="none"
-                containerStyle={styles.inputContainer}
-              />
-
-              <Input
-                label="Password"
-                placeholder="••••••••"
-                value={password}
-                onChangeText={setPassword}
-                secureTextEntry={!showPassword}
-                containerStyle={styles.inputContainer}
-                rightIcon={
-                  <TouchableOpacity onPress={togglePasswordVisibility}>
-                    {showPassword ? (
-                      <EyeOff size={20} color="#888" />
-                    ) : (
-                      <Eye size={20} color="#888" />
-                    )}
-                  </TouchableOpacity>
-                }
-              />
-
-              <TouchableOpacity style={styles.forgotPassword}>
-                <Text style={styles.forgotPasswordText}>Forgot Password?</Text>
-              </TouchableOpacity>
-
-              <Button 
-                label={isLoading ? "Signing in..." : "Sign In"}
-                onPress={handleLogin}
-                disabled={isLoading}
-                style={styles.loginButton}
-                icon={isLoading ? <ActivityIndicator size="small" color="#FFF" /> : null}
-              />
-
-              <View style={styles.signupContainer}>
-                <Text style={styles.signupText}>Don't have an account? </Text>
-                <Link href="/(auth)/register" asChild>
-                  <TouchableOpacity>
-                    <Text style={styles.signupLink}>Sign Up</Text>
-                  </TouchableOpacity>
-                </Link>
-              </View>
+              </Animated.View>
             </Animated.View>
           </View>
         </ScrollView>

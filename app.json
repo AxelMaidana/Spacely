@@ -8,8 +8,11 @@
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
+    "android": {
+      "softwareKeyboardLayoutMode": "resize"
+    },
     "ios": {
-      "supportsTablet": true
+      "viewportFit": "cover"
     },
     "web": {
       "bundler": "metro",
