@@ -1,4 +1,5 @@
-import React, { createContext, useState, useEffect, useCallback } from 'react';
+// C:\Users\Usuario\Desktop\Aaron\Spacely\contexts\AuthContext.tsx
+import React, { createContext, useState, useEffect, useCallback, useContext } from 'react'; // <<-- AÑADIR useContext
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { router } from 'expo-router';
 
@@ -96,7 +97,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       setUser(userWithoutPassword);
       
       // Navigate to the main app
-      router.replace('/(tabs)/home');
+      router.replace('/(tabs)/(tabs-group)/home' as any); // Último recurso, desactiva el tipado para esa línea
     } catch (error) {
       console.error('Login error:', error);
       throw error;
@@ -140,7 +141,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       setUser(userWithoutPassword);
       
       // Navigate to the main app
-      router.replace('/(tabs)/home');
+    router.replace('/(tabs)/(tabs-group)/home' as any); // Último recurso, desactiva el tipado para esa línea
     } catch (error) {
       console.error('Registration error:', error);
       throw error;
@@ -178,3 +179,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
+
+// <<<<<<<<<<<<<< ESTO ES LO QUE TE FALTABA AÑADIR >>>>>>>>>>>>>>>>
+export const useAuth = () => {
+  const context = useContext(AuthContext);
+  if (context === undefined) {
+    throw new Error('useAuth must be used within an AuthProvider');
+  }
+  return context;
+};
