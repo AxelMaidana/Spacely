@@ -1,3 +1,4 @@
+// C:\Users\Usuario\Desktop\Aaron\Spacely\app\(app)\home.tsx
 import React, { useState } from 'react';
 import { 
   StyleSheet, 
@@ -14,7 +15,6 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useAuth } from '@/hooks/useAuth';
 import { COLORS } from '@/constants/Colors';
 import { MaterialIcons, FontAwesome, Ionicons } from '@expo/vector-icons';
-// Importamos 'router' de 'expo-router' para la navegación
 import { router } from 'expo-router'; 
 
 // Datos simulados de restaurantes (usamos los mismos que ya tenías)
@@ -73,9 +73,9 @@ export default function HomeScreen() {
     ? restaurants 
     : restaurants.filter(r => r.category === categories.find(c => c.id === selectedCategory)?.name);
 
-  // Función para navegar al menú del restaurante
+  // Función para navegar al menú del restaurante - CORREGIDO
   const navigateToRestaurantMenu = (restaurantId: string) => {
-    router.push(`/(tabs)/${restaurantId}/menu`);
+    router.push(`/(app)/${restaurantId}/menu`); // CAMBIO: (tabs) a (app)
   };
 
   return (
@@ -87,7 +87,7 @@ export default function HomeScreen() {
             <Text style={styles.greeting}>Hola, {user?.name || 'Gourmet'}</Text>
             <Text style={styles.welcomeBack}>¿Qué vas a comer hoy?</Text>
           </View>
-          <TouchableOpacity style={styles.profileButton} onPress={() => router.push('/(tabs)/profile')}>
+          <TouchableOpacity style={styles.profileButton} onPress={() => router.push('/(app)/profile')}> {/* CAMBIO: (tabs) a (app) */}
             <FontAwesome name="user-circle" size={28} color={COLORS.text} />
           </TouchableOpacity>
         </Animated.View>
@@ -126,7 +126,7 @@ export default function HomeScreen() {
               >
                 {/* CORRECCIÓN: Usar category.icon en lugar de categories.icon */}
                 <MaterialIcons 
-                  name={category.icon as any} // 'as any' para evitar error de tipo si los nombres no son estrictamente MaterialIcons
+                  name={category.icon as any} 
                   size={24} 
                   color={selectedCategory === category.id ? COLORS.white : COLORS.textSecondary} 
                 />
@@ -147,7 +147,6 @@ export default function HomeScreen() {
         {featuredRestaurant && (
           <Animated.View entering={FadeInUp.delay(250).duration(500)}>
             <Text style={styles.sectionTitle}>Recomendado para ti</Text>
-            {/* Añadimos onPress para navegar al menú del restaurante destacado */}
             <TouchableOpacity 
               style={styles.featuredCard}
               onPress={() => navigateToRestaurantMenu(featuredRestaurant.id)}
@@ -177,7 +176,6 @@ export default function HomeScreen() {
             keyExtractor={item => item.id}
             scrollEnabled={false}
             renderItem={({ item }) => (
-              // Añadimos onPress para navegar al menú de cada restaurante
               <TouchableOpacity 
                 style={styles.restaurantCard}
                 onPress={() => navigateToRestaurantMenu(item.id)}
@@ -235,12 +233,12 @@ const styles = StyleSheet.create({
   searchContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: COLORS.white, // Usamos COLORS.white
+    backgroundColor: COLORS.white,
     borderRadius: 12,
     paddingHorizontal: 16,
     paddingVertical: 12,
     marginBottom: 24,
-    shadowColor: COLORS.black, // Usamos COLORS.black
+    shadowColor: COLORS.black,
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 4,
@@ -256,7 +254,7 @@ const styles = StyleSheet.create({
     color: COLORS.text,
   },
   filterButton: {
-    backgroundColor: COLORS.PRIMARY_COLOR, // Usamos COLORS.PRIMARY_COLOR
+    backgroundColor: COLORS.PRIMARY_COLOR,
     borderRadius: 8,
     padding: 6,
   },
@@ -273,17 +271,17 @@ const styles = StyleSheet.create({
   categoryButton: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: COLORS.white, // Usamos COLORS.white
+    backgroundColor: COLORS.white,
     borderRadius: 20,
     paddingVertical: 8,
     paddingHorizontal: 16,
     marginRight: 10,
     borderWidth: 1,
-    borderColor: COLORS.border, // Usamos COLORS.border
+    borderColor: COLORS.border,
   },
   categoryButtonActive: {
-    backgroundColor: COLORS.PRIMARY_COLOR, // Usamos COLORS.PRIMARY_COLOR
-    borderColor: COLORS.PRIMARY_COLOR, // Usamos COLORS.PRIMARY_COLOR
+    backgroundColor: COLORS.PRIMARY_COLOR,
+    borderColor: COLORS.PRIMARY_COLOR,
   },
   categoryText: {
     fontFamily: 'Inter-Medium',
@@ -292,7 +290,7 @@ const styles = StyleSheet.create({
     marginLeft: 8,
   },
   categoryTextActive: {
-    color: COLORS.white, // Usamos COLORS.white
+    color: COLORS.white,
   },
   featuredCard: {
     height: 200,
@@ -323,7 +321,7 @@ const styles = StyleSheet.create({
   featuredTitle: {
     fontFamily: 'Inter-Bold',
     fontSize: 24,
-    color: COLORS.white, // Usamos COLORS.white
+    color: COLORS.white,
     marginBottom: 8,
   },
   featuredInfo: {
@@ -333,7 +331,7 @@ const styles = StyleSheet.create({
   ratingBadge: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: COLORS.PRIMARY_COLOR, // Usamos COLORS.PRIMARY_COLOR
+    backgroundColor: COLORS.PRIMARY_COLOR,
     borderRadius: 20,
     paddingVertical: 4,
     paddingHorizontal: 10,
@@ -342,27 +340,27 @@ const styles = StyleSheet.create({
   ratingText: {
     fontFamily: 'Inter-Bold',
     fontSize: 14,
-    color: COLORS.white, // Usamos COLORS.white
+    color: COLORS.white,
     marginLeft: 4,
   },
   featuredCategory: {
     fontFamily: 'Inter-Medium',
     fontSize: 14,
-    color: COLORS.white, // Usamos COLORS.white
+    color: COLORS.white,
     marginRight: 10,
   },
   featuredDistance: {
     fontFamily: 'Inter-Regular',
     fontSize: 14,
-    color: COLORS.white, // Usamos COLORS.white
+    color: COLORS.white,
   },
   restaurantCard: {
     flexDirection: 'row',
-    backgroundColor: COLORS.white, // Usamos COLORS.white
+    backgroundColor: COLORS.white,
     borderRadius: 12,
     overflow: 'hidden',
     marginBottom: 16,
-    shadowColor: COLORS.black, // Usamos COLORS.black
+    shadowColor: COLORS.black,
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 4,

@@ -128,7 +128,7 @@ export default function RestaurantMenuScreen() {
           {/* Botón para ver reseñas */}
           <TouchableOpacity 
             style={styles.reviewsButton}
-            onPress={() => router.push(`/(tabs)/${restaurant.id}/reviews`)} // Navega a la pantalla de reseñas
+            onPress={() => router.push(`/(app)/${restaurant.id}/reviews`)} // Navega a la pantalla de reseñas
           >
             <Text style={styles.reviewsButtonText}>Ver {restaurant.reviewsCount} Reseñas</Text>
             <MaterialIcons name="arrow-forward-ios" size={16} color={COLORS.PRIMARY_COLOR} />

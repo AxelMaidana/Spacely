@@ -1,24 +1,21 @@
+// C:\Users\Usuario\Desktop\Aaron\Spacely\app/_layout.tsx
+import React from 'react';
 import { Stack } from 'expo-router';
-import { StyleSheet } from 'react-native';
-import { COLORS } from '@/constants/Colors';
+import { AuthProvider } from '@/contexts/AuthContext'; // Asumo que tienes AuthProvider
 
-export default function AuthLayout() {
+export default function RootLayout() {
   return (
-    <Stack 
-      screenOptions={{
-        headerShown: false,
-        contentStyle: {
-          backgroundColor: COLORS.background,
-        },
-        animation: 'slide_from_right',
-      }}
-    />
+    <AuthProvider>
+      <Stack>
+        {/* Rutas de autenticación (login, register) */}
+        <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+        
+        {/* Ruta principal de la aplicación con la barra de navegación */}
+        <Stack.Screen name="(app)" options={{ headerShown: false }} />
+        
+        {/* Página 404 (Not Found) */}
+        <Stack.Screen name="+not-found" />
+      </Stack>
+    </AuthProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: COLORS.background,
-  },
-});

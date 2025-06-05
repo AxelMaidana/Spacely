@@ -97,7 +97,7 @@ export default function RestaurantReviewsScreen() {
             {/* Botón para agregar reseña */}
             <TouchableOpacity 
               style={styles.addReviewButton}
-              onPress={() => router.push(`/(tabs)/${restaurantId}/add-review`)} // Navega a la pantalla de agregar reseña
+              onPress={() => router.push(`/(app)/${restaurantId}/add-review`)} // Navega a la pantalla de agregar reseña
             >
               <Plus size={18} color={COLORS.white} />
               <Text style={styles.addReviewButtonText}>Añadir</Text>

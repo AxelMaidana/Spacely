@@ -1,3 +1,4 @@
+// C:\Users\Usuario\Desktop\Aaron\Spacely\app\(tabs)\settings.tsx
 import React, { useState } from 'react';
 import { StyleSheet, View, Text, Switch, ScrollView, TouchableOpacity } from 'react-native';
 import Animated, { FadeInUp } from 'react-native-reanimated';
@@ -32,15 +33,17 @@ export default function SettingsScreen() {
           
           <View style={styles.settingItem}>
             <View style={styles.settingIconContainer}>
-              <Bell size={20} color={COLORS.primary} />
+              {/* Corregido: Usar PRIMARY_COLOR */}
+              <Bell size={20} color={COLORS.PRIMARY_COLOR} /> 
             </View>
             <View style={styles.settingContent}>
               <Text style={styles.settingTitle}>Notifications</Text>
               <Text style={styles.settingDescription}>Receive app notifications</Text>
             </View>
             <Switch
-              trackColor={{ false: COLORS.border, true: COLORS.primaryLight }}
-              thumbColor={notifications ? COLORS.primary : COLORS.textTertiary}
+              // Corregido: Usar PRIMARY_COLOR para thumbColor activo, y una combinación para trackColor
+              trackColor={{ false: COLORS.border, true: COLORS.PRIMARY_COLOR }} 
+              thumbColor={notifications ? COLORS.PRIMARY_COLOR : COLORS.textTertiary}
               onValueChange={toggleNotifications}
               value={notifications}
             />
@@ -48,15 +51,17 @@ export default function SettingsScreen() {
           
           <View style={styles.settingItem}>
             <View style={styles.settingIconContainer}>
-              <Moon size={20} color={COLORS.primary} />
+              {/* Corregido: Usar PRIMARY_COLOR */}
+              <Moon size={20} color={COLORS.PRIMARY_COLOR} /> 
             </View>
             <View style={styles.settingContent}>
               <Text style={styles.settingTitle}>Dark Mode</Text>
               <Text style={styles.settingDescription}>Switch to dark theme</Text>
             </View>
             <Switch
-              trackColor={{ false: COLORS.border, true: COLORS.primaryLight }}
-              thumbColor={darkMode ? COLORS.primary : COLORS.textTertiary}
+              // Corregido: Usar PRIMARY_COLOR para thumbColor activo, y una combinación para trackColor
+              trackColor={{ false: COLORS.border, true: COLORS.PRIMARY_COLOR }} 
+              thumbColor={darkMode ? COLORS.PRIMARY_COLOR : COLORS.textTertiary}
               onValueChange={toggleDarkMode}
               value={darkMode}
             />
@@ -71,15 +76,17 @@ export default function SettingsScreen() {
           
           <View style={styles.settingItem}>
             <View style={styles.settingIconContainer}>
-              <Shield size={20} color={COLORS.primary} />
+              {/* Corregido: Usar PRIMARY_COLOR */}
+              <Shield size={20} color={COLORS.PRIMARY_COLOR} /> 
             </View>
             <View style={styles.settingContent}>
               <Text style={styles.settingTitle}>Biometric Login</Text>
               <Text style={styles.settingDescription}>Login with Face ID or Touch ID</Text>
             </View>
             <Switch
-              trackColor={{ false: COLORS.border, true: COLORS.primaryLight }}
-              thumbColor={biometrics ? COLORS.primary : COLORS.textTertiary}
+              // Corregido: Usar PRIMARY_COLOR para thumbColor activo, y una combinación para trackColor
+              trackColor={{ false: COLORS.border, true: COLORS.PRIMARY_COLOR }} 
+              thumbColor={biometrics ? COLORS.PRIMARY_COLOR : COLORS.textTertiary}
               onValueChange={toggleBiometrics}
               value={biometrics}
             />
@@ -87,7 +94,8 @@ export default function SettingsScreen() {
           
           <TouchableOpacity style={styles.settingButton}>
             <View style={styles.settingIconContainer}>
-              <Shield size={20} color={COLORS.primary} />
+              {/* Corregido: Usar PRIMARY_COLOR */}
+              <Shield size={20} color={COLORS.PRIMARY_COLOR} /> 
             </View>
             <View style={styles.settingContent}>
               <Text style={styles.settingTitle}>Change Password</Text>
@@ -104,7 +112,8 @@ export default function SettingsScreen() {
           
           <TouchableOpacity style={styles.settingButton}>
             <View style={styles.settingIconContainer}>
-              <HelpCircle size={20} color={COLORS.primary} />
+              {/* Corregido: Usar PRIMARY_COLOR */}
+              <HelpCircle size={20} color={COLORS.PRIMARY_COLOR} /> 
             </View>
             <View style={styles.settingContent}>
               <Text style={styles.settingTitle}>Help & Support</Text>
@@ -114,7 +123,8 @@ export default function SettingsScreen() {
           
           <TouchableOpacity style={styles.settingButton}>
             <View style={styles.settingIconContainer}>
-              <Info size={20} color={COLORS.primary} />
+              {/* Corregido: Usar PRIMARY_COLOR */}
+              <Info size={20} color={COLORS.PRIMARY_COLOR} /> 
             </View>
             <View style={styles.settingContent}>
               <Text style={styles.settingTitle}>About App</Text>
