@@ -4,11 +4,13 @@ import Animated, { FadeInUp } from 'react-native-reanimated';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { COLORS } from '@/constants/Colors';
 import { Bell, Moon, Shield, CircleHelp as HelpCircle, Info } from 'lucide-react-native';
+import { useRouter } from 'expo-router';
 
 export default function SettingsScreen() {
   const [notifications, setNotifications] = useState(true);
   const [darkMode, setDarkMode] = useState(false);
   const [biometrics, setBiometrics] = useState(false);
+  const router = useRouter();
 
   const toggleNotifications = () => setNotifications(previous => !previous);
   const toggleDarkMode = () => setDarkMode(previous => !previous);
@@ -31,22 +33,24 @@ export default function SettingsScreen() {
           <Text style={styles.sectionTitle}>Preferences</Text>
           
           <View style={styles.settingItem}>
-            <View style={styles.settingIconContainer}>
-              <Bell size={20} color={COLORS.primary} />
-            </View>
-            <View style={styles.settingContent}>
-              <Text style={styles.settingTitle}>Notifications</Text>
-              <Text style={styles.settingDescription}>Receive app notifications</Text>
-            </View>
-            <Switch
-              trackColor={{ false: COLORS.border, true: COLORS.primaryLight }}
-              thumbColor={notifications ? COLORS.primary : COLORS.textTertiary}
-              onValueChange={toggleNotifications}
-              value={notifications}
-            />
+  
+         <TouchableOpacity
+  style={[styles.settingItem, { paddingHorizontal: 0 }]}  // ← anula el padding horizontal
+  onPress={() => router.push('/notifications')}
+>
+  <View style={styles.settingIconContainer}>
+    <Bell size={20} color={COLORS.primary} />
+  </View>
+  <View style={styles.settingContent}>
+    <Text style={styles.settingTitle}>Notificaciones</Text>
+    <Text style={styles.settingDescription}>Ver configuración de notificaciones</Text>
+  </View>
+</TouchableOpacity>
+
+
           </View>
-          
           <View style={styles.settingItem}>
+
             <View style={styles.settingIconContainer}>
               <Moon size={20} color={COLORS.primary} />
             </View>
@@ -102,7 +106,9 @@ export default function SettingsScreen() {
         >
           <Text style={styles.sectionTitle}>About</Text>
           
-          <TouchableOpacity style={styles.settingButton}>
+          <TouchableOpacity style={styles.settingButton}
+           onPress={() => router.push('/help')}          
+          >
             <View style={styles.settingIconContainer}>
               <HelpCircle size={20} color={COLORS.primary} />
             </View>
@@ -111,6 +117,7 @@ export default function SettingsScreen() {
               <Text style={styles.settingDescription}>Get help with the app</Text>
             </View>
           </TouchableOpacity>
+
           
           <TouchableOpacity style={styles.settingButton}>
             <View style={styles.settingIconContainer}>
