@@ -145,7 +145,11 @@ const SearchScreen = () => {
           data={resultadosFiltrados}
           keyExtractor={(item) => item.id}
           renderItem={({ item }) => (
-            <TouchableOpacity style={styles.resultItem}>
+            <TouchableOpacity
+              style={styles.resultItem}
+              onPress={() => router.push({ pathname: '/restaurant', params: { id: item.id } })}
+            >
+
               <Image source={item.image} style={{ width: '100%', height: 150, borderRadius: 10 }} />
               <Text style={styles.resultText}>{item.name}</Text>
               <Text style={styles.resultSub}>{item.category} • ⭐ {item.rating} • {item.distance}</Text>
