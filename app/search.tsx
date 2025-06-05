@@ -52,19 +52,23 @@ const restaurantesMock = [
   },
 ];
 
-const ultimasBusquedas = ['La Trattoria', 'Sushi Palace', 'El Asador'];
+const ultimasBusquedas = [
+  { id: '1', name: 'La Trattoria' },
+  { id: '2', name: 'Sushi Palace' },
+  { id: '4', name: 'El Asador' },
+];
 
 const repetidos = [
-  { id: 'r1', name: 'La Trattoria', icon: require('@/assets/images/restaurant1.jpg') },
-  { id: 'r2', name: 'Sushi Palace', icon: require('@/assets/images/restaurant2.jpg') },
-  { id: 'r3', name: 'Burger Factory', icon: require('@/assets/images/restaurant3.jpg') },
-  { id: 'r4', name: 'El Asador', icon: require('@/assets/images/restaurant4.jpg') },
+  { id: '1', name: 'La Trattoria', icon: require('@/assets/images/restaurant1.jpg') },
+  { id: '2', name: 'Sushi Palace', icon: require('@/assets/images/restaurant2.jpg') },
+  { id: '3', name: 'Burger Factory', icon: require('@/assets/images/restaurant3.jpg') },
+  { id: '4', name: 'El Asador', icon: require('@/assets/images/restaurant4.jpg') },
 ];
 
 const tendencias = [
-  { id: 't1', nombre: 'La Trattoria', categoria: 'Restaurantes' },
-  { id: 't2', nombre: 'Sushi', categoria: 'Comida Japonesa' },
-  { id: 't3', nombre: 'El Asador', categoria: 'Parrilla' },
+  { id: '1', nombre: 'La Trattoria', categoria: 'Restaurantes' },
+  { id: '2', nombre: 'Sushi', categoria: 'Comida Japonesa' },
+  { id: '4', nombre: 'El Asador', categoria: 'Parrilla' },
 ];
 
 const SearchScreen = () => {
@@ -78,7 +82,7 @@ const SearchScreen = () => {
       .includes(searchQuery.toLowerCase())
   );
 
-  const borrarBusqueda = (item: string) => {
+  const borrarBusqueda = (item: { id: string; name: string }) => {
     setUltimas((prev) => prev.filter((x) => x !== item));
   };
 
@@ -109,9 +113,11 @@ const SearchScreen = () => {
           {/* Últimas búsquedas */}
           <Text style={styles.sectionTitle}>Tus últimas búsquedas</Text>
           {ultimas.map((item) => (
-            <View key={item} style={styles.recentItem}>
+            <View key={item.id} style={styles.recentItem}>
               <MaterialIcons name="history" size={20} color="#000" />
-              <Text style={styles.recentText}>{item}</Text>
+              <TouchableOpacity onPress={() => router.push({ pathname: '/restaurant', params: { id: item.id } })}>
+                <Text style={styles.recentText}>{item.name}</Text>
+              </TouchableOpacity>
               <TouchableOpacity onPress={() => borrarBusqueda(item)} style={{ marginLeft: 'auto' }}>
                 <Ionicons name="close" size={20} color="#888" />
               </TouchableOpacity>
@@ -122,7 +128,7 @@ const SearchScreen = () => {
           <Text style={styles.sectionTitle}>Repetí donde ya pediste</Text>
           <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.repeatRow}>
             {repetidos.map((r) => (
-              <TouchableOpacity key={r.id} style={styles.repeatItem}>
+              <TouchableOpacity key={r.id} style={styles.repeatItem} onPress={() => router.push({ pathname: '/restaurant', params: { id: r.id } })}>
                 <Image source={r.icon} style={styles.repeatIcon} />
               </TouchableOpacity>
             ))}
@@ -133,10 +139,14 @@ const SearchScreen = () => {
           {tendencias.map((t, index) => (
             <View key={t.id} style={styles.trendItem}>
               <Text style={styles.trendRank}>#{index + 1}</Text>
+              <TouchableOpacity
+                onPress={() => router.push({ pathname: '/restaurant', params: { id: t.id } })}
+              >
               <View>
                 <Text style={styles.resultText}>{t.nombre}</Text>
                 <Text style={styles.resultSub}>{t.categoria}</Text>
               </View>
+              </TouchableOpacity>
             </View>
           ))}
         </ScrollView>
