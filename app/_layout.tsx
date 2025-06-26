@@ -42,7 +42,14 @@ export default function RootLayout() {
         <Stack.Screen name="index" />
         <Stack.Screen name="(auth)" options={{ animation: 'slide_from_right' }} />
         <Stack.Screen name="(tabs)" options={{ animation: 'fade' }} />
-        <Stack.Screen name="+not-found" options={{ presentation: 'modal' }} />
+        <Stack.Screen name="+not-found" options={{ presentation: 'modal' }} /><Stack.Screen 
+        name="notifications" 
+        options={{ 
+        presentation: 'card',
+        headerShown: true,
+  }} 
+/>
+
       </Stack>
       <StatusBar style="auto" />
     </AuthProvider>
