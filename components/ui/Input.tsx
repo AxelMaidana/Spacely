@@ -1,4 +1,3 @@
-// C:\Users\Usuario\Desktop\Aaron\Spacely\components\ui\Input.tsx
 import React from 'react';
 import { 
   StyleSheet, 
@@ -33,9 +32,8 @@ export default function Input({
         <TextInput
           style={[
             styles.input,
-            // CORREGIDO: Usar operador ternario para evitar que 'false' se propague a los estilos
-            rightIcon ? styles.inputWithIcon : null, 
-            error ? styles.inputError : null, // También aplicado aquí por consistencia
+            rightIcon && styles.inputWithIcon,
+            error && styles.inputError,
             style,
           ]}
           placeholderTextColor={COLORS.textTertiary}

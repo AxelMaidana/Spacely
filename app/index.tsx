@@ -35,7 +35,7 @@ export default function SplashScreen() {
   const navigateToNextScreen = () => {
     if (!isLoading) {
       if (isAuthenticated) {
-        router.replace('/(app)/home');
+        router.replace('/(tabs)/home');
       } else {
         router.replace('/(auth)/login');
       }

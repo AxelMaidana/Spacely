@@ -1,4 +1,3 @@
-// C:\Users\Usuario\Desktop\Aaron\Spacely\app\(app)\home.tsx
 import React, { useState } from 'react';
 import { 
   StyleSheet, 
@@ -15,9 +14,9 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useAuth } from '@/hooks/useAuth';
 import { COLORS } from '@/constants/Colors';
 import { MaterialIcons, FontAwesome, Ionicons } from '@expo/vector-icons';
-import { router } from 'expo-router'; 
+import { Cog } from 'lucide-react-native';
+import { navigate } from 'expo-router/build/global-state/routing';
 
-// Datos simulados de restaurantes (usamos los mismos que ya tenías)
 const restaurants = [
   {
     id: '1',
@@ -54,13 +53,12 @@ const restaurants = [
   },
 ];
 
-// Datos simulados de categorías (usamos los mismos que ya tenías)
 const categories = [
   { id: '1', name: 'Todos', icon: 'restaurant' },
-  { id: '2', name: 'Italiana', icon: 'local-pizza' }, 
-  { id: '3', name: 'Japonesa', icon: 'set-meal' }, 
-  { id: '4', name: 'Parrilla', icon: 'outdoor-grill' }, 
-  { id: '5', name: 'Vegetariana', icon: 'grass' }, 
+  { id: '2', name: 'Italiana', icon: 'local-pizza' }, // Cambiado de 'pizza' a 'local-pizza'
+  { id: '3', name: 'Japonesa', icon: 'set-meal' }, // Cambiado de 'sushi' a 'set-meal'
+  { id: '4', name: 'Parrilla', icon: 'outdoor-grill' }, // Cambiado de 'bbq' a 'outdoor-grill'
+  { id: '5', name: 'Vegetariana', icon: 'grass' }, // Cambiado de 'leaf' a 'grass'
 ];
 
 export default function HomeScreen() {
@@ -73,11 +71,6 @@ export default function HomeScreen() {
     ? restaurants 
     : restaurants.filter(r => r.category === categories.find(c => c.id === selectedCategory)?.name);
 
-  // Función para navegar al menú del restaurante - CORREGIDO
-  const navigateToRestaurantMenu = (restaurantId: string) => {
-    router.push(`/(app)/${restaurantId}/menu`); // CAMBIO: (tabs) a (app)
-  };
-
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollContent}>
@@ -87,8 +80,10 @@ export default function HomeScreen() {
             <Text style={styles.greeting}>Hola, {user?.name || 'Gourmet'}</Text>
             <Text style={styles.welcomeBack}>¿Qué vas a comer hoy?</Text>
           </View>
-          <TouchableOpacity style={styles.profileButton} onPress={() => router.push('/(app)/profile')}> {/* CAMBIO: (tabs) a (app) */}
-            <FontAwesome name="user-circle" size={28} color={COLORS.text} />
+          <TouchableOpacity style={styles.settingsButton}
+            onPress={() => navigate('/settings')}
+          >
+            <Cog size={24} color={COLORS.textSecondary} />
           </TouchableOpacity>
         </Animated.View>
 
@@ -101,6 +96,8 @@ export default function HomeScreen() {
             placeholderTextColor="#888"
             value={searchQuery}
             onChangeText={setSearchQuery}
+            onFocus={() => navigate('/search')}
+            editable={true}
           />
           <TouchableOpacity style={styles.filterButton}>
             <Ionicons name="filter" size={20} color="#FFF" />
@@ -124,11 +121,10 @@ export default function HomeScreen() {
                 ]}
                 onPress={() => setSelectedCategory(category.id)}
               >
-                {/* CORRECCIÓN: Usar category.icon en lugar de categories.icon */}
                 <MaterialIcons 
-                  name={category.icon as any} 
+                  name={category.icon as any}
                   size={24} 
-                  color={selectedCategory === category.id ? COLORS.white : COLORS.textSecondary} 
+                  color={selectedCategory === category.id ? '#FFF' : COLORS.textSecondary} 
                 />
                 <Text 
                   style={[
@@ -147,17 +143,14 @@ export default function HomeScreen() {
         {featuredRestaurant && (
           <Animated.View entering={FadeInUp.delay(250).duration(500)}>
             <Text style={styles.sectionTitle}>Recomendado para ti</Text>
-            <TouchableOpacity 
-              style={styles.featuredCard}
-              onPress={() => navigateToRestaurantMenu(featuredRestaurant.id)}
-            >
+            <TouchableOpacity style={styles.featuredCard}>
               <Image source={featuredRestaurant.image} style={styles.featuredImage} />
               <View style={styles.featuredOverlay} />
               <View style={styles.featuredContent}>
                 <Text style={styles.featuredTitle}>{featuredRestaurant.name}</Text>
                 <View style={styles.featuredInfo}>
                   <View style={styles.ratingBadge}>
-                    <MaterialIcons name="star" size={16} color={COLORS.white} />
+                    <MaterialIcons name="star" size={16} color="#FFF" />
                     <Text style={styles.ratingText}>{featuredRestaurant.rating}</Text>
                   </View>
                   <Text style={styles.featuredCategory}>{featuredRestaurant.category}</Text>
@@ -176,16 +169,13 @@ export default function HomeScreen() {
             keyExtractor={item => item.id}
             scrollEnabled={false}
             renderItem={({ item }) => (
-              <TouchableOpacity 
-                style={styles.restaurantCard}
-                onPress={() => navigateToRestaurantMenu(item.id)}
-              >
+              <TouchableOpacity style={styles.restaurantCard}>
                 <Image source={item.image} style={styles.restaurantImage} />
                 <View style={styles.restaurantInfo}>
                   <Text style={styles.restaurantName}>{item.name}</Text>
                   <View style={styles.restaurantDetails}>
                     <View style={styles.ratingBadge}>
-                      <MaterialIcons name="star" size={14} color={COLORS.white} />
+                      <MaterialIcons name="star" size={14} color="#FFF" />
                       <Text style={styles.ratingText}>{item.rating}</Text>
                     </View>
                     <Text style={styles.restaurantCategory}>{item.category}</Text>
@@ -207,8 +197,8 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.background,
   },
   scrollContent: {
-    padding: 16,
-    paddingBottom: 30,
+    padding: 6,
+    paddingBottom: 62,
   },
   header: {
     flexDirection: 'row',
@@ -227,18 +217,18 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: COLORS.textSecondary,
   },
-  profileButton: {
+  settingsButton: {
     padding: 8,
   },
   searchContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: COLORS.white,
+    backgroundColor: '#FFF',
     borderRadius: 12,
     paddingHorizontal: 16,
     paddingVertical: 12,
     marginBottom: 24,
-    shadowColor: COLORS.black,
+    shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 4,
@@ -254,7 +244,7 @@ const styles = StyleSheet.create({
     color: COLORS.text,
   },
   filterButton: {
-    backgroundColor: COLORS.PRIMARY_COLOR,
+    backgroundColor: '#F59439',
     borderRadius: 8,
     padding: 6,
   },
@@ -271,17 +261,17 @@ const styles = StyleSheet.create({
   categoryButton: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: COLORS.white,
+    backgroundColor: '#FFF',
     borderRadius: 20,
     paddingVertical: 8,
     paddingHorizontal: 16,
     marginRight: 10,
     borderWidth: 1,
-    borderColor: COLORS.border,
+    borderColor: '#EAEAEA',
   },
   categoryButtonActive: {
-    backgroundColor: COLORS.PRIMARY_COLOR,
-    borderColor: COLORS.PRIMARY_COLOR,
+    backgroundColor: '#F59439',
+    borderColor: '#F59439',
   },
   categoryText: {
     fontFamily: 'Inter-Medium',
@@ -290,7 +280,7 @@ const styles = StyleSheet.create({
     marginLeft: 8,
   },
   categoryTextActive: {
-    color: COLORS.white,
+    color: '#FFF',
   },
   featuredCard: {
     height: 200,
@@ -321,7 +311,7 @@ const styles = StyleSheet.create({
   featuredTitle: {
     fontFamily: 'Inter-Bold',
     fontSize: 24,
-    color: COLORS.white,
+    color: '#FFF',
     marginBottom: 8,
   },
   featuredInfo: {
@@ -331,7 +321,7 @@ const styles = StyleSheet.create({
   ratingBadge: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: COLORS.PRIMARY_COLOR,
+    backgroundColor: '#F59439',
     borderRadius: 20,
     paddingVertical: 4,
     paddingHorizontal: 10,
@@ -340,27 +330,27 @@ const styles = StyleSheet.create({
   ratingText: {
     fontFamily: 'Inter-Bold',
     fontSize: 14,
-    color: COLORS.white,
+    color: '#FFF',
     marginLeft: 4,
   },
   featuredCategory: {
     fontFamily: 'Inter-Medium',
     fontSize: 14,
-    color: COLORS.white,
+    color: '#FFF',
     marginRight: 10,
   },
   featuredDistance: {
     fontFamily: 'Inter-Regular',
     fontSize: 14,
-    color: COLORS.white,
+    color: '#FFF',
   },
   restaurantCard: {
     flexDirection: 'row',
-    backgroundColor: COLORS.white,
+    backgroundColor: '#FFF',
     borderRadius: 12,
     overflow: 'hidden',
     marginBottom: 16,
-    shadowColor: COLORS.black,
+    shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 4,

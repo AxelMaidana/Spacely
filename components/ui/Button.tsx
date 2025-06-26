@@ -1,4 +1,3 @@
-// C:\Users\Usuario\Desktop\Aaron\Spacely\components\ui\Button.tsx
 import React from 'react';
 import { 
   StyleSheet, 
@@ -76,18 +75,15 @@ const styles = StyleSheet.create({
     borderRadius: 12,
   },
   primaryButton: {
-    // Corregido: Usar PRIMARY_COLOR
-    backgroundColor: COLORS.PRIMARY_COLOR,
+    backgroundColor: COLORS.primary,
   },
   secondaryButton: {
-    // Corregido: Usar secondary (ya que sí existe en Colors.ts)
     backgroundColor: COLORS.secondary,
   },
   outlineButton: {
     backgroundColor: 'transparent',
     borderWidth: 2,
-    // Corregido: Usar PRIMARY_COLOR
-    borderColor: COLORS.PRIMARY_COLOR,
+    borderColor: COLORS.primary,
   },
   smallButton: {
     paddingVertical: 8,
@@ -116,8 +112,7 @@ const styles = StyleSheet.create({
     color: COLORS.white,
   },
   outlineLabel: {
-    // Corregido: Usar PRIMARY_COLOR
-    color: COLORS.PRIMARY_COLOR,
+    color: COLORS.primary,
   },
   smallLabel: {
     fontSize: 14,

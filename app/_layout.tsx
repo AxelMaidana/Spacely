@@ -5,7 +5,6 @@ import { useFrameworkReady } from '@/hooks/useFrameworkReady';
 import { useFonts, Inter_400Regular, Inter_500Medium, Inter_700Bold } from '@expo-google-fonts/inter';
 import * as SplashScreen from 'expo-splash-screen';
 import { AuthProvider } from '@/contexts/AuthContext';
-import { COLORS } from '@/constants/Colors'; // Importa COLORS aquí
 
 // Prevent the splash screen from auto-hiding
 SplashScreen.preventAutoHideAsync();
@@ -37,12 +36,11 @@ export default function RootLayout() {
         headerShown: false,
         animation: 'fade_from_bottom',
         contentStyle: {
-          backgroundColor: COLORS.background, // Usamos COLORS.background aquí
+          backgroundColor: '#FFFFFF',
         }
       }}>
         <Stack.Screen name="index" />
         <Stack.Screen name="(auth)" options={{ animation: 'slide_from_right' }} />
-        {/* Añadimos esta línea para permitir rutas dinámicas dentro del grupo (tabs) */}
         <Stack.Screen name="(tabs)" options={{ animation: 'fade' }} />
         <Stack.Screen name="+not-found" options={{ presentation: 'modal' }} /><Stack.Screen 
         name="notifications" 
