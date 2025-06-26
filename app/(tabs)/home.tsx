@@ -94,8 +94,10 @@ export default function HomeScreen() {
             style={styles.searchInput}
             placeholder="Buscar restaurantes, platos..."
             placeholderTextColor="#888"
-            value={searchQuery}
-            onChangeText={setSearchQuery}
+            // value={searchQuery}
+            // onChangeText={setSearchQuery}
+            onFocus={() => router.push('/search')}
+            editable={true}
           />
           <TouchableOpacity style={styles.filterButton}>
             <Ionicons name="filter" size={20} color="#FFF" />
