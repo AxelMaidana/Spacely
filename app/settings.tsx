@@ -3,7 +3,7 @@ import { StyleSheet, View, Text, Switch, ScrollView, TouchableOpacity } from 're
 import Animated, { FadeInUp } from 'react-native-reanimated';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { COLORS } from '@/constants/Colors';
-import { Bell, Moon, Shield, CircleHelp as HelpCircle, Info } from 'lucide-react-native';
+import { Bell, Moon, Shield, CircleHelp as HelpCircle, Info, ArrowLeft } from 'lucide-react-native';
 import { useRouter } from 'expo-router';
 
 export default function SettingsScreen() {
@@ -19,10 +19,10 @@ export default function SettingsScreen() {
   return (
     <SafeAreaView style={styles.container}>
       <View style={{ flexDirection: 'row', alignItems: 'center', paddingHorizontal: 16, paddingTop: 16 }}>
-        <TouchableOpacity onPress={() => navigation.goBack()} style={{ marginRight: 16 }}>
+        <TouchableOpacity onPress={() => router.back()} style={{ marginRight: 16 }}>
           <ArrowLeft size={28} color={COLORS.text} />
         </TouchableOpacity>
-        <Text style={styles.title}>Settings</Text>
+        <Text style={styles.title}>Configuración</Text>
       </View>
       
       <ScrollView style={styles.scrollView}>
@@ -39,7 +39,7 @@ export default function SettingsScreen() {
   onPress={() => router.push('/notifications')}
 >
   <View style={styles.settingIconContainer}>
-    <Bell size={20} color={COLORS.primary} />
+    <Bell size={20} color={COLORS.PRIMARY_COLOR} />
   </View>
   <View style={styles.settingContent}>
     <Text style={styles.settingTitle}>Notificaciones</Text>
