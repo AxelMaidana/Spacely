@@ -77,7 +77,7 @@ export const storageService = {
    * Get all keys from AsyncStorage
    * @returns Array of keys
    */
-  getAllKeys: async (): Promise<string[]> => {
+  getAllKeys: async (): Promise<readonly string[]> => {
     try {
       return Array.from(await AsyncStorage.getAllKeys());
     } catch (error) {

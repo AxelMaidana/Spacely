@@ -1,4 +1,5 @@
-import React, { createContext, useState, useEffect, useCallback } from 'react';
+// C:\Users\Usuario\Desktop\Aaron\Spacely\contexts\AuthContext.tsx
+import React, { createContext, useState, useEffect, useCallback, useContext } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { router } from 'expo-router';
 
@@ -53,7 +54,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       try {
         const userJson = await AsyncStorage.getItem(USER_STORAGE_KEY);
         const token = await AsyncStorage.getItem(TOKEN_STORAGE_KEY);
-        
+
         if (userJson && token) {
           const parsedUser = JSON.parse(userJson);
           setUser(parsedUser);
@@ -71,32 +72,32 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   // Login function - in a real app, this would make an API call
   const login = useCallback(async (email: string, password: string) => {
     setIsLoading(true);
-    
+
     try {
       // Simulate API delay
       await new Promise(resolve => setTimeout(resolve, 1000));
-      
+
       // Find user in our mock database
       const foundUser = MOCK_USERS.find(
         u => u.email === email && u.password === password
       );
-      
+
       if (!foundUser) {
         throw new Error('Invalid credentials');
       }
-      
+
       // Create user object without password
       const { password: _, ...userWithoutPassword } = foundUser;
-      
+
       // Save user data and token to AsyncStorage
       await AsyncStorage.setItem(USER_STORAGE_KEY, JSON.stringify(userWithoutPassword));
       await AsyncStorage.setItem(TOKEN_STORAGE_KEY, 'mock-jwt-token');
-      
+
       // Update state
       setUser(userWithoutPassword);
-      
-      // Navigate to the main app
-      router.replace('/(tabs)/home');
+
+      // Navigate to the main app - CORREGIDO
+      router.replace('/(app)/home'); // Se cambió de /(tabs)/(tabs-group)/home a /(app)/home
     } catch (error) {
       console.error('Login error:', error);
       throw error;
@@ -108,39 +109,39 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   // Register function - in a real app, this would make an API call
   const register = useCallback(async (name: string, email: string, password: string) => {
     setIsLoading(true);
-    
+
     try {
       // Simulate API delay
       await new Promise(resolve => setTimeout(resolve, 1000));
-      
+
       // Check if user already exists
       const existingUser = MOCK_USERS.find(u => u.email === email);
-      
+
       if (existingUser) {
         throw new Error('User already exists');
       }
-      
+
       // Generate a new user ID
       const id = (MOCK_USERS.length + 1).toString();
-      
+
       // Create new user
       const newUser = { id, name, email, password };
-      
+
       // Add to mock database (in real app, this would be a POST request)
       MOCK_USERS.push(newUser);
-      
+
       // Create user object without password
       const { password: _, ...userWithoutPassword } = newUser;
-      
+
       // Save user data and token to AsyncStorage
       await AsyncStorage.setItem(USER_STORAGE_KEY, JSON.stringify(userWithoutPassword));
       await AsyncStorage.setItem(TOKEN_STORAGE_KEY, 'mock-jwt-token');
-      
+
       // Update state
       setUser(userWithoutPassword);
-      
-      // Navigate to the main app
-      router.replace('/(tabs)/home');
+
+      // Navigate to the main app - CORREGIDO
+      router.replace('/(app)/home'); // Se cambió de /(tabs)/(tabs-group)/home a /(app)/home
     } catch (error) {
       console.error('Registration error:', error);
       throw error;
@@ -155,10 +156,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       // Clear auth data from AsyncStorage
       await AsyncStorage.removeItem(USER_STORAGE_KEY);
       await AsyncStorage.removeItem(TOKEN_STORAGE_KEY);
-      
+
       // Update state
       setUser(null);
-      
+
       // Navigate to the login screen
       router.replace('/(auth)/login');
     } catch (error) {
@@ -178,3 +179,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
+
+export const useAuth = () => {
+  const context = useContext(AuthContext);
+  if (context === undefined) {
+    throw new Error('useAuth must be used within an AuthProvider');
+  }
+  return context;
+};

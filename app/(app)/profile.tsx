@@ -1,3 +1,4 @@
+// C:\Users\Usuario\Desktop\Aaron\Spacely\app\(tabs)\profile.tsx
 import React from 'react';
 import { StyleSheet, View, Text, TouchableOpacity, Image } from 'react-native';
 import Animated, { FadeInUp } from 'react-native-reanimated';
@@ -35,7 +36,8 @@ export default function ProfileScreen() {
         <Text style={styles.userEmail}>{user?.email || 'user@example.com'}</Text>
         
         <TouchableOpacity style={styles.editProfileButton}>
-          <Edit size={16} color={COLORS.PRIMARY_COLOR} />
+          {/* Corregido: Usar PRIMARY_COLOR */}
+          <Edit size={16} color={COLORS.PRIMARY_COLOR} /> 
           <Text style={styles.editProfileText}>Edit Profile</Text>
         </TouchableOpacity>
       </Animated.View>
@@ -106,7 +108,8 @@ const styles = StyleSheet.create({
     width: 104,
     height: 104,
     borderRadius: 52,
-    backgroundColor: COLORS.PRIMARY_COLOR,
+    // Corregido: Usar PRIMARY_COLOR
+    backgroundColor: COLORS.PRIMARY_COLOR, 
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -119,7 +122,8 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 0,
     right: 0,
-    backgroundColor: COLORS.secondary,
+    // Corregido: Usar secondary (ya que sí existe en Colors.ts)
+    backgroundColor: COLORS.secondary, 
     width: 36,
     height: 36,
     borderRadius: 18,
@@ -148,12 +152,14 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     borderRadius: 20,
     borderWidth: 1,
-    borderColor: COLORS.PRIMARY_COLOR,
+    // Corregido: Usar PRIMARY_COLOR
+    borderColor: COLORS.PRIMARY_COLOR, 
   },
   editProfileText: {
     fontFamily: 'Inter-Medium',
     fontSize: 14,
-    color: COLORS.PRIMARY_COLOR,
+    // Corregido: Usar PRIMARY_COLOR
+    color: COLORS.PRIMARY_COLOR, 
     marginLeft: 8,
   },
   statsContainer: {
