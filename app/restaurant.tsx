@@ -83,7 +83,7 @@ const RestaurantScreen = () => {
         <View style={styles.imageContainer}>
             <Image source={restaurant.image} style={styles.image} />
             <TouchableOpacity onPress={router.back} style={styles.backButton}>
-            <Ionicons name="arrow-back" size={24} color="#fff" />
+                <Ionicons name="arrow-back" size={24} color="#fff" />
             </TouchableOpacity>
             <View style={styles.topRightIcons}>
             <TouchableOpacity onPress={() => {}}>

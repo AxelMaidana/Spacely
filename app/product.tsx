@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { View, Text, Image, TouchableOpacity, StyleSheet, ScrollView } from "react-native";
+import { View, Text, Image, TouchableOpacity, StyleSheet, ScrollView, Share } from "react-native";
 import { useCart } from "@/contexts/CartContext";
-import { Ionicons, MaterialIcons } from "@expo/vector-icons";
+import { Ionicons, MaterialIcons, Feather } from "@expo/vector-icons";
 import { router } from "expo-router";
 
 export default function ProductScreen() {
@@ -29,9 +29,28 @@ export default function ProductScreen() {
     setAdded(true);
   };
 
+  const handleShare = () => {
+    Share.share({
+      message: `¡Te recomiendo ${product.name}!.`,
+    });
+  };
   return (
     <ScrollView style={{ flex: 1 }}>
-      <Image source={product.image} style={styles.image} />
+      <View style={styles.imageContainer}>
+        <Image source={product.image} style={styles.image} />
+        <TouchableOpacity onPress={router.back} style={styles.backButton}>
+          <Ionicons name="arrow-back" size={24} color="#fff" />
+        </TouchableOpacity>
+        <View style={styles.topRightIcons}>
+          <TouchableOpacity onPress={() => {}}>
+            <Ionicons name="heart-outline" size={24} color="#fff" style={styles.icon} />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={handleShare}>
+            <Feather name="share-2" size={24} color="#fff" />
+          </TouchableOpacity>
+        </View>
+      </View>
+      
 
       <View style={styles.timerContainer}>
         <Ionicons name="time-outline" size={16} color="#F59439" />
@@ -106,6 +125,30 @@ const styles = StyleSheet.create({
     paddingVertical: 6,
     borderBottomWidth: 1,
     borderColor: "#eee",
+  },
+  backButton: {
+    position: 'absolute',
+    top: 40,
+    left: 16,
+    backgroundColor: '#0006',
+    padding: 8,
+    borderRadius: 20,
+  },
+  imageContainer: {
+    position: 'relative',
+  },
+  topRightIcons: {
+    position: 'absolute',
+    top: 40,
+    right: 16,
+    flexDirection: 'row',
+    gap: 12,
+    backgroundColor: '#0006',
+    padding: 8,
+    borderRadius: 20,
+  },
+  icon: {
+    marginRight: 12,
   },
   timerText: { color: "#F59439", fontWeight: "bold", marginLeft: 4 },
   content: { padding: 16 },

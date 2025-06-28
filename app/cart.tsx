@@ -31,6 +31,9 @@ export default function Cart() {
     <SafeAreaView style={{ flex: 1, backgroundColor: "#fff" }}>
       <ScrollView contentContainerStyle={{ padding: 16 }}>
         <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
+          <TouchableOpacity onPress={router.back} style={styles.backButton}>
+            <Ionicons name="arrow-back" size={24} color="#fff" />
+          </TouchableOpacity>
           <Text style={{ fontSize: 22, fontWeight: "bold" }}>Carrito</Text>
           <TouchableOpacity onPress={handleClearCart}>
             <Text style={{ color: "#DAA520", fontWeight: "bold" }}>Vaciar</Text>
@@ -257,5 +260,13 @@ const styles = StyleSheet.create({
     paddingVertical: 14,
     paddingHorizontal: 20,
     borderRadius: 8,
+  },
+  backButton: {
+    position: 'absolute',
+    top: 40,
+    left: 16,
+    backgroundColor: '#0006',
+    padding: 8,
+    borderRadius: 20,
   },
 });
