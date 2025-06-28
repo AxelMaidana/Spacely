@@ -12,64 +12,45 @@ import {
 import Animated, { FadeInUp } from 'react-native-reanimated';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useAuth } from '@/hooks/useAuth';
+import { useRestaurantFilters } from '@/hooks/useRestaurantFilters';
 import { COLORS } from '@/constants/Colors';
 import { MaterialIcons, FontAwesome, Ionicons } from '@expo/vector-icons';
 import { Cog } from 'lucide-react-native';
 import { navigate } from 'expo-router/build/global-state/routing';
-
-const restaurants = [
-  {
-    id: '1',
-    name: 'La Trattoria',
-    category: 'Italiana',
-    rating: 4.8,
-    distance: '0.5 km',
-    image: require('@/assets/images/restaurant1.jpg'),
-    featured: true
-  },
-  {
-    id: '2',
-    name: 'Sushi Palace',
-    category: 'Japonesa',
-    rating: 4.6,
-    distance: '1.2 km',
-    image: require('@/assets/images/restaurant2.jpg')
-  },
-  {
-    id: '3',
-    name: 'Burger Factory',
-    category: 'Americana',
-    rating: 4.3,
-    distance: '0.8 km',
-    image: require('@/assets/images/restaurant3.jpg')
-  },
-  {
-    id: '4',
-    name: 'El Asador',
-    category: 'Parrilla',
-    rating: 4.5,
-    distance: '1.5 km',
-    image: require('@/assets/images/restaurant4.jpg')
-  },
-];
-
-const categories = [
-  { id: '1', name: 'Todos', icon: 'restaurant' },
-  { id: '2', name: 'Italiana', icon: 'local-pizza' }, // Cambiado de 'pizza' a 'local-pizza'
-  { id: '3', name: 'Japonesa', icon: 'set-meal' }, // Cambiado de 'sushi' a 'set-meal'
-  { id: '4', name: 'Parrilla', icon: 'outdoor-grill' }, // Cambiado de 'bbq' a 'outdoor-grill'
-  { id: '5', name: 'Vegetariana', icon: 'grass' }, // Cambiado de 'leaf' a 'grass'
-];
+import { CategoryCarousel } from '@/components/CategoryCarousel';
+import { PromoCarousel } from '@/components/PromoCarousel';
+import { RestaurantSection } from '@/components/RestaurantSection';
+import { 
+  getFeaturedRestaurant,
+  Restaurant 
+} from '@/data/restaurants';
+import { HighlightCard } from '@/components/HighlightCard';
 
 export default function HomeScreen() {
   const { user } = useAuth();
+  const { getFilteredRestaurants } = useRestaurantFilters();
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('1');
 
-  const featuredRestaurant = restaurants.find(r => r.featured);
-  const filteredRestaurants = selectedCategory === '1' 
-    ? restaurants 
-    : restaurants.filter(r => r.category === categories.find(c => c.id === selectedCategory)?.name);
+  const featuredRestaurant = getFeaturedRestaurant();
+
+  const handleCategoryPress = (categoryId: string) => {
+    setSelectedCategory(categoryId);
+  };
+
+  const handleRestaurantPress = (restaurant: Restaurant) => {
+    navigate(`/restaurant/${restaurant.id}` as any);
+  };
+
+  const handleFeaturedPress = () => {
+    if (featuredRestaurant) {
+      handleRestaurantPress(featuredRestaurant);
+    }
+  };
+
+  const handleViewMore = (filterType?: string) => {
+    navigate(`/restobars?filter=${filterType || 'all'}` as any);
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -104,88 +85,52 @@ export default function HomeScreen() {
           </TouchableOpacity>
         </Animated.View>
 
-        {/* Categories */}
-        <Animated.View entering={FadeInUp.delay(200).duration(500)}>
-          <Text style={styles.sectionTitle}>Categorías</Text>
-          <ScrollView 
-            horizontal 
-            showsHorizontalScrollIndicator={false}
-            contentContainerStyle={styles.categoriesContainer}
-          >
-            {categories.map(category => (
-              <TouchableOpacity
-                key={category.id}
-                style={[
-                  styles.categoryButton,
-                  selectedCategory === category.id && styles.categoryButtonActive
-                ]}
-                onPress={() => setSelectedCategory(category.id)}
-              >
-                <MaterialIcons 
-                  name={category.icon as any}
-                  size={24} 
-                  color={selectedCategory === category.id ? '#FFF' : COLORS.textSecondary} 
-                />
-                <Text 
-                  style={[
-                    styles.categoryText,
-                    selectedCategory === category.id && styles.categoryTextActive
-                  ]}
-                >
-                  {category.name}
-                </Text>
-              </TouchableOpacity>
-            ))}
-          </ScrollView>
-        </Animated.View>
+        {/* Promociones */}
+        <PromoCarousel />
 
-        {/* Featured Restaurant */}
-        {featuredRestaurant && (
-          <Animated.View entering={FadeInUp.delay(250).duration(500)}>
-            <Text style={styles.sectionTitle}>Recomendado para ti</Text>
-            <TouchableOpacity style={styles.featuredCard}>
-              <Image source={featuredRestaurant.image} style={styles.featuredImage} />
-              <View style={styles.featuredOverlay} />
-              <View style={styles.featuredContent}>
-                <Text style={styles.featuredTitle}>{featuredRestaurant.name}</Text>
-                <View style={styles.featuredInfo}>
-                  <View style={styles.ratingBadge}>
-                    <MaterialIcons name="star" size={16} color="#FFF" />
-                    <Text style={styles.ratingText}>{featuredRestaurant.rating}</Text>
-                  </View>
-                  <Text style={styles.featuredCategory}>{featuredRestaurant.category}</Text>
-                  <Text style={styles.featuredDistance}>{featuredRestaurant.distance}</Text>
-                </View>
-              </View>
-            </TouchableOpacity>
-          </Animated.View>
-        )}
+        {/* Categorías */}
+        <CategoryCarousel />
 
-        {/* Nearby Restaurants */}
-        <Animated.View entering={FadeInUp.delay(300).duration(500)}>
-          <Text style={styles.sectionTitle}>Restaurantes cercanos</Text>
-          <FlatList
-            data={filteredRestaurants}
-            keyExtractor={item => item.id}
-            scrollEnabled={false}
-            renderItem={({ item }) => (
-              <TouchableOpacity style={styles.restaurantCard}>
-                <Image source={item.image} style={styles.restaurantImage} />
-                <View style={styles.restaurantInfo}>
-                  <Text style={styles.restaurantName}>{item.name}</Text>
-                  <View style={styles.restaurantDetails}>
-                    <View style={styles.ratingBadge}>
-                      <MaterialIcons name="star" size={14} color="#FFF" />
-                      <Text style={styles.ratingText}>{item.rating}</Text>
-                    </View>
-                    <Text style={styles.restaurantCategory}>{item.category}</Text>
-                    <Text style={styles.restaurantDistance}>{item.distance}</Text>
-                  </View>
-                </View>
-              </TouchableOpacity>
-            )}
-          />
-        </Animated.View>
+        {/* Secciones de Restaurantes */}
+        <RestaurantSection
+          title="Con Descuentos"
+          restaurants={getFilteredRestaurants.withDiscount()}
+          maxItems={4}
+          onActionPress={handleViewMore}
+          filterType="discount"
+        />
+
+        <RestaurantSection
+          title="Bodegones"
+          restaurants={getFilteredRestaurants.bodegones()}
+          maxItems={4}
+          onActionPress={handleViewMore}
+          filterType="bodegones"
+        />
+
+{/* Beneficio exclusivo */}
+<HighlightCard
+          image={require('@/assets/images/mapa.jpg')}
+          badgeText="Exclusivo"
+          title="Mapa interactivo"
+          description="Añadimos una vista de mapa interactiva con los restaurantes más cercanos"
+        />
+
+        <RestaurantSection
+          title="Mejor Calificados"
+          restaurants={getFilteredRestaurants.topRated()}
+          maxItems={4}
+          onActionPress={handleViewMore}
+          filterType="topRated"
+        />
+
+        <RestaurantSection
+          title="Con Delivery"
+          restaurants={getFilteredRestaurants.withDelivery()}
+          maxItems={4}
+          onActionPress={handleViewMore}
+          filterType="withDelivery"
+        />
       </ScrollView>
     </SafeAreaView>
   );

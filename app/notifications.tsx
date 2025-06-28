@@ -33,7 +33,7 @@ const NotificationsScreen = () => {
       <SafeAreaView style={styles.container}>
   <View style={styles.header}>
     <TouchableOpacity onPress={() => router.back()} style={styles.backButton}>
-      <ChevronLeft size={28} color={COLORS.primary} />
+      <ChevronLeft size={28} color={COLORS.PRIMARY_COLOR} />
     </TouchableOpacity>
   </View>
 
@@ -54,8 +54,8 @@ const NotificationsScreen = () => {
               </Text>
             </View>
             <Switch
-              trackColor={{ false: COLORS.border, true: COLORS.primaryLight }}
-              thumbColor={promociones ? COLORS.primary : COLORS.textTertiary}
+              trackColor={{ false: COLORS.border, true: COLORS.PRIMARY_COLOR_DARK }}
+              thumbColor={promociones ? COLORS.PRIMARY_COLOR : COLORS.textTertiary}
               onValueChange={setPromociones}
               value={promociones}
             />
@@ -69,8 +69,8 @@ const NotificationsScreen = () => {
               </Text>
             </View>
             <Switch
-              trackColor={{ false: COLORS.border, true: COLORS.primaryLight }}
-              thumbColor={estadoPedidos ? COLORS.primary : COLORS.textTertiary}
+              trackColor={{ false: COLORS.border, true: COLORS.PRIMARY_COLOR_DARK }}
+              thumbColor={estadoPedidos ? COLORS.PRIMARY_COLOR : COLORS.textTertiary}
               onValueChange={setEstadoPedidos}
               value={estadoPedidos}
             />
@@ -84,8 +84,8 @@ const NotificationsScreen = () => {
               </Text>
             </View>
             <Switch
-              trackColor={{ false: COLORS.border, true: COLORS.primaryLight }}
-              thumbColor={novedades ? COLORS.primary : COLORS.textTertiary}
+              trackColor={{ false: COLORS.border, true: COLORS.PRIMARY_COLOR_DARK }}
+              thumbColor={novedades ? COLORS.PRIMARY_COLOR : COLORS.textTertiary}
               onValueChange={setNovedades}
               value={novedades}
             />

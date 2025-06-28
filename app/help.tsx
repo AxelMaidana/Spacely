@@ -52,7 +52,7 @@ const HelpScreen = () => {
       {/* HEADER CON FLECHA */}
       <View style={styles.header}>
         <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
-          <ChevronLeft size={28} color={COLORS.primary} />
+          <ChevronLeft size={28} color={COLORS.PRIMARY_COLOR} />
         </TouchableOpacity>
       </View>
 

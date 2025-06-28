@@ -37,9 +37,9 @@ const TOKEN_STORAGE_KEY = '@auth:token';
 const MOCK_USERS = [
   {
     id: '1',
-    name: 'John Doe',
-    email: 'user@example.com',
-    password: 'password123',
+    name: 'Emilio Puljiz',
+    email: 'user@gmail.com',
+    password: '123',
   },
 ];
 

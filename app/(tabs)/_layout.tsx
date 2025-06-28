@@ -1,76 +1,95 @@
-import React from 'react';
-import { View, TouchableOpacity, StyleSheet, Platform } from 'react-native';
 import { Tabs } from 'expo-router';
-import {
-  Home,
-  MapPin,
-  Search,
-  Martini,
-  User,
-  Compass
-  ,
-} from 'lucide-react-native';
-import { COLORS } from '@/constants/Colors';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { View, Text, StyleSheet } from 'react-native';
+import { House, Heart, MapPin, List, User } from 'lucide-react-native';
+
+function TabBarIcon({ 
+  name, 
+  color, 
+  focused 
+}: { 
+  name: string; 
+  color: string; 
+  focused: boolean; 
+}) {
+  const IconComponent = {
+    home: House,
+    favorites: Heart,
+    map: MapPin,
+    restobars: List,
+    profile: User,
+  }[name];
+
+  if (!IconComponent) return null;
+
+  return (
+    <View style={[styles.tabIcon, focused && styles.tabIconFocused]}>
+      <IconComponent 
+        size={name === 'map' ? 28 : 24} 
+        color={color} 
+        strokeWidth={focused ? 2.5 : 2}
+      />
+    </View>
+  );
+}
 
 export default function TabLayout() {
-  const insets = useSafeAreaInsets();
-  const TABBAR_HEIGHT = 60;
-  const FLOATING_MARGIN = 10;
-
   return (
     <Tabs
       screenOptions={{
-        tabBarShowLabel: true,
         headerShown: false,
-        tabBarStyle: {
-          ...styles.tabBar,
-          height: TABBAR_HEIGHT,
-          bottom: FLOATING_MARGIN + insets.bottom, // Espacio flotante + SafeArea
-          paddingBottom: 0, // No necesitamos padding interno
-          
-        },
+        tabBarStyle: styles.tabBar,
+        tabBarActiveTintColor: '#FF6B35',
+        tabBarInactiveTintColor: '#9CA3AF',
+        tabBarLabelStyle: styles.tabBarLabel,
+        tabBarIconStyle: styles.tabBarIcon,
       }}
     >
       <Tabs.Screen
         name="home"
         options={{
-          tabBarIcon: ({ color, size }) => <Home size={size} color={color} />,
-        }}
-      />
-
-      <Tabs.Screen
-        name="map"
-        options={{
-          tabBarIcon: ({ color, size }) => <MapPin size={size} color={color} />,
-        }}
-      />
-
-      <Tabs.Screen
-        name="explore"
-        options={{
-          tabBarIcon: ({ focused }) => (
-            <View style={styles.exploreButton}>
-              <Compass 
-                size={28} 
-                color={focused ? COLORS.PRIMARY_COLOR : COLORS.white}
-              />
-            </View>
+          title: 'Home',
+          tabBarIcon: ({ color, focused }) => (
+            <TabBarIcon name="home" color={color} focused={focused} />
           ),
         }}
       />
-
+      <Tabs.Screen
+        name="favorites"
+        options={{
+          title: 'Favorites',
+          tabBarIcon: ({ color, focused }) => (
+            <TabBarIcon name="favorites" color={color} focused={focused} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="map"
+        options={{
+          title: 'Map',
+          tabBarIcon: ({ color, focused }) => (
+            <View style={[styles.mapButton, focused && styles.mapButtonFocused]}>
+              <MapPin size={28} color="#FFFFFF" strokeWidth={2.5} />
+            </View>
+          ),
+          tabBarLabel: () => null,
+        }}
+      />
       <Tabs.Screen
         name="restobars"
         options={{
-          tabBarIcon: ({ color, size }) => <Martini size={size} color={color} />,
+          title: 'Restobars',
+          tabBarIcon: ({ color, focused }) => (
+            <TabBarIcon name="restobars" color={color} focused={focused} />
+          ),
         }}
       />
-
       <Tabs.Screen
         name="profile"
         options={{
-          tabBarIcon: ({ color, size }) => <User size={size} color={color} />,
+          title: 'Profile',
+          tabBarIcon: ({ color, focused }) => (
+            <TabBarIcon name="profile" color={color} focused={focused} />
+          ),
         }}
       />
     </Tabs>
@@ -79,35 +98,55 @@ export default function TabLayout() {
 
 const styles = StyleSheet.create({
   tabBar: {
-    position: 'absolute',
-    left: 20,
-    right: 20,
-    borderRadius: 35,
-    backgroundColor: 'rgba(250, 249, 249, 0.99)', // Fondo glass
-    borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.2)',
-    shadowColor: 'rgba(173, 173, 173, 0.96)',
+    height: 80,
+    paddingBottom: 20,
+    paddingTop: 12,
+    backgroundColor: '#FFFFFF',
+    borderTopWidth: 1,
+    borderTopColor: '#F3F4F6',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: -2,
+    },
     shadowOpacity: 0.1,
-    shadowRadius: 3,
-    shadowOffset: { width: 0, height: 4 },
+    shadowRadius: 8,
     elevation: 10,
-    marginHorizontal: 20,
-    paddingVertical: 10,
   },
-  exploreButton: {
-    top: -30,
-    width: 64,
-    height: 64,
-    borderRadius: 32,
-    backgroundColor: COLORS.PRIMARY_COLOR,
+  tabBarLabel: {
+    fontSize: 12,
+    fontFamily: 'Inter-SemiBold',
+    marginTop: 4,
+  },
+  tabBarIcon: {
+    marginBottom: -4,
+  },
+  tabIcon: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  tabIconFocused: {
+    transform: [{ scale: 1.1 }],
+  },
+  mapButton: {
+    width: 56,
+    height: 56,
+    borderRadius: 28,
+    backgroundColor: '#FF6B35',
     justifyContent: 'center',
     alignItems: 'center',
-    shadowColor: COLORS.PRIMARY_COLOR,
-    shadowOffset: { width: 0, height: 5 },
+    marginBottom: 8,
+    shadowColor: '#FF6B35',
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
     shadowOpacity: 0.3,
-    shadowRadius: 6.27,
-    elevation: 10,
-    borderWidth: 4,
-    borderColor: '#fff',
+    shadowRadius: 8,
+    elevation: 8,
+  },
+  mapButtonFocused: {
+    backgroundColor: '#E55A2B',
+    transform: [{ scale: 1.05 }],
   },
 });
