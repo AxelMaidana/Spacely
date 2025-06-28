@@ -85,8 +85,8 @@ export default function Cart() {
           </View>
         ))}
 
-        {/* Otros Morfers */}
-        <Text style={{ fontSize: 18, fontWeight: "bold", marginTop: 24 }}>Otros Morfers también compraron</Text>
+        {/* Otros Spacers */}
+        <Text style={{ fontSize: 18, fontWeight: "bold", marginTop: 24 }}>Otros Spacers también compraron</Text>
         <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{ marginTop: 12 }}>
           {suggestedProducts.map(product => (
             <View key={product.id} style={styles.suggestedItem}>
