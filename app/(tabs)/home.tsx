@@ -15,6 +15,7 @@ import { useAuth } from '@/hooks/useAuth';
 import { COLORS } from '@/constants/Colors';
 import { MaterialIcons, FontAwesome, Ionicons } from '@expo/vector-icons';
 import { router } from 'expo-router';
+import { CartIcon } from "@/components/ui/CartIcon";
 
 const restaurants = [
   {
@@ -99,8 +100,15 @@ export default function HomeScreen() {
           <TouchableOpacity style={styles.filterButton}>
             <Ionicons name="filter" size={20} color="#FFF" />
           </TouchableOpacity>
+          {/* Ícono del carrito */}
+          <TouchableOpacity
+            style={styles.cartButton}
+            onPress={() => router.push('/cart')}
+          >
+            <CartIcon />
+          </TouchableOpacity>
         </Animated.View>
-
+        
         {/* Categories */}
         <Animated.View entering={FadeInUp.delay(200).duration(500)}>
           <Text style={styles.sectionTitle}>Categorías</Text>
@@ -382,4 +390,8 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: COLORS.textSecondary,
   },
+  cartButton: {
+  marginLeft: 8,
+},
+
 });
