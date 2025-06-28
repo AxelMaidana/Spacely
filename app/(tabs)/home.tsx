@@ -148,7 +148,7 @@ export default function HomeScreen() {
         {featuredRestaurant && (
           <Animated.View entering={FadeInUp.delay(250).duration(500)}>
             <Text style={styles.sectionTitle}>Recomendado para ti</Text>
-            <TouchableOpacity style={styles.featuredCard}>
+            <TouchableOpacity style={styles.featuredCard} onPress={() => router.push({ pathname: '/restaurant', params: { id: featuredRestaurant.id } })}>
               <Image source={featuredRestaurant.image} style={styles.featuredImage} />
               <View style={styles.featuredOverlay} />
               <View style={styles.featuredContent}>
@@ -174,7 +174,7 @@ export default function HomeScreen() {
             keyExtractor={item => item.id}
             scrollEnabled={false}
             renderItem={({ item }) => (
-              <TouchableOpacity style={styles.restaurantCard}>
+              <TouchableOpacity style={styles.restaurantCard} onPress={() => router.push({ pathname: '/restaurant', params: { id: item.id } })}>
                 <Image source={item.image} style={styles.restaurantImage} />
                 <View style={styles.restaurantInfo}>
                   <Text style={styles.restaurantName}>{item.name}</Text>
