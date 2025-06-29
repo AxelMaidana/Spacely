@@ -8,7 +8,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 export default function Cart() {
   const { cartItems, updateQuantity, removeItem, addItem, clearCart } = useCart();
 
-  const finalPricePerItem = 16400;
+  const finalPricePerItem = 17400;
   const originalPricePerItem = 20500;
 
   const subtotal = cartItems.reduce((sum, item) => sum + finalPricePerItem * item.quantity, 0);
