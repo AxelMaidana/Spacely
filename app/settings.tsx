@@ -76,6 +76,7 @@ export default function SettingsScreen() {
           <View style={styles.settingItem}>
             <View style={styles.settingIconContainer}>
               <Shield size={20} color={COLORS.PRIMARY_COLOR} />
+              <Shield size={20} color={COLORS.PRIMARY_COLOR} />
             </View>
             <View style={styles.settingContent}>
               <Text style={styles.settingTitle}>Biometric Login</Text>
@@ -91,6 +92,7 @@ export default function SettingsScreen() {
           
           <TouchableOpacity style={styles.settingButton}>
             <View style={styles.settingIconContainer}>
+              <Shield size={20} color={COLORS.PRIMARY_COLOR} />
               <Shield size={20} color={COLORS.PRIMARY_COLOR} />
             </View>
             <View style={styles.settingContent}>
@@ -111,6 +113,7 @@ export default function SettingsScreen() {
           >
             <View style={styles.settingIconContainer}>
               <HelpCircle size={20} color={COLORS.PRIMARY_COLOR} />
+              <HelpCircle size={20} color={COLORS.PRIMARY_COLOR} />
             </View>
             <View style={styles.settingContent}>
               <Text style={styles.settingTitle}>Help & Support</Text>
@@ -121,6 +124,7 @@ export default function SettingsScreen() {
           
           <TouchableOpacity style={styles.settingButton}>
             <View style={styles.settingIconContainer}>
+              <Info size={20} color={COLORS.PRIMARY_COLOR} />
               <Info size={20} color={COLORS.PRIMARY_COLOR} />
             </View>
             <View style={styles.settingContent}>

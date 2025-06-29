@@ -15,6 +15,8 @@ import { useAuth } from '@/hooks/useAuth';
 import { useRestaurantFilters } from '@/hooks/useRestaurantFilters';
 import { COLORS } from '@/constants/Colors';
 import { MaterialIcons, FontAwesome, Ionicons } from '@expo/vector-icons';
+import { router } from 'expo-router';
+import { CartIcon } from "@/components/ui/CartIcon";
 import { Cog } from 'lucide-react-native';
 import { navigate } from 'expo-router/build/global-state/routing';
 import { CategoryCarousel } from '@/components/CategoryCarousel';
@@ -82,6 +84,13 @@ export default function HomeScreen() {
           />
           <TouchableOpacity style={styles.filterButton}>
             <Ionicons name="filter" size={20} color="#FFF" />
+          </TouchableOpacity>
+          {/* Ícono del carrito */}
+          <TouchableOpacity
+            style={styles.cartButton}
+            onPress={() => router.push('/cart')}
+          >
+            <CartIcon />
           </TouchableOpacity>
         </Animated.View>
 
@@ -330,4 +339,8 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: COLORS.textSecondary,
   },
+  cartButton: {
+  marginLeft: 8,
+},
+
 });

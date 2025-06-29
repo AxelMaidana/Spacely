@@ -1,121 +1,130 @@
-import React, { useState, useEffect } from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  Image,
-  TouchableOpacity,
-  ActivityIndicator,
-  ScrollView,
-  Share,
-} from 'react-native';
-import { useLocalSearchParams, useRouter } from 'expo-router';
-import { Ionicons, Feather, EvilIcons } from '@expo/vector-icons';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import Button from '@/components/ui/Button';
-import { useAddProduct } from '@/hooks/useAddProduct';
-import { COLORS } from '@/constants/Colors';
+import React, { useState } from "react";
+import { View, Text, Image, TouchableOpacity, StyleSheet, ScrollView, Share } from "react-native";
+import { useCart } from "@/contexts/CartContext";
+import { Ionicons, MaterialIcons, Feather } from "@expo/vector-icons";
+import { router } from "expo-router";
 
-const productsMock = [
-    { id: 'p1', name: 'Doble Cheeseburger', price: 7990, promo: 6990, image: require('@/assets/images/hamburguesaCheeseburger.jpg')},
-    { id: 'p2', name: 'Kentucky', price: 8990, image: require('@/assets/images/hamburguesaKentucky.jpg')},
-    { id: 'p3', name: 'Tasty', price: 8990, image: require('@/assets/images/hamburguesaTasty.jpg')},
-    { id: 'p4', name: 'Oklahoma', price: 8990, image: require('@/assets/images/hamburguesaOklahoma.jpg')},
-    { id: 'p5', name: 'California', price: 8990, image: require('@/assets/images/hamburguesaCalifornia.jpg')},
-    { id: 'p6', name: 'Hamburgesa Full + Papas fritas', price: 8990, image: require('@/assets/images/hamburguesaFull.jpg')},
-];
+export default function ProductScreen() {
+  const [quantity, setQuantity] = useState(1);
+  const { addItem, cartItems } = useCart();
+  const [added, setAdded] = useState(false);
 
-const ProductScreen = () => {
-  const { id } = useLocalSearchParams();
-  const router = useRouter();
+  const product = {
+    id: "1",
+    name: "Milanesa de Ternera Napolitana + Agua/Gaseosa",
+    description: "Milanesa de Ternera Napolitana + Agua/Gaseosa.\n*No acumulable con otras promociones del local.",
+    originalPrice: 20500,
+    discount: 20,
+    finalPrice: 16400,
+    image: require("@/assets/images/restaurant1.jpg"),
+    restaurant: {
+      name: "La Taberna",
+      address: "Adolfo Alsina 431",
+      hours: "Acercate HOY de 11:30 - 17:00 / 19:00 - 00:00"
+    }
+  };
 
-  const product = productsMock.find((r) => r.id === id);
-
-  if (!product) {
-    return <Text style={styles.noData}>Producto no encontrado</Text>;
-  }
-
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState('');
-  const [label, setLabel] = useState('');
+  const handleAddToCart = () => {
+    addItem({ id: product.id, name: product.name, quantity });
+    setAdded(true);
+  };
 
   const handleShare = () => {
     Share.share({
-      message: `¡Te recomiendo ${product.name}! Está en Spacely.`,
+      message: `¡Te recomiendo ${product.name}!.`,
     });
   };
-
-  const handleAddProduct = async () => {
-    
-    setError('');
-    setIsLoading(true);
-
-    try {
-      await useAddProduct(product.id);
-    } catch (err) {
-      setError('Error al agregar. Intenta nuevamente.');
-    } finally {
-       // if(amount > 0){
-            setLabel('Ver carrito');
-       // }
-      setIsLoading(false);
-    }
-  };
   return (
-    <SafeAreaView style={styles.container}>
-        <ScrollView style={styles.container}>
-        <View style={styles.imageContainer}>
-            <Image source={product.image} style={styles.image} />
-            <TouchableOpacity onPress={router.back} style={styles.backButton}>
-            <Ionicons name="arrow-back" size={24} color="#fff" />
-            </TouchableOpacity>
-            <View style={styles.topRightIcons}>
-            <TouchableOpacity onPress={() => {}}>
-                <Ionicons name="heart-outline" size={24} color="#fff" style={styles.icon} />
-            </TouchableOpacity>
-            <TouchableOpacity onPress={handleShare}>
-                <Feather name="share-2" size={24} color="#fff" />
-            </TouchableOpacity>
-            </View>
+    <ScrollView style={{ flex: 1 }}>
+      <View style={styles.imageContainer}>
+        <Image source={product.image} style={styles.image} />
+        <TouchableOpacity onPress={router.back} style={styles.backButton}>
+          <Ionicons name="arrow-back" size={24} color="#fff" />
+        </TouchableOpacity>
+        <View style={styles.topRightIcons}>
+          <TouchableOpacity onPress={() => {}}>
+            <Ionicons name="heart-outline" size={24} color="#fff" style={styles.icon} />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={handleShare}>
+            <Feather name="share-2" size={24} color="#fff" />
+          </TouchableOpacity>
         </View>
-        
-        <View style={styles.infoContainer}>
-            <Text style={styles.title}>{product.name}</Text>
-            <Text style={styles.subtitle}>
-                <Text style={styles.iconText}>
-                    <EvilIcons name="location"  style={{ fontSize: 24, color: '#666', verticalAlign: 'bottom' }} />
-                </Text> {product.price}
+      </View>
+      
+
+      <View style={styles.timerContainer}>
+        <Ionicons name="time-outline" size={16} color="#F59439" />
+        <Text style={styles.timerText}>12:52:37</Text>
+      </View>
+
+      <View style={styles.content}>
+        <Text style={styles.name}>{product.name}</Text>
+        <Text style={styles.description}>{product.description}</Text>
+
+        <View style={styles.priceRow}>
+          <Text style={styles.originalPrice}>${product.originalPrice.toLocaleString()}</Text>
+          <View style={styles.discountBadge}>
+            <Text style={styles.discountText}>- {product.discount}%</Text>
+          </View>
+        </View>
+        <Text style={styles.finalPrice}>${product.finalPrice.toLocaleString()}</Text>
+
+        <View style={styles.restaurantInfo}>
+          <MaterialIcons name="storefront" size={18} color="#000" />
+          <View style={{ marginLeft: 8 }}>
+            <Text style={styles.restaurantName}>{product.restaurant.name}</Text>
+            <Text style={styles.restaurantAddress}>{product.restaurant.address}</Text>
+          </View>
+        </View>
+
+        <View style={styles.hoursContainer}>
+          <Ionicons name="time-outline" size={16} color="#F59439" />
+          <Text style={styles.hoursText}>{product.restaurant.hours}</Text>
+        </View>
+
+        <View style={styles.footerRow}>
+          <View style={styles.quantityRow}>
+            <TouchableOpacity
+              style={styles.qtyButton}
+              onPress={() => setQuantity((prev) => (prev > 1 ? prev - 1 : 1))}
+            >
+              <Text style={styles.qtyButtonText}>-</Text>
+            </TouchableOpacity>
+            <Text style={styles.qtyText}>{quantity}</Text>
+            <TouchableOpacity
+              style={styles.qtyButton}
+              onPress={() => setQuantity((prev) => prev + 1)}
+            >
+              <Text style={styles.qtyButtonText}>+</Text>
+            </TouchableOpacity>
+          </View>
+
+          <TouchableOpacity
+            style={styles.addButton}
+            onPress={() => {
+              if (!added) handleAddToCart();
+              else router.push("/cart");
+            }}
+          >
+            <Text style={styles.addButtonText}>
+              {added ? "Revisar carrito" : `Añadir $${product.finalPrice.toLocaleString()}`}
             </Text>
-            <Text style={styles.subtitle}>
-                <EvilIcons name="clock"  style={{ fontSize: 24, color: '#666', verticalAlign: 'bottom' }} /> Hoy: {product.price}
-            </Text> 
+          </TouchableOpacity>
         </View>
-
-                      <Button 
-                        label={"Añadir"}
-                        onPress={handleAddProduct}
-                        disabled={isLoading}
-                        style={styles.añadirButton}
-                        icon={isLoading ? <ActivityIndicator size="small" color="#FFF" /> : null}
-                      />
-        </ScrollView>
-    </SafeAreaView>
+      </View>
+    </ScrollView>
   );
-};
-
-export default ProductScreen;
+}
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-  },
-  imageContainer: {
-    position: 'relative',
-  },
-  image: {
-    width: '100%',
-    height: 200,
+  image: { width: "100%", height: 250 },
+  timerContainer: {
+    flexDirection: "row",
+    justifyContent: "center",
+    backgroundColor: "#FFF",
+    paddingVertical: 6,
+    borderBottomWidth: 1,
+    borderColor: "#eee",
   },
   backButton: {
     position: 'absolute',
@@ -124,6 +133,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#0006',
     padding: 8,
     borderRadius: 20,
+  },
+  imageContainer: {
+    position: 'relative',
   },
   topRightIcons: {
     position: 'absolute',
@@ -138,85 +150,25 @@ const styles = StyleSheet.create({
   icon: {
     marginRight: 12,
   },
-  iconText: {
-  fontSize: 24,
-  color: '#666',
-  marginRight: 4,
-  transform: [{ translateY: 1 }],
-},
-  infoContainer: {
-    padding: 16,
-  },
-  title: {
-    fontSize: 22,
-    fontWeight: 'bold',
-  },
-  subtitle: {
-    fontSize: 14,
-    color: '#666',
-    marginTop: 10,
-  },
-  sectionTitle: {
-    fontSize: 18,
-    fontWeight: '600',
-    margin: 16,
-  },
-  productsContainer: {
-    paddingHorizontal: 16,
-  },
-  productCard: {
-    flexDirection: 'row',
-    backgroundColor: '#fafafa',
-    padding: 12,
-    borderRadius: 12,
-    marginBottom: 12,
-    elevation: 1,
-  },
-  productImage: {
-    width: 80,
-    height: 80,
-    borderRadius: 10,
-    marginRight: 12,
-  },
-  productTitle: {
-    fontSize: 16,
-    fontWeight: '600',
-  },
-  piecesText: {
-    fontSize: 13,
-    color: '#888',
-    marginVertical: 2,
-  },
-  priceRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 10,
-  },
-  oldPrice: {
-    textDecorationLine: 'line-through',
-    color: '#888',
-    fontSize: 14,
-  },
-  newPrice: {
-    color: '#D9534F',
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
-  noData: {
-    padding: 20,
-    textAlign: 'center',
-    color: '#666',
-  },
-  añadirButton: {
-    borderRadius: 12,
-    height: 50,
-    width: 200,
-    margin: 200,
-    backgroundColor: COLORS.PRIMARY_COLOR,
-    shadowColor: COLORS.PRIMARY_COLOR,
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.3,
-    shadowRadius: 8,
-    elevation: 5,
-    }
+  timerText: { color: "#F59439", fontWeight: "bold", marginLeft: 4 },
+  content: { padding: 16 },
+  name: { fontSize: 20, fontWeight: "bold", marginBottom: 6 },
+  description: { fontSize: 14, color: "#555", marginBottom: 12 },
+  priceRow: { flexDirection: "row", alignItems: "center", marginBottom: 4 },
+  originalPrice: { fontSize: 14, color: "#999", textDecorationLine: "line-through", marginRight: 8 },
+  discountBadge: { backgroundColor: "#F6A72D", borderRadius: 4, paddingHorizontal: 6, paddingVertical: 2 },
+  discountText: { color: "#FFF", fontSize: 12, fontWeight: "bold" },
+  finalPrice: { fontSize: 20, fontWeight: "bold", marginBottom: 16 },
+  restaurantInfo: { flexDirection: "row", alignItems: "center", marginBottom: 8 },
+  restaurantName: { fontSize: 16, fontWeight: "bold" },
+  restaurantAddress: { fontSize: 14, color: "#777" },
+  hoursContainer: { flexDirection: "row", alignItems: "center", backgroundColor: "#FFF5E0", padding: 10, borderRadius: 6, marginBottom: 16 },
+  hoursText: { marginLeft: 8, color: "#000", fontSize: 13 },
+  footerRow: { flexDirection: "row", alignItems: "center" },
+  quantityRow: { flexDirection: "row", alignItems: "center", marginRight: 12 },
+  qtyButton: { backgroundColor: "#EEE", paddingHorizontal: 14, paddingVertical: 6, borderRadius: 6 },
+  qtyButtonText: { fontSize: 18, fontWeight: "bold" },
+  qtyText: { marginHorizontal: 10, fontSize: 16, fontWeight: "bold" },
+  addButton: { flex: 1, backgroundColor: "#1C1C1C", padding: 14, borderRadius: 8, alignItems: "center" },
+  addButtonText: { color: "#FFF", fontSize: 16, fontWeight: "bold" },
 });
