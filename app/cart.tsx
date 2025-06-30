@@ -4,15 +4,40 @@ import { useCart } from "@/contexts/CartContext";
 import { Ionicons } from "@expo/vector-icons";
 import { router } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { getRestaurantById } from "@/data/restaurants";
 
 export default function Cart() {
-  const { cartItems, updateQuantity, removeItem, addItem, clearCart } = useCart();
+  const { cartItems, restaurantInfo, updateQuantity, removeItem, addItem, clearCart } = useCart();
 
+  // Precios simulados - en una app real vendrían de la API
   const finalPricePerItem = 16400;
   const originalPricePerItem = 20500;
 
   const subtotal = cartItems.reduce((sum, item) => sum + finalPricePerItem * item.quantity, 0);
   const ahorro = cartItems.reduce((sum, item) => sum + (originalPricePerItem - finalPricePerItem) * item.quantity, 0);
+
+  // Obtener productos sugeridos del mismo restaurante
+  const getSuggestedProducts = () => {
+    if (!restaurantInfo) return [];
+    
+    const restaurant = getRestaurantById(restaurantInfo.id);
+    if (!restaurant || !restaurant.menu) return [];
+    
+    // Filtrar productos que no están ya en el carrito
+    const cartItemIds = cartItems.map(item => item.id);
+    const availableProducts = restaurant.menu.filter(item => !cartItemIds.includes(item.id));
+    
+    // Tomar hasta 3 productos sugeridos
+    return availableProducts.slice(0, 3).map(item => ({
+      id: item.id,
+      name: item.name,
+      price: 16400,
+      discount: Math.random() > 0.7 ? 15 : 0,
+      image: restaurant.image
+    }));
+  };
+
+  const suggestedProducts = getSuggestedProducts();
 
   const handleClearCart = () => {
     Alert.alert("Vaciar carrito", "¿Seguro que deseas vaciar el carrito?", [
@@ -21,18 +46,48 @@ export default function Cart() {
     ]);
   };
 
-  const suggestedProducts = [
-    { id: "sorrentinos", name: "Sorrentinos de JyQ", price: 15725, discount: 15, image: require("@/assets/images/restaurant2.jpg") },
-    { id: "flan", name: "Flan Casero", price: 4250, discount: 15, image: require("@/assets/images/restaurant3.jpg") },
-    { id: "gaseosa", name: "Gaseosa x1", price: 3000, discount: 0, image: require("@/assets/images/restaurant4.jpg") },
-  ];
+  const handleCheckout = () => {
+    if (cartItems.length === 0) {
+      Alert.alert("Carrito vacío", "Agrega productos al carrito antes de continuar");
+      return;
+    }
+    router.push("/checkout");
+  };
+
+  if (cartItems.length === 0) {
+    return (
+      <SafeAreaView style={{ flex: 1, backgroundColor: "#fff" }}>
+        <View style={styles.header}>
+          <TouchableOpacity onPress={router.back} style={styles.backButton}>
+            <Ionicons name="arrow-back" size={24} color="#fff" />
+          </TouchableOpacity>
+          <Text style={styles.headerTitle}>Carrito</Text>
+          <View style={styles.headerSpacer} />
+        </View>
+        
+        <View style={styles.emptyContainer}>
+          <Ionicons name="cart-outline" size={80} color="#D1D5DB" />
+          <Text style={styles.emptyTitle}>Tu carrito está vacío</Text>
+          <Text style={styles.emptyDescription}>
+            Agrega productos desde cualquier restaurante para comenzar
+          </Text>
+          <TouchableOpacity 
+            style={styles.browseButton}
+            onPress={() => router.push('/home')}
+          >
+            <Text style={styles.browseButtonText}>Explorar Restaurantes</Text>
+          </TouchableOpacity>
+        </View>
+      </SafeAreaView>
+    );
+  }
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "#fff" }}>
       <ScrollView contentContainerStyle={{ padding: 16 }}>
         <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
           <TouchableOpacity onPress={router.back} style={styles.backButton}>
-            <Ionicons name="arrow-back" size={24} color="#fff" />
+            <Ionicons name="arrow-back" size={24} color="#000" />
           </TouchableOpacity>
           <Text style={{ fontSize: 22, fontWeight: "bold" }}>Carrito</Text>
           <TouchableOpacity onPress={handleClearCart}>
@@ -41,18 +96,20 @@ export default function Cart() {
         </View>
 
         {/* Info restaurante */}
-        <View style={styles.restaurantInfo}>
-          <Image source={require("@/assets/images/restaurant1.jpg")} style={styles.restaurantLogo} />
-          <View>
-            <Text style={{ fontSize: 16, fontWeight: "bold" }}>La Taberna</Text>
-            <Text style={{ fontSize: 14, color: "gray" }}>Adolfo Alsina 431</Text>
+        {restaurantInfo && (
+          <View style={styles.restaurantInfo}>
+            <Image source={restaurantInfo.image} style={styles.restaurantLogo} />
+            <View>
+              <Text style={{ fontSize: 16, fontWeight: "bold" }}>{restaurantInfo.name}</Text>
+              <Text style={{ fontSize: 14, color: "gray" }}>{restaurantInfo.address}</Text>
+            </View>
           </View>
-        </View>
+        )}
 
         {/* Items en el carrito */}
         {cartItems.map((item) => (
           <View key={item.id} style={styles.itemContainer}>
-            <Image source={require("@/assets/images/restaurant1.jpg")} style={styles.itemImage} />
+            <Image source={restaurantInfo?.image || require("@/assets/images/restaurant1.jpg")} style={styles.itemImage} />
             <View style={{ flex: 1, marginLeft: 8 }}>
               <Text numberOfLines={1} style={styles.itemName}>{item.name}</Text>
               <View style={styles.priceRow}>
@@ -89,7 +146,9 @@ export default function Cart() {
         ))}
 
         {/* Otros Spacers */}
-        <Text style={{ fontSize: 18, fontWeight: "bold", marginTop: 24 }}>Otros Spacers también compraron</Text>
+        <Text style={{ fontSize: 18, fontWeight: "bold", marginTop: 24 }}>
+          Otros platos de {restaurantInfo?.name || 'este restaurante'}
+        </Text>
         <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{ marginTop: 12 }}>
           {suggestedProducts.map(product => (
             <View key={product.id} style={styles.suggestedItem}>
@@ -106,7 +165,7 @@ export default function Cart() {
               <Text style={styles.suggestedPrice}>${product.price.toLocaleString()}</Text>
               <TouchableOpacity
                 style={styles.addSuggestedButton}
-                onPress={() => addItem({ id: product.id, name: product.name, quantity: 1 })}
+                onPress={() => addItem({ id: product.id, name: product.name, quantity: 1 }, restaurantInfo || undefined)}
               >
                 <Ionicons name="add" size={16} color="#000" />
               </TouchableOpacity>
@@ -128,7 +187,7 @@ export default function Cart() {
         </View>
         <TouchableOpacity
           style={styles.checkoutButton}
-          onPress={() => router.push("/checkout")}
+          onPress={handleCheckout}
         >
           <Text style={{ color: "#fff", fontWeight: "bold" }}>Elige día y horario</Text>
         </TouchableOpacity>
@@ -262,11 +321,46 @@ const styles = StyleSheet.create({
     borderRadius: 8,
   },
   backButton: {
-    position: 'absolute',
-    top: 40,
-    left: 16,
-    backgroundColor: '#0006',
     padding: 8,
-    borderRadius: 20,
+  },
+  header: {
+    flexDirection: "row",
+    alignItems: "center",
+    padding: 16,
+  },
+  headerTitle: {
+    fontSize: 22,
+    fontWeight: "bold",
+    marginLeft: 16,
+  },
+  headerSpacer: {
+    flex: 1,
+  },
+  emptyContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  emptyTitle: {
+    fontSize: 24,
+    fontWeight: "bold",
+    marginBottom: 16,
+  },
+  emptyDescription: {
+    fontSize: 16,
+    color: "#6B7280",
+    marginBottom: 24,
+    textAlign: "center",
+  },
+  browseButton: {
+    backgroundColor: "#1C1C1C",
+    paddingVertical: 14,
+    paddingHorizontal: 20,
+    borderRadius: 8,
+  },
+  browseButtonText: {
+    color: "#fff",
+    fontSize: 16,
+    fontWeight: "bold",
   },
 });

@@ -33,6 +33,7 @@ import { getRestaurantById, MenuItem } from '@/data/restaurants';
 import { getPromotionsByCategory } from '@/data/promotions';
 import { getReviewsByRestaurantId, Review } from '@/data/reviews';
 import { useFavorites } from '@/contexts/FavoritesContext';
+import { useCart } from '@/contexts/CartContext';
 
 const { width } = Dimensions.get('window');
 
@@ -42,6 +43,7 @@ export default function RestaurantScreen() {
   const [selectedTab, setSelectedTab] = useState('menu');
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const { isFavorite, addToFavorites, removeFromFavorites } = useFavorites();
+  const { addItem, cartItems } = useCart();
 
   if (!restaurant) {
     return (
@@ -67,6 +69,31 @@ export default function RestaurantScreen() {
       removeFromFavorites(restaurant.id);
     } else {
       addToFavorites(restaurant.id);
+    }
+  };
+
+  const handleAddToCart = (menuItem: MenuItem) => {
+    const restaurantInfo = {
+      id: restaurant.id,
+      name: restaurant.title,
+      address: restaurant.address,
+      image: restaurant.image
+    };
+    
+    addItem({
+      id: menuItem.id,
+      name: menuItem.name,
+      quantity: 1
+    }, restaurantInfo);
+    
+    Alert.alert('Producto agregado', `${menuItem.name} se agregó al carrito`);
+  };
+
+  const handleViewCart = () => {
+    if (cartItems.length > 0) {
+      router.push('/cart');
+    } else {
+      Alert.alert('Carrito vacío', 'Agrega productos al carrito antes de continuar');
     }
   };
 
@@ -110,16 +137,24 @@ export default function RestaurantScreen() {
   };
 
   const renderMenuItem = ({ item }: { item: MenuItem }) => (
-    <TouchableOpacity style={styles.menuItem}>
+    <View style={styles.menuItem}>
       <View style={styles.menuItemInfo}>
         <Text style={styles.menuItemName}>{item.name}</Text>
         <Text style={styles.menuItemDescription}>{item.description}</Text>
         <Text style={styles.menuItemPrice}>{item.price}</Text>
       </View>
-      {item.image && (
-        <Image source={item.image} style={styles.menuItemImage} />
-      )}
-    </TouchableOpacity>
+      <View style={styles.menuItemActions}>
+        {item.image && (
+          <Image source={item.image} style={styles.menuItemImage} />
+        )}
+        <TouchableOpacity 
+          style={styles.addToCartButton}
+          onPress={() => handleAddToCart(item)}
+        >
+          <MaterialIcons name="add-shopping-cart" size={20} color="#FFFFFF" />
+        </TouchableOpacity>
+      </View>
+    </View>
   );
 
   const renderPromotion = ({ item }: { item: any }) => (
@@ -275,6 +310,13 @@ export default function RestaurantScreen() {
               <MapPin size={20} color="#F59439" />
               <Text style={styles.quickActionText}>Dirección</Text>
             </TouchableOpacity>
+            <TouchableOpacity 
+              style={styles.quickActionButton} 
+              onPress={() => router.push(`/reservation/${restaurant.id}` as any)}
+            >
+              <MaterialIcons name="event-available" size={20} color="#9C27B0" />
+              <Text style={styles.quickActionText}>Reservar Mesa</Text>
+            </TouchableOpacity>
           </View>
 
           {/* Amenities */}
@@ -405,9 +447,19 @@ export default function RestaurantScreen() {
           <Text style={styles.priceText}>
             {restaurant.prices?.description || 'Rango de precios'}
           </Text>
+          {cartItems.length > 0 && (
+            <Text style={styles.cartCount}>
+              {cartItems.length} producto{cartItems.length !== 1 ? 's' : ''} en el carrito
+            </Text>
+          )}
         </View>
-        <TouchableOpacity style={styles.reserveButton}>
-          <Text style={styles.reserveButtonText}>Hacer Pedido</Text>
+        <TouchableOpacity 
+          style={[styles.reserveButton, cartItems.length === 0 && styles.reserveButtonDisabled]}
+          onPress={handleViewCart}
+        >
+          <Text style={styles.reserveButtonText}>
+            {cartItems.length > 0 ? 'Ver Carrito' : 'Hacer Pedido'}
+          </Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>
@@ -669,6 +721,16 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     marginLeft: 12,
   },
+  menuItemActions: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+  },
+  addToCartButton: {
+    backgroundColor: '#FF6B35',
+    padding: 8,
+    borderRadius: 8,
+  },
   promotionsContainer: {
     gap: 12,
   },
@@ -752,6 +814,12 @@ const styles = StyleSheet.create({
     fontFamily: 'Inter-Regular',
     color: '#6B7280',
   },
+  cartCount: {
+    fontSize: 12,
+    fontFamily: 'Inter-Regular',
+    color: '#6B7280',
+    marginTop: 4,
+  },
   reserveButton: {
     backgroundColor: '#FF6B35',
     paddingHorizontal: 32,
@@ -765,6 +833,9 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.3,
     shadowRadius: 8,
     elevation: 8,
+  },
+  reserveButtonDisabled: {
+    backgroundColor: '#F3F4F6',
   },
   reserveButtonText: {
     fontSize: 16,

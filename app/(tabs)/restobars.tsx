@@ -322,11 +322,12 @@ const styles = StyleSheet.create({
     borderBottomColor: '#E5E7EB',
     marginBottom: 8,
     paddingBottom: 24,
+    maxHeight: 80,
   },
   filterContent: {
     paddingHorizontal: 20,
     paddingVertical: 12,
-    paddingBottom: 16,
+    paddingBottom: 20,
   },
   filterButton: {
     flexDirection: 'row',

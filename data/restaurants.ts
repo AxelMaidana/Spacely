@@ -108,9 +108,9 @@ export const restaurants: Restaurant[] = [
       'Martes': '6:00 PM - 2:00 AM',
       'Miércoles': '6:00 PM - 2:00 AM',
       'Jueves': '6:00 PM - 2:00 AM',
-      'Viernes': '6:00 PM - 3:00 AM',
-      'Sábado': '6:00 PM - 3:00 AM',
-      'Domingo': '6:00 PM - 2:00 AM',
+      'Viernes': '6:00 PM - 2:00 AM',
+      'Sábado': '6:00 PM - 2:00 AM',
+      'Domingo': 'Cerrado',
     },
   },
   {
@@ -576,7 +576,7 @@ export const restaurants: Restaurant[] = [
       'Jueves': '6:00 PM - 2:00 AM',
       'Viernes': '6:00 PM - 3:00 AM',
       'Sábado': '6:00 PM - 3:00 AM',
-      'Domingo': '6:00 PM - 2:00 AM',
+      'Domingo': 'Cerrado',
     },
   },
   {
@@ -643,7 +643,7 @@ export const restaurants: Restaurant[] = [
       'Jueves': '12:00 PM - 2:00 AM',
       'Viernes': '12:00 PM - 3:00 AM',
       'Sábado': '12:00 PM - 3:00 AM',
-      'Domingo': '12:00 PM - 2:00 AM',
+      'Domingo': 'Cerrado',
     },
   },
   {
@@ -710,7 +710,7 @@ export const restaurants: Restaurant[] = [
       'Jueves': '7:00 PM - 2:00 AM',
       'Viernes': '7:00 PM - 3:00 AM',
       'Sábado': '7:00 PM - 3:00 AM',
-      'Domingo': '7:00 PM - 2:00 AM',
+      'Domingo': 'Cerrado',
     },
   },
   {
@@ -777,7 +777,7 @@ export const restaurants: Restaurant[] = [
       'Jueves': '8:00 AM - 10:00 PM',
       'Viernes': '8:00 AM - 11:00 PM',
       'Sábado': '8:00 AM - 11:00 PM',
-      'Domingo': '8:00 AM - 10:00 PM',
+      'Domingo': 'Cerrado',
     },
   },
   {
@@ -864,7 +864,7 @@ export const restaurants: Restaurant[] = [
       'Jueves': '11:00 AM - 10:00 PM',
       'Viernes': '11:00 AM - 11:00 PM',
       'Sábado': '10:00 AM - 11:00 PM',
-      'Domingo': '10:00 AM - 10:00 PM',
+      'Domingo': 'Cerrado',
     },
   },
   {
@@ -951,7 +951,7 @@ export const restaurants: Restaurant[] = [
       'Jueves': '10:00 AM - 10:00 PM',
       'Viernes': '10:00 AM - 11:00 PM',
       'Sábado': '9:00 AM - 11:00 PM',
-      'Domingo': '9:00 AM - 10:00 PM',
+      'Domingo': 'Cerrado',
     },
   },
   {
@@ -1039,7 +1039,7 @@ export const restaurants: Restaurant[] = [
       'Jueves': '12:00 PM - 10:00 PM',
       'Viernes': '12:00 PM - 11:00 PM',
       'Sábado': '11:00 AM - 11:00 PM',
-      'Domingo': '11:00 AM - 10:00 PM',
+      'Domingo': 'Cerrado',
     },
   },
   {
@@ -1127,7 +1127,7 @@ export const restaurants: Restaurant[] = [
       'Jueves': '9:00 AM - 9:00 PM',
       'Viernes': '9:00 AM - 10:00 PM',
       'Sábado': '8:00 AM - 10:00 PM',
-      'Domingo': '8:00 AM - 9:00 PM',
+      'Domingo': 'Cerrado',
     },
   },
   {
@@ -1302,7 +1302,7 @@ export const restaurants: Restaurant[] = [
       'Jueves': '11:00 AM - 11:00 PM',
       'Viernes': '11:00 AM - 12:00 AM',
       'Sábado': '10:00 AM - 12:00 AM',
-      'Domingo': '10:00 AM - 11:00 PM',
+      'Domingo': 'Cerrado',
     },
   },
   {
@@ -1390,7 +1390,7 @@ export const restaurants: Restaurant[] = [
       'Jueves': '12:00 PM - 10:00 PM',
       'Viernes': '12:00 PM - 11:00 PM',
       'Sábado': '11:00 AM - 11:00 PM',
-      'Domingo': '11:00 AM - 10:00 PM',
+      'Domingo': 'Cerrado',
     },
   },
   {
@@ -1478,7 +1478,7 @@ export const restaurants: Restaurant[] = [
       'Jueves': '11:00 AM - 10:00 PM',
       'Viernes': '11:00 AM - 11:00 PM',
       'Sábado': '10:00 AM - 11:00 PM',
-      'Domingo': '10:00 AM - 10:00 PM',
+      'Domingo': 'Cerrado',
     },
   },
   {
@@ -1566,7 +1566,7 @@ export const restaurants: Restaurant[] = [
       'Jueves': '12:00 PM - 11:00 PM',
       'Viernes': '12:00 PM - 12:00 AM',
       'Sábado': '11:00 AM - 12:00 AM',
-      'Domingo': '11:00 AM - 11:00 PM',
+      'Domingo': 'Cerrado',
     },
   },
   {
@@ -1654,7 +1654,7 @@ export const restaurants: Restaurant[] = [
       'Jueves': '11:00 AM - 10:00 PM',
       'Viernes': '11:00 AM - 11:00 PM',
       'Sábado': '10:00 AM - 11:00 PM',
-      'Domingo': '10:00 AM - 10:00 PM',
+      'Domingo': 'Cerrado',
     },
   },
   {
@@ -1742,7 +1742,7 @@ export const restaurants: Restaurant[] = [
       'Jueves': '12:00 PM - 10:00 PM',
       'Viernes': '12:00 PM - 11:00 PM',
       'Sábado': '11:00 AM - 11:00 PM',
-      'Domingo': '11:00 AM - 10:00 PM',
+      'Domingo': 'Cerrado',
     },
   },
   {
@@ -1830,7 +1830,7 @@ export const restaurants: Restaurant[] = [
       'Jueves': '12:00 PM - 10:00 PM',
       'Viernes': '12:00 PM - 11:00 PM',
       'Sábado': '11:00 AM - 11:00 PM',
-      'Domingo': '11:00 AM - 10:00 PM',
+      'Domingo': 'Cerrado',
     },
   },
   {
@@ -1918,7 +1918,7 @@ export const restaurants: Restaurant[] = [
       'Jueves': '11:00 AM - 11:00 PM',
       'Viernes': '11:00 AM - 12:00 AM',
       'Sábado': '10:00 AM - 12:00 AM',
-      'Domingo': '10:00 AM - 11:00 PM',
+      'Domingo': 'Cerrado',
     },
   },
   {
@@ -2006,7 +2006,7 @@ export const restaurants: Restaurant[] = [
       'Jueves': '10:00 AM - 11:00 PM',
       'Viernes': '10:00 AM - 12:00 AM',
       'Sábado': '9:00 AM - 12:00 AM',
-      'Domingo': '9:00 AM - 11:00 PM',
+      'Domingo': 'Cerrado',
     },
   },
   {
@@ -2094,7 +2094,7 @@ export const restaurants: Restaurant[] = [
       'Jueves': '11:00 AM - 10:00 PM',
       'Viernes': '11:00 AM - 11:00 PM',
       'Sábado': '10:00 AM - 11:00 PM',
-      'Domingo': '10:00 AM - 10:00 PM',
+      'Domingo': 'Cerrado',
     },
   },
   {
@@ -2532,7 +2532,7 @@ export const restaurants: Restaurant[] = [
       'Jueves': '11:00 AM - 10:00 PM',
       'Viernes': '11:00 AM - 11:00 PM',
       'Sábado': '10:00 AM - 11:00 PM',
-      'Domingo': '10:00 AM - 10:00 PM',
+      'Domingo': 'Cerrado',
     },
   },
   {
@@ -2620,7 +2620,7 @@ export const restaurants: Restaurant[] = [
       'Jueves': '12:00 PM - 10:00 PM',
       'Viernes': '12:00 PM - 11:00 PM',
       'Sábado': '11:00 AM - 11:00 PM',
-      'Domingo': '11:00 AM - 10:00 PM',
+      'Domingo': 'Cerrado',
     },
   },
   {
@@ -2708,7 +2708,7 @@ export const restaurants: Restaurant[] = [
       'Jueves': '8:00 AM - 8:00 PM',
       'Viernes': '8:00 AM - 8:00 PM',
       'Sábado': '8:00 AM - 8:00 PM',
-      'Domingo': '8:00 AM - 8:00 PM',
+      'Domingo': 'Cerrado',
     },
   }
 ];

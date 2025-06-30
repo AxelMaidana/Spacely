@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import {
   View,
   TextInput,
@@ -8,251 +8,350 @@ import {
   FlatList,
   ScrollView,
   Image,
+  Dimensions,
 } from 'react-native';
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { restaurants, Restaurant } from '@/data/restaurants';
 
-const restaurantesMock = [
-  {
-    id: '1',
-    name: 'La Trattoria',
-    category: 'Italiana',
-    rating: 4.8,
-    distance: '0.5 km',
-    image: require('@/assets/images/restaurant1.jpg'),
-    featured: true,
-  },
-  {
-    id: '2',
-    name: 'Sushi Palace',
-    category: 'Japonesa',
-    rating: 4.6,
-    distance: '1.2 km',
-    image: require('@/assets/images/restaurant2.jpg'),
-    featured: true,
-  },
-  {
-    id: '3',
-    name: 'Burger Factory',
-    category: 'Americana',
-    rating: 4.3,
-    distance: '0.8 km',
-    image: require('@/assets/images/restaurant3.jpg'),
-    featured: true,
-  },
-  {
-    id: '4',
-    name: 'El Asador',
-    category: 'Parrilla',
-    rating: 4.5,
-    distance: '1.5 km',
-    image: require('@/assets/images/restaurant4.jpg'),
-    featured: true,
-  },
-];
-
-const ultimasBusquedas = [
-  { id: '1', name: 'La Trattoria' },
-  { id: '2', name: 'Sushi Palace' },
-  { id: '4', name: 'El Asador' },
-];
-
-const repetidos = [
-  { id: '1', name: 'La Trattoria', icon: require('@/assets/images/restaurant1.jpg') },
-  { id: '2', name: 'Sushi Palace', icon: require('@/assets/images/restaurant2.jpg') },
-  { id: '3', name: 'Burger Factory', icon: require('@/assets/images/restaurant3.jpg') },
-  { id: '4', name: 'El Asador', icon: require('@/assets/images/restaurant4.jpg') },
-];
-
-const tendencias = [
-  { id: '1', nombre: 'La Trattoria', categoria: 'Restaurantes' },
-  { id: '2', nombre: 'Sushi', categoria: 'Comida Japonesa' },
-  { id: '4', nombre: 'El Asador', categoria: 'Parrilla' },
-];
+const { width } = Dimensions.get('window');
 
 const SearchScreen = () => {
   const [searchQuery, setSearchQuery] = useState('');
+  const [recentSearches, setRecentSearches] = useState<string[]>([]);
   const router = useRouter();
-  const [ultimas, setUltimas] = useState(ultimasBusquedas);
 
-  const resultadosFiltrados = restaurantesMock.filter((restaurante) =>
-    `${restaurante.name} ${restaurante.category}`
-      .toLowerCase()
-      .includes(searchQuery.toLowerCase())
+  const filteredResults = useMemo(() => 
+    restaurants.filter(restaurant =>
+      `${restaurant.title} ${restaurant.category} ${restaurant.subtitle || ''}`
+        .toLowerCase()
+        .includes(searchQuery.toLowerCase())
+    ), [searchQuery]
   );
 
-  const borrarBusqueda = (item: { id: string; name: string }) => {
-    setUltimas((prev) => prev.filter((x) => x !== item));
+  const removeRecentSearch = (search: string) => {
+    setRecentSearches(prev => prev.filter(s => s !== search));
   };
+
+  const addToRecentSearches = (search: string) => {
+    if (search.trim() && !recentSearches.includes(search)) {
+      setRecentSearches(prev => [search, ...prev.slice(0, 4)]);
+    }
+  };
+
+  const handleSearch = (query: string) => {
+    setSearchQuery(query);
+    if (query.trim()) {
+      addToRecentSearches(query);
+    }
+  };
+
+  const renderSearchHeader = () => (
+    <View style={styles.searchBar}>
+      <TouchableOpacity onPress={() => router.back()} style={styles.backButton}>
+        <Ionicons name="arrow-back" size={24} color="#666" />
+      </TouchableOpacity>
+      <TextInput
+        style={styles.input}
+        placeholder="Buscar restaurantes, platos..."
+        placeholderTextColor="#999"
+        value={searchQuery}
+        onChangeText={handleSearch}
+        autoFocus
+      />
+      <TouchableOpacity style={styles.searchButton}>
+        <MaterialIcons name="search" size={24} color="#666" />
+      </TouchableOpacity>
+    </View>
+  );
+
+  const renderRecentSearches = () => (
+    <View style={styles.section}>
+      <Text style={styles.sectionTitle}>Tus últimas búsquedas</Text>
+      {recentSearches.length > 0 ? (
+        recentSearches.map((search, index) => (
+          <TouchableOpacity 
+            key={index} 
+            style={styles.recentItem}
+            onPress={() => handleSearch(search)}
+          >
+            <MaterialIcons name="history" size={20} color="#666" />
+            <Text style={styles.recentText}>{search}</Text>
+            <TouchableOpacity 
+              onPress={() => removeRecentSearch(search)} 
+              style={styles.removeButton}
+            >
+              <Ionicons name="close" size={18} color="#999" />
+            </TouchableOpacity>
+          </TouchableOpacity>
+        ))
+      ) : (
+        <Text style={styles.emptyText}>No hay búsquedas recientes</Text>
+      )}
+    </View>
+  );
+
+  const renderRepeatSection = () => (
+    <View style={styles.section}>
+      <Text style={styles.sectionTitle}>Repetí donde ya pediste</Text>
+      <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.repeatRow}>
+        {restaurants.slice(0, 4).map((restaurant) => (
+          <TouchableOpacity 
+            key={restaurant.id} 
+            style={styles.repeatItem}
+            onPress={() => router.push(`/restaurant/${restaurant.id}`)}
+          >
+            <Image source={restaurant.image} style={styles.repeatIcon} />
+            <Text style={styles.repeatText}>{restaurant.title}</Text>
+          </TouchableOpacity>
+        ))}
+      </ScrollView>
+    </View>
+  );
+
+  const renderTrends = () => {
+    // Obtener restaurantes con descuento como tendencias
+    const trendingRestaurants = restaurants.filter(r => r.discount).slice(0, 3);
+    
+    return (
+      <View style={styles.section}>
+        <Text style={styles.sectionTitle}>Búsquedas que son tendencia</Text>
+        {trendingRestaurants.map((restaurant, index) => (
+          <TouchableOpacity 
+            key={restaurant.id} 
+            style={styles.trendItem}
+            onPress={() => router.push(`/restaurant/${restaurant.id}`)}
+          >
+            <View style={styles.trendRank}>
+              <Text style={styles.trendRankText}>#{index + 1}</Text>
+            </View>
+            <View style={styles.trendContent}>
+              <Text style={styles.trendName}>{restaurant.title}</Text>
+              <Text style={styles.trendCategory}>{restaurant.category}</Text>
+            </View>
+            <Ionicons name="trending-up" size={16} color="#FF6B6B" />
+          </TouchableOpacity>
+        ))}
+      </View>
+    );
+  };
+
+  const renderSearchResult = ({ item }: { item: Restaurant }) => (
+    <TouchableOpacity
+      style={styles.resultItem}
+      onPress={() => router.push(`/restaurant/${item.id}`)}
+    >
+      <Image source={item.image} style={styles.resultImage} />
+      <View style={styles.resultContent}>
+        <Text style={styles.resultName}>{item.title}</Text>
+        <Text style={styles.resultDetails}>
+          {item.category} • ⭐ {item.rating} • {item.distance}
+        </Text>
+        {item.discount && (
+          <View style={styles.discountBadge}>
+            <Text style={styles.discountText}>{item.discount}</Text>
+          </View>
+        )}
+      </View>
+    </TouchableOpacity>
+  );
 
   return (
     <SafeAreaView style={styles.container}>
-      {/* Search Header */}
-      <View style={styles.searchBar}>
-        <TouchableOpacity onPress={() => router.back()}>
-          <Ionicons name="arrow-back" size={24} color="#888" />
-        </TouchableOpacity>
-
-        <TextInput
-          style={styles.input}
-          placeholder="Buscar restaurantes, platos..."
-          placeholderTextColor="#888"
-          value={searchQuery}
-          onChangeText={setSearchQuery}
-          autoFocus
-        />
-
-        <TouchableOpacity>
-          <MaterialIcons name="search" size={24} color="#888" />
-        </TouchableOpacity>
-      </View>
-
+      {renderSearchHeader()}
+      
       {searchQuery.trim() === '' ? (
-        <ScrollView>
-          {/* Últimas búsquedas */}
-          <Text style={styles.sectionTitle}>Tus últimas búsquedas</Text>
-          {ultimas.map((item) => (
-            <View key={item.id} style={styles.recentItem}>
-              <MaterialIcons name="history" size={20} color="#000" />
-              <TouchableOpacity onPress={() => router.push({ pathname: '/restaurant', params: { id: item.id } })}>
-                <Text style={styles.recentText}>{item.name}</Text>
-              </TouchableOpacity>
-              <TouchableOpacity onPress={() => borrarBusqueda(item)} style={{ marginLeft: 'auto' }}>
-                <Ionicons name="close" size={20} color="#888" />
-              </TouchableOpacity>
-            </View>
-          ))}
-
-          {/* Repetir donde ya pediste */}
-          <Text style={styles.sectionTitle}>Repetí donde ya pediste</Text>
-          <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.repeatRow}>
-            {repetidos.map((r) => (
-              <TouchableOpacity key={r.id} style={styles.repeatItem} onPress={() => router.push({ pathname: '/restaurant', params: { id: r.id } })}>
-                <Image source={r.icon} style={styles.repeatIcon} />
-              </TouchableOpacity>
-            ))}
-          </ScrollView>
-
-          {/* Tendencias */}
-          <Text style={styles.sectionTitle}>Búsquedas que son tendencia</Text>
-          {tendencias.map((t, index) => (
-            <View key={t.id} style={styles.trendItem}>
-              <Text style={styles.trendRank}>#{index + 1}</Text>
-              <TouchableOpacity
-                onPress={() => router.push({ pathname: '/restaurant', params: { id: t.id } })}
-              >
-              <View>
-                <Text style={styles.resultText}>{t.nombre}</Text>
-                <Text style={styles.resultSub}>{t.categoria}</Text>
-              </View>
-              </TouchableOpacity>
-            </View>
-          ))}
+        <ScrollView showsVerticalScrollIndicator={false}>
+          {renderRecentSearches()}
+          {renderRepeatSection()}
+          {renderTrends()}
         </ScrollView>
       ) : (
         <FlatList
-          data={resultadosFiltrados}
+          data={filteredResults}
           keyExtractor={(item) => item.id}
-          renderItem={({ item }) => (
-            <TouchableOpacity
-              style={styles.resultItem}
-              onPress={() => router.push({ pathname: '/restaurant', params: { id: item.id } })}
-            >
-
-              <Image source={item.image} style={{ width: '100%', height: 150, borderRadius: 10 }} />
-              <Text style={styles.resultText}>{item.name}</Text>
-              <Text style={styles.resultSub}>{item.category} • ⭐ {item.rating} • {item.distance}</Text>
-            </TouchableOpacity>
-          )}
-          ListEmptyComponent={<Text style={styles.noResults}>No se encontraron resultados.</Text>}
+          renderItem={renderSearchResult}
+          ListEmptyComponent={
+            <View style={styles.emptyState}>
+              <Ionicons name="search-outline" size={48} color="#CCC" />
+              <Text style={styles.emptyText}>No se encontraron resultados</Text>
+              <Text style={styles.emptySubtext}>Intenta con otros términos de búsqueda</Text>
+            </View>
+          }
         />
       )}
     </SafeAreaView>
   );
 };
 
-export default SearchScreen;
-
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 50,
-    backgroundColor: '#fff',
     flex: 1,
+    backgroundColor: '#FAFAFA',
   },
   searchBar: {
     flexDirection: 'row',
     alignItems: 'center',
     margin: 16,
-    paddingHorizontal: 12,
-    paddingVertical: 8,
-    borderRadius: 10,
-    backgroundColor: '#F2F2F2',
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+    borderRadius: 25,
+    backgroundColor: '#FFF',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 8,
+    elevation: 3,
+  },
+  backButton: {
+    marginRight: 12,
   },
   input: {
     flex: 1,
-    marginHorizontal: 12,
     fontSize: 16,
-    color: '#000',
+    color: '#333',
   },
-  resultItem: {
-    padding: 16,
-    borderBottomWidth: 1,
-    borderBottomColor: '#eee',
+  searchButton: {
+    marginLeft: 12,
   },
-  resultText: {
-    fontSize: 16,
-    fontWeight: '500',
-    marginTop: 8,
-  },
-  resultSub: {
-    fontSize: 14,
-    color: '#888',
-    marginTop: 4,
-  },
-  noResults: {
-    padding: 16,
-    textAlign: 'center',
-    color: '#888',
+  section: {
+    marginBottom: 24,
   },
   sectionTitle: {
-    fontSize: 16,
-    fontWeight: '600',
-    marginHorizontal: 16,
-    marginTop: 20,
-    marginBottom: 10,
+    fontSize: 18,
+    fontWeight: '700',
+    marginHorizontal: 20,
+    marginBottom: 16,
+    color: '#333',
   },
   recentItem: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginHorizontal: 16,
+    marginHorizontal: 20,
     marginBottom: 12,
+    paddingVertical: 8,
   },
   recentText: {
-    marginLeft: 10,
-    fontSize: 15,
+    flex: 1,
+    marginLeft: 12,
+    fontSize: 16,
+    color: '#333',
+  },
+  removeButton: {
+    padding: 4,
   },
   repeatRow: {
-    flexDirection: 'row',
-    paddingHorizontal: 16,
+    paddingHorizontal: 20,
   },
   repeatItem: {
-    marginRight: 12,
+    alignItems: 'center',
+    marginRight: 16,
   },
   repeatIcon: {
-    width: 50,
-    height: 50,
-    borderRadius: 10,
+    width: 60,
+    height: 60,
+    borderRadius: 12,
+    marginBottom: 8,
+  },
+  repeatText: {
+    fontSize: 12,
+    color: '#666',
+    textAlign: 'center',
+    maxWidth: 60,
   },
   trendItem: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginHorizontal: 16,
-    marginBottom: 12,
+    marginHorizontal: 20,
+    marginBottom: 16,
+    paddingVertical: 8,
   },
   trendRank: {
-    fontWeight: 'bold',
-    width: 30,
+    width: 32,
+    height: 32,
+    borderRadius: 16,
+    backgroundColor: '#FF6B6B',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginRight: 12,
+  },
+  trendRankText: {
+    color: '#FFF',
+    fontWeight: '700',
+    fontSize: 14,
+  },
+  trendContent: {
+    flex: 1,
+  },
+  trendName: {
     fontSize: 16,
+    fontWeight: '600',
+    color: '#333',
+  },
+  trendCategory: {
+    fontSize: 14,
+    color: '#666',
+    marginTop: 2,
+  },
+  resultItem: {
+    marginHorizontal: 20,
+    marginBottom: 16,
+    backgroundColor: '#FFF',
+    borderRadius: 16,
+    overflow: 'hidden',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 8,
+    elevation: 3,
+  },
+  resultImage: {
+    width: '100%',
+    height: 160,
+  },
+  resultContent: {
+    padding: 16,
+  },
+  resultName: {
+    fontSize: 18,
+    fontWeight: '600',
+    color: '#333',
+    marginBottom: 4,
+  },
+  resultDetails: {
+    fontSize: 14,
+    color: '#666',
+  },
+  discountBadge: {
+    position: 'absolute',
+    top: 8,
+    right: 8,
+    backgroundColor: '#FF6B6B',
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    borderRadius: 12,
+  },
+  discountText: {
+    color: '#FFF',
+    fontSize: 12,
+    fontWeight: '600',
+  },
+  emptyState: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 60,
+  },
+  emptyText: {
+    fontSize: 16,
+    color: '#999',
+    marginTop: 16,
+  },
+  emptySubtext: {
+    fontSize: 14,
+    color: '#CCC',
+    marginTop: 8,
   },
 });
+
+export default SearchScreen;

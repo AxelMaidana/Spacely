@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, lazy, Suspense } from 'react';
 import { 
   View, 
   Text, 
@@ -8,10 +8,10 @@ import {
   ScrollView,
   Image,
   Dimensions,
-  Alert
+  Alert,
+  Platform
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import { MaterialIcons, Ionicons } from '@expo/vector-icons';
 import { ArrowLeft, Star, MapPin, Clock } from 'lucide-react-native';
 import { router } from 'expo-router';
@@ -34,6 +34,11 @@ const filterOptions = [
   { id: 'mexicana', label: 'Mexicana', icon: 'restaurant' },
   { id: 'bars', label: 'Bares', icon: 'local-bar' },
 ];
+
+// Importación dinámica del componente del mapa solo para móvil
+const MapComponent = Platform.OS === 'web' 
+  ? () => null 
+  : lazy(() => import('@/components/MapComponent'));
 
 export default function MapViewScreen() {
   const { getFilteredRestaurants } = useRestaurantFilters();
@@ -124,41 +129,24 @@ export default function MapViewScreen() {
     <SafeAreaView style={styles.container}>
       {/* Map - Full Screen */}
       <View style={styles.mapContainer}>
-        <MapView
-          style={styles.map}
-          provider={PROVIDER_GOOGLE}
-          initialRegion={initialRegion}
-        >
-          {filteredRestaurants.map((restaurant) => {
-            const coordinates = restaurant.location?.coordinates || { lat: -27.4512, lng: -58.9866 };
-            return (
-              <Marker
-                key={restaurant.id}
-                coordinate={{
-                  latitude: coordinates.lat,
-                  longitude: coordinates.lng,
-                }}
-                title={restaurant.title}
-                onPress={() => handleRestaurantPress(restaurant)}
-              >
-                <View style={styles.markerContainer}>
-                  <View style={styles.marker}>
-                    <Image 
-                      source={restaurant.image} 
-                      style={styles.markerImage}
-                      resizeMode="cover"
-                    />
-                    {restaurant.discount && (
-                      <View style={styles.discountBadge}>
-                        <MaterialIcons name="local-offer" size={8} color="#FFFFFF" />
-                      </View>
-                    )}
-                  </View>
-                </View>
-              </Marker>
-            );
-          })}
-        </MapView>
+        {Platform.OS === 'web' ? (
+          <View style={styles.webNotAvailableContainer}>
+            <MaterialIcons name="map" size={64} color="#6B7280" />
+            <Text style={styles.webNotAvailableTitle}>Mapa no disponible</Text>
+            <Text style={styles.webNotAvailableText}>
+              La funcionalidad del mapa no está disponible en la versión web.
+              Por favor, utiliza la aplicación móvil para acceder a esta función.
+            </Text>
+          </View>
+        ) : (
+          <Suspense fallback={<View style={styles.loadingContainer}><Text>Cargando mapa...</Text></View>}>
+            <MapComponent
+              initialRegion={initialRegion}
+              filteredRestaurants={filteredRestaurants}
+              handleRestaurantPress={handleRestaurantPress}
+            />
+          </Suspense>
+        )}
       </View>
 
       {/* Overlay UI Elements */}
@@ -363,38 +351,6 @@ const styles = StyleSheet.create({
   filterTextActive: {
     color: '#FFFFFF',
   },
-  markerContainer: {
-    alignItems: 'center',
-  },
-  marker: {
-    backgroundColor: '#FFFFFF',
-    borderRadius: 20,
-    padding: 2,
-    borderWidth: 2,
-    borderColor: '#FFFFFF',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.3,
-    shadowRadius: 4,
-    elevation: 4,
-    width: 40,
-    height: 40,
-  },
-  markerImage: {
-    width: 36,
-    height: 36,
-    borderRadius: 18,
-  },
-  discountBadge: {
-    position: 'absolute',
-    top: -2,
-    right: -2,
-    backgroundColor: '#FF6B35',
-    borderRadius: 10,
-    padding: 2,
-    borderWidth: 1,
-    borderColor: '#FFFFFF',
-  },
   restaurantCard: {
     position: 'absolute',
     bottom: 20,
@@ -495,5 +451,31 @@ const styles = StyleSheet.create({
     top: 8,
     right: 8,
     padding: 4,
+  },
+  webNotAvailableContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingHorizontal: 32,
+  },
+  webNotAvailableTitle: {
+    fontSize: 24,
+    fontFamily: 'Inter-Bold',
+    color: '#1F2937',
+    marginTop: 16,
+    marginBottom: 16,
+    textAlign: 'center',
+  },
+  webNotAvailableText: {
+    fontSize: 16,
+    fontFamily: 'Inter-Regular',
+    color: '#6B7280',
+    textAlign: 'center',
+    lineHeight: 24,
+  },
+  loadingContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });

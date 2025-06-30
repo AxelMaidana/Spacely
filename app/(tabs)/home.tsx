@@ -72,26 +72,20 @@ export default function HomeScreen() {
 
         {/* Search Bar */}
         <Animated.View entering={FadeInUp.delay(150).duration(500)} style={styles.searchContainer}>
-          <MaterialIcons name="search" size={24} color="#888" style={styles.searchIcon} />
-          <TextInput
-            style={styles.searchInput}
-            placeholder="Buscar restaurantes, platos..."
-            placeholderTextColor="#888"
-            value={searchQuery}
-            onChangeText={setSearchQuery}
-            onFocus={() => navigate('/search')}
-            editable={true}
-          />
-          <TouchableOpacity style={styles.filterButton}>
-            <Ionicons name="filter" size={20} color="#FFF" />
-          </TouchableOpacity>
+          <View style={styles.searchInputContainer}>
+            <MaterialIcons name="search" size={24} color="#888" style={styles.searchIcon} />
+            <TextInput
+              style={styles.searchInput}
+              placeholder="Buscar restaurantes, platos..."
+              placeholderTextColor="#888"
+              value={searchQuery}
+              onChangeText={setSearchQuery}
+              onFocus={() => navigate('/search')}
+              editable={true}
+            />
+          </View>
           {/* Ícono del carrito */}
-          <TouchableOpacity
-            style={styles.cartButton}
-            onPress={() => router.push('/cart')}
-          >
-            <CartIcon />
-          </TouchableOpacity>
+          <CartIcon onPress={() => router.push('/cart')} />
         </Animated.View>
 
         {/* Promociones */}
@@ -177,11 +171,17 @@ const styles = StyleSheet.create({
   searchContainer: {
     flexDirection: 'row',
     alignItems: 'center',
+    marginBottom: 24,
+    gap: 12,
+  },
+  searchInputContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
     backgroundColor: '#FFF',
-    borderRadius: 12,
+    borderRadius: 25,
     paddingHorizontal: 16,
     paddingVertical: 12,
-    marginBottom: 24,
+    flex: 1,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
@@ -339,8 +339,4 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: COLORS.textSecondary,
   },
-  cartButton: {
-  marginLeft: 8,
-},
-
 });
