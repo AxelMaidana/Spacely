@@ -90,16 +90,21 @@ export default function SettingsScreen() {
             />
           </View>
           
-          <TouchableOpacity style={styles.settingButton}>
-            <View style={styles.settingIconContainer}>
-              <Shield size={20} color={COLORS.PRIMARY_COLOR} />
-              <Shield size={20} color={COLORS.PRIMARY_COLOR} />
-            </View>
-            <View style={styles.settingContent}>
-              <Text style={styles.settingTitle}>Change Password</Text>
-              <Text style={styles.settingDescription}>Update your password</Text>
-            </View>
-          </TouchableOpacity>
+          <TouchableOpacity 
+  style={styles.settingButton}
+  onPress={() => router.push('/changePassword')}
+>
+  {/* Iconos y texto aquí */}
+  <View style={styles.settingIconContainer}>
+    <Shield size={20} color={COLORS.PRIMARY_COLOR} />
+    <Shield size={20} color={COLORS.PRIMARY_COLOR} />
+  </View>
+  <View style={styles.settingContent}>
+    <Text style={styles.settingTitle}>Change Password</Text>
+    <Text style={styles.settingDescription}>Update your password</Text>
+  </View>
+</TouchableOpacity>
+
         </Animated.View>
         
         <Animated.View 
