@@ -9,30 +9,52 @@ import { getRestaurantById } from "@/data/restaurants";
 export default function Cart() {
   const { cartItems, restaurantInfo, updateQuantity, removeItem, addItem, clearCart } = useCart();
 
-  // Precios simulados - en una app real vendrían de la API
-  const finalPricePerItem = 16400;
-  const originalPricePerItem = 20500;
+  // Obtener restaurante y menú real
+  const restaurant = restaurantInfo ? getRestaurantById(restaurantInfo.id) : null;
+  const menu = restaurant?.menu || [];
 
-  const subtotal = cartItems.reduce((sum, item) => sum + finalPricePerItem * item.quantity, 0);
-  const ahorro = cartItems.reduce((sum, item) => sum + (originalPricePerItem - finalPricePerItem) * item.quantity, 0);
+  // Obtener descuento del restaurante (ej: "15% OFF")
+  const discountPercent = restaurant?.discount ? parseInt(restaurant.discount) : 0;
+
+  // Función para obtener el precio real de un producto
+  const getProductPrice = (itemId: string) => {
+    const menuItem = menu.find((m) => m.id === itemId);
+    if (!menuItem) return 0;
+    // El precio es string tipo "$8.500"
+    return Number(menuItem.price.replace(/[^\d]/g, ""));
+  };
+
+  // Función para calcular el precio con descuento
+  const getDiscountedPrice = (price: number) => {
+    if (discountPercent > 0) {
+      return Math.round(price * (1 - discountPercent / 100));
+    }
+    return price;
+  };
+
+  // Calcular subtotal y ahorro
+  const subtotal = cartItems.reduce((sum, item) => {
+    const price = getProductPrice(item.id);
+    const finalPrice = getDiscountedPrice(price);
+    return sum + finalPrice * item.quantity;
+  }, 0);
+
+  const ahorro = cartItems.reduce((sum, item) => {
+    const price = getProductPrice(item.id);
+    const finalPrice = getDiscountedPrice(price);
+    return sum + (price - finalPrice) * item.quantity;
+  }, 0);
 
   // Obtener productos sugeridos del mismo restaurante
   const getSuggestedProducts = () => {
-    if (!restaurantInfo) return [];
-    
-    const restaurant = getRestaurantById(restaurantInfo.id);
-    if (!restaurant || !restaurant.menu) return [];
-    
-    // Filtrar productos que no están ya en el carrito
+    if (!restaurantInfo || !restaurant) return [];
     const cartItemIds = cartItems.map(item => item.id);
-    const availableProducts = restaurant.menu.filter(item => !cartItemIds.includes(item.id));
-    
+    const availableProducts = menu.filter(item => !cartItemIds.includes(item.id));
     // Tomar hasta 3 productos sugeridos
     return availableProducts.slice(0, 3).map(item => ({
       id: item.id,
       name: item.name,
-      price: 16400,
-      discount: Math.random() > 0.7 ? 15 : 0,
+      price: Number(item.price.replace(/[^\d]/g, "")),
       image: restaurant.image
     }));
   };
@@ -107,70 +129,81 @@ export default function Cart() {
         )}
 
         {/* Items en el carrito */}
-        {cartItems.map((item) => (
-          <View key={item.id} style={styles.itemContainer}>
-            <Image source={restaurantInfo?.image || require("@/assets/images/restaurant1.jpg")} style={styles.itemImage} />
-            <View style={{ flex: 1, marginLeft: 8 }}>
-              <Text numberOfLines={1} style={styles.itemName}>{item.name}</Text>
-              <View style={styles.priceRow}>
-                <Text style={styles.originalPrice}>$20.500</Text>
-                <View style={styles.discountBadge}>
-                  <Text style={styles.discountText}>-20%</Text>
+        {cartItems.map((item) => {
+          const price = getProductPrice(item.id);
+          const finalPrice = getDiscountedPrice(price);
+          return (
+            <View key={item.id} style={styles.itemContainer}>
+              <Image source={restaurantInfo?.image || require("@/assets/images/restaurant1.jpg")} style={styles.itemImage} />
+              <View style={{ flex: 1, marginLeft: 8 }}>
+                <Text numberOfLines={1} style={styles.itemName}>{item.name}</Text>
+                <View style={styles.priceRow}>
+                  {discountPercent > 0 && (
+                    <Text style={styles.originalPrice}>${price.toLocaleString()}</Text>
+                  )}
+                  {discountPercent > 0 && (
+                    <View style={styles.discountBadge}>
+                      <Text style={styles.discountText}>-{discountPercent}%</Text>
+                    </View>
+                  )}
                 </View>
+                <Text style={styles.finalPrice}>${finalPrice.toLocaleString()}</Text>
               </View>
-              <Text style={styles.finalPrice}>$16.400</Text>
-            </View>
 
-            <View style={styles.qtyControls}>
-              <TouchableOpacity
-                style={styles.qtyButton}
-                onPress={() => {
-                  if (item.quantity > 1) {
-                    updateQuantity(item.id, item.quantity - 1);
-                  } else {
-                    removeItem(item.id);
-                  }
-                }}
-              >
-                <Text style={styles.qtyButtonText}>-</Text>
-              </TouchableOpacity>
-              <Text style={styles.qtyValue}>{item.quantity}</Text>
-              <TouchableOpacity
-                style={styles.qtyButton}
-                onPress={() => updateQuantity(item.id, item.quantity + 1)}
-              >
-                <Text style={styles.qtyButtonText}>+</Text>
-              </TouchableOpacity>
+              <View style={styles.qtyControls}>
+                <TouchableOpacity
+                  style={styles.qtyButton}
+                  onPress={() => {
+                    if (item.quantity > 1) {
+                      updateQuantity(item.id, item.quantity - 1);
+                    } else {
+                      removeItem(item.id);
+                    }
+                  }}
+                >
+                  <Text style={styles.qtyButtonText}>-</Text>
+                </TouchableOpacity>
+                <Text style={styles.qtyValue}>{item.quantity}</Text>
+                <TouchableOpacity
+                  style={styles.qtyButton}
+                  onPress={() => updateQuantity(item.id, item.quantity + 1)}
+                >
+                  <Text style={styles.qtyButtonText}>+</Text>
+                </TouchableOpacity>
+              </View>
             </View>
-          </View>
-        ))}
+          );
+        })}
 
         {/* Otros Spacers */}
         <Text style={{ fontSize: 18, fontWeight: "bold", marginTop: 24 }}>
           Otros platos de {restaurantInfo?.name || 'este restaurante'}
         </Text>
         <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{ marginTop: 12 }}>
-          {suggestedProducts.map(product => (
-            <View key={product.id} style={styles.suggestedItem}>
-              <Image source={product.image} style={styles.suggestedImage} />
-              <Text numberOfLines={1} style={styles.suggestedName}>{product.name}</Text>
-              {product.discount > 0 && (
-                <View style={{ flexDirection: "row", alignItems: "center" }}>
-                  <Text style={styles.suggestedOriginalPrice}>
-                    ${(product.price / (1 - product.discount / 100)).toLocaleString()}
-                  </Text>
-                  <Text style={styles.suggestedDiscount}> -{product.discount}%</Text>
-                </View>
-              )}
-              <Text style={styles.suggestedPrice}>${product.price.toLocaleString()}</Text>
-              <TouchableOpacity
-                style={styles.addSuggestedButton}
-                onPress={() => addItem({ id: product.id, name: product.name, quantity: 1 }, restaurantInfo || undefined)}
-              >
-                <Ionicons name="add" size={16} color="#000" />
-              </TouchableOpacity>
-            </View>
-          ))}
+          {suggestedProducts.map(product => {
+            const finalPrice = getDiscountedPrice(product.price);
+            return (
+              <View key={product.id} style={styles.suggestedItem}>
+                <Image source={product.image} style={styles.suggestedImage} />
+                <Text numberOfLines={1} style={styles.suggestedName}>{product.name}</Text>
+                {discountPercent > 0 && (
+                  <View style={{ flexDirection: "row", alignItems: "center" }}>
+                    <Text style={styles.suggestedOriginalPrice}>
+                      ${product.price.toLocaleString()}
+                    </Text>
+                    <Text style={styles.suggestedDiscount}> -{discountPercent}%</Text>
+                  </View>
+                )}
+                <Text style={styles.suggestedPrice}>${finalPrice.toLocaleString()}</Text>
+                <TouchableOpacity
+                  style={styles.addSuggestedButton}
+                  onPress={() => addItem({ id: product.id, name: product.name, quantity: 1 }, restaurantInfo || undefined)}
+                >
+                  <Ionicons name="add" size={16} color="#000" />
+                </TouchableOpacity>
+              </View>
+            );
+          })}
         </ScrollView>
       </ScrollView>
 

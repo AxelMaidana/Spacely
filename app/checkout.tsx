@@ -4,16 +4,42 @@ import { useCart } from "@/contexts/CartContext";
 import { Ionicons } from "@expo/vector-icons";
 import { router } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { getRestaurantById } from "@/data/restaurants";
 
 export default function Checkout() {
-  const { cartItems, clearCart } = useCart();
+  const { cartItems, clearCart, restaurantInfo } = useCart();
   const [selectedDate, setSelectedDate] = useState("Hoy");
   const [selectedTime, setSelectedTime] = useState("19:00");
   const [paymentMethod, setPaymentMethod] = useState("efectivo");
   const [showSuccessModal, setShowSuccessModal] = useState(false);
 
-  const finalPricePerItem = 16400;
-  const subtotal = cartItems.reduce((sum, item) => sum + finalPricePerItem * item.quantity, 0);
+  // Obtener restaurante y menú real
+  const restaurant = restaurantInfo ? getRestaurantById(restaurantInfo.id) : null;
+  const menu = restaurant?.menu || [];
+  const discountPercent = restaurant?.discount ? parseInt(restaurant.discount) : 0;
+
+  // Función para obtener el precio real de un producto
+  const getProductPrice = (itemId: string) => {
+    const menuItem = menu.find((m) => m.id === itemId);
+    if (!menuItem) return 0;
+    return Number(menuItem.price.replace(/[^\d]/g, ""));
+  };
+
+  // Función para calcular el precio con descuento
+  const getDiscountedPrice = (price: number) => {
+    if (discountPercent > 0) {
+      return Math.round(price * (1 - discountPercent / 100));
+    }
+    return price;
+  };
+
+  // Calcular subtotal
+  const subtotal = cartItems.reduce((sum, item) => {
+    const price = getProductPrice(item.id);
+    const finalPrice = getDiscountedPrice(price);
+    return sum + finalPrice * item.quantity;
+  }, 0);
+
   const deliveryFee = 2000;
   const subtotalWithDelivery = subtotal + deliveryFee;
   const cardFee = paymentMethod === "tarjeta" ? subtotalWithDelivery * 0.15 : 0;
@@ -67,15 +93,29 @@ export default function Checkout() {
         {/* Resumen del pedido */}
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Resumen del Pedido</Text>
-          {cartItems.map((item) => (
-            <View key={item.id} style={styles.orderItem}>
-              <Text style={styles.itemName}>{item.name}</Text>
-              <Text style={styles.itemQuantity}>x{item.quantity}</Text>
-              <Text style={styles.itemPrice}>
-                ${(finalPricePerItem * item.quantity).toLocaleString()}
-              </Text>
-            </View>
-          ))}
+          {cartItems.map((item) => {
+            const price = getProductPrice(item.id);
+            const finalPrice = getDiscountedPrice(price);
+            return (
+              <View key={item.id} style={styles.orderItem}>
+                <Text style={styles.itemName}>{item.name}</Text>
+                <Text style={styles.itemQuantity}>x{item.quantity}</Text>
+                <View style={{ flexDirection: 'row', alignItems: 'center', gap: 4 }}>
+                  {discountPercent > 0 && (
+                    <Text style={{ textDecorationLine: 'line-through', color: '#999', fontSize: 14 }}>
+                      ${price.toLocaleString()}
+                    </Text>
+                  )}
+                  {discountPercent > 0 && (
+                    <Text style={{ color: '#DAA520', fontSize: 12, fontWeight: 'bold' }}> -{discountPercent}% </Text>
+                  )}
+                  <Text style={styles.itemPrice}>
+                    ${(finalPrice * item.quantity).toLocaleString()}
+                  </Text>
+                </View>
+              </View>
+            );
+          })}
         </View>
 
         {/* Selección de fecha */}
