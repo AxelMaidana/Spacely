@@ -127,16 +127,20 @@ export default function SettingsScreen() {
           </TouchableOpacity>
 
           
-          <TouchableOpacity style={styles.settingButton}>
-            <View style={styles.settingIconContainer}>
-              <Info size={20} color={COLORS.PRIMARY_COLOR} />
-              <Info size={20} color={COLORS.PRIMARY_COLOR} />
-            </View>
-            <View style={styles.settingContent}>
-              <Text style={styles.settingTitle}>About App</Text>
-              <Text style={styles.settingDescription}>Version 1.0.0</Text>
-            </View>
-          </TouchableOpacity>
+          <TouchableOpacity
+  style={styles.settingButton}
+  onPress={() => router.push('/about')}   // <--- acá vas a la pantalla About
+>
+  <View style={styles.settingIconContainer}>
+    <Info size={20} color={COLORS.PRIMARY_COLOR} />
+    <Info size={20} color={COLORS.PRIMARY_COLOR} />
+  </View>
+  <View style={styles.settingContent}>
+    <Text style={styles.settingTitle}>About App</Text>
+    <Text style={styles.settingDescription}>Version 1.0.0</Text>
+  </View>
+</TouchableOpacity>
+
         </Animated.View>
       </ScrollView>
     </SafeAreaView>
