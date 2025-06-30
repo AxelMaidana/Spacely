@@ -90,16 +90,21 @@ export default function SettingsScreen() {
             />
           </View>
           
-          <TouchableOpacity style={styles.settingButton}>
-            <View style={styles.settingIconContainer}>
-              <Shield size={20} color={COLORS.PRIMARY_COLOR} />
-              <Shield size={20} color={COLORS.PRIMARY_COLOR} />
-            </View>
-            <View style={styles.settingContent}>
-              <Text style={styles.settingTitle}>Change Password</Text>
-              <Text style={styles.settingDescription}>Update your password</Text>
-            </View>
-          </TouchableOpacity>
+          <TouchableOpacity 
+  style={styles.settingButton}
+  onPress={() => router.push('/changePassword')}
+>
+  {/* Iconos y texto aquí */}
+  <View style={styles.settingIconContainer}>
+    <Shield size={20} color={COLORS.PRIMARY_COLOR} />
+    <Shield size={20} color={COLORS.PRIMARY_COLOR} />
+  </View>
+  <View style={styles.settingContent}>
+    <Text style={styles.settingTitle}>Change Password</Text>
+    <Text style={styles.settingDescription}>Update your password</Text>
+  </View>
+</TouchableOpacity>
+
         </Animated.View>
         
         <Animated.View 
@@ -122,16 +127,20 @@ export default function SettingsScreen() {
           </TouchableOpacity>
 
           
-          <TouchableOpacity style={styles.settingButton}>
-            <View style={styles.settingIconContainer}>
-              <Info size={20} color={COLORS.PRIMARY_COLOR} />
-              <Info size={20} color={COLORS.PRIMARY_COLOR} />
-            </View>
-            <View style={styles.settingContent}>
-              <Text style={styles.settingTitle}>About App</Text>
-              <Text style={styles.settingDescription}>Version 1.0.0</Text>
-            </View>
-          </TouchableOpacity>
+          <TouchableOpacity
+  style={styles.settingButton}
+  onPress={() => router.push('/about')}   // <--- acá vas a la pantalla About
+>
+  <View style={styles.settingIconContainer}>
+    <Info size={20} color={COLORS.PRIMARY_COLOR} />
+    <Info size={20} color={COLORS.PRIMARY_COLOR} />
+  </View>
+  <View style={styles.settingContent}>
+    <Text style={styles.settingTitle}>About App</Text>
+    <Text style={styles.settingDescription}>Version 1.0.0</Text>
+  </View>
+</TouchableOpacity>
+
         </Animated.View>
       </ScrollView>
     </SafeAreaView>
