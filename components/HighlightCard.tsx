@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, StyleSheet, Image, TouchableOpacity, Text, Dimensions } from 'react-native';
 import { router } from 'expo-router';
+import { COLORS } from '@/constants/Colors';
 
 const { width } = Dimensions.get('window');
 
@@ -79,26 +80,26 @@ const styles = StyleSheet.create({
   },
   discountBadge: {
     alignSelf: 'flex-start',
-    backgroundColor: '#F59439',
+    backgroundColor: COLORS.PRIMARY_COLOR,
     borderRadius: 12,
     paddingHorizontal: 12,
     paddingVertical: 6,
     marginBottom: 8,
   },
   discountText: {
-    color: '#FFF',
+    color: COLORS.background,
     fontSize: 14,
     fontWeight: 'bold',
   },
   promoTitle: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: '#FFF',
+    color: COLORS.background,
     marginBottom: 4,
   },
   promoDescription: {
     fontSize: 14,
-    color: '#FFF',
+    color: COLORS.background,
     marginBottom: 4,
     opacity: 0.9,
   },

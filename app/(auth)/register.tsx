@@ -1,29 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { 
-  StyleSheet, 
-  View, 
-  Text, 
-  TouchableOpacity, 
-  KeyboardAvoidingView, 
-  Platform,
-  ScrollView, 
-  ActivityIndicator,
-  Image,
-  Dimensions
-} from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, KeyboardAvoidingView, Platform,ScrollView, ActivityIndicator, Image, Dimensions } from 'react-native';
 import { Link, router } from 'expo-router';
-import Animated, { 
-  useSharedValue, 
-  useAnimatedStyle,
-  withTiming,
-  Easing,
-  FadeIn
-} from 'react-native-reanimated';
+import Animated, { useSharedValue, useAnimatedStyle, withTiming, Easing, FadeIn } from 'react-native-reanimated';
 import { COLORS } from '@/constants/Colors';
 import Input from '@/components/ui/Input';
 import Button from '@/components/ui/Button';
 import { useAuth } from '@/hooks/useAuth';
 import { ArrowLeft, Eye, EyeOff } from 'lucide-react-native';
+import { LinearGradient } from 'expo-linear-gradient';
 
 const { width, height } = Dimensions.get('window');
 
@@ -87,16 +71,15 @@ export default function Register() {
   }));
 
   return (
-    <View style={styles.backgroundContainer}>
-      {/* Círculo naranja que se contrae */}
-      <Animated.View style={[
-        styles.backgroundCircle, 
-        circleStyle,
-        { backgroundColor: COLORS.PRIMARY_COLOR }
-      ]} />
-
+    <View style={{ flex: 1 }}>
+      <LinearGradient
+        colors={[COLORS.PRIMARY_COLOR, '#fffbe6', COLORS.background]}
+        style={StyleSheet.absoluteFill}
+        start={{ x: 0.2, y: 0 }}
+        end={{ x: 1, y: 1 }}
+      />
       <KeyboardAvoidingView 
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        behavior={'height'}
         style={styles.keyboardAvoid}
       >
         <ScrollView 
@@ -105,15 +88,15 @@ export default function Register() {
         >
           <View style={styles.centerContainer}>
             {/* Logo de la app */}
-            <Animated.View 
-              style={[styles.logoContainer, contentStyle]}
-              entering={FadeIn.delay(300)}
-            >
-              <Image
-                source={require('@/assets/images/spacely1.png')}
-                style={styles.logoImage}
-                resizeMode="contain"
-              />
+            <Animated.View style={contentStyle} entering={FadeIn.delay(300)}>
+              <View style={styles.logoCenterContainer}>
+                <View style={styles.logoBgCircle} />
+                <Image
+                  source={require('@/assets/images/spacely1.png')}
+                  style={styles.logoImage}
+                  resizeMode="contain"
+                />
+              </View>
             </Animated.View>
 
             {/* Formulario */}
@@ -217,10 +200,6 @@ export default function Register() {
 }
 
 const styles = StyleSheet.create({
-  backgroundContainer: {
-    flex: 1,
-    backgroundColor: '#FFF',
-  },
   keyboardAvoid: {
     flex: 1,
   },
@@ -235,21 +214,32 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 24,
   },
-  backgroundCircle: {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    width: width * 2,
-    height: width * 2,
-    borderRadius: width,
-    transform: [{ translateX: -width }, { translateY: -width }],
-  },
-  logoContainer: {
+  logoCenterContainer: {
     alignItems: 'center',
+    justifyContent: 'center',
+    width: 140,
+    height: 140,
+    marginBottom: 12,
+    position: 'relative',
+  },
+  logoBgCircle: {
+    position: 'absolute',
+    width: 120,
+    height: 120,
+    borderRadius: 60,
+    backgroundColor: COLORS.PRIMARY_COLOR_DARK,
+    opacity: 0.92,
+    zIndex: 0,
+    shadowColor: COLORS.PRIMARY_COLOR_DARK,
+    shadowOffset: { width: 0, height: 8 },
+    shadowOpacity: 0.25,
+    shadowRadius: 24,
+    elevation: 12,
   },
   logoImage: {
-    width: 180,
-    height: 180,
+    width: 140,
+    height: 140,
+    zIndex: 1,
   },
   header: {
     width: '100%',
@@ -276,7 +266,7 @@ const styles = StyleSheet.create({
   formContainer: {
     width: '100%',
     maxWidth: 400,
-    backgroundColor: '#FFF',
+    backgroundColor: COLORS.background,
     padding: 24,
     borderRadius: 24,
     shadowColor: '#000',

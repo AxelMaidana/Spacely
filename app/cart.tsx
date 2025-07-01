@@ -5,6 +5,8 @@ import { Ionicons } from "@expo/vector-icons";
 import { router } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { getRestaurantById } from "@/data/restaurants";
+import { COLORS } from '@/constants/Colors';
+import { ArrowLeft } from 'lucide-react-native';
 
 export default function Cart() {
   const { cartItems, restaurantInfo, updateQuantity, removeItem, addItem, clearCart } = useCart();
@@ -55,7 +57,7 @@ export default function Cart() {
       id: item.id,
       name: item.name,
       price: Number(item.price.replace(/[^\d]/g, "")),
-      image: restaurant.image
+      image: item.image || restaurant.image
     }));
   };
 
@@ -81,7 +83,7 @@ export default function Cart() {
       <SafeAreaView style={{ flex: 1, backgroundColor: "#fff" }}>
         <View style={styles.header}>
           <TouchableOpacity onPress={router.back} style={styles.backButton}>
-            <Ionicons name="arrow-back" size={24} color="#fff" />
+            <ArrowLeft size={24} color={COLORS.text} />
           </TouchableOpacity>
           <Text style={styles.headerTitle}>Carrito</Text>
           <View style={styles.headerSpacer} />
@@ -109,7 +111,7 @@ export default function Cart() {
       <ScrollView contentContainerStyle={{ padding: 16 }}>
         <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
           <TouchableOpacity onPress={router.back} style={styles.backButton}>
-            <Ionicons name="arrow-back" size={24} color="#000" />
+            <Ionicons name="arrow-back" size={24} color={COLORS.text} />
           </TouchableOpacity>
           <Text style={{ fontSize: 22, fontWeight: "bold" }}>Carrito</Text>
           <TouchableOpacity onPress={handleClearCart}>
@@ -132,9 +134,13 @@ export default function Cart() {
         {cartItems.map((item) => {
           const price = getProductPrice(item.id);
           const finalPrice = getDiscountedPrice(price);
+          // Obtener la imagen específica del plato
+          const menuItem = menu.find((m) => m.id === item.id);
+          const itemImage = menuItem?.image || restaurantInfo?.image || require("@/assets/images/restaurant1.jpg");
+          
           return (
             <View key={item.id} style={styles.itemContainer}>
-              <Image source={restaurantInfo?.image || require("@/assets/images/restaurant1.jpg")} style={styles.itemImage} />
+              <Image source={itemImage} style={styles.itemImage} />
               <View style={{ flex: 1, marginLeft: 8 }}>
                 <Text numberOfLines={1} style={styles.itemName}>{item.name}</Text>
                 <View style={styles.priceRow}>
@@ -386,7 +392,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   browseButton: {
-    backgroundColor: "#1C1C1C",
+    backgroundColor: COLORS.PRIMARY_COLOR,
     paddingVertical: 14,
     paddingHorizontal: 20,
     borderRadius: 8,

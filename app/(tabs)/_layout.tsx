@@ -1,6 +1,7 @@
 import { Tabs } from 'expo-router';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { House, Heart, MapPin, List, User } from 'lucide-react-native';
+import { COLORS } from '@/constants/Colors';
 
 function TabBarIcon({ 
   name, 
@@ -37,8 +38,9 @@ export default function TabLayout() {
     <Tabs
       screenOptions={{
         headerShown: false,
+        tabBarShowLabel: true,
         tabBarStyle: styles.tabBar,
-        tabBarActiveTintColor: '#FF6B35',
+        tabBarActiveTintColor: COLORS.PRIMARY_COLOR,
         tabBarInactiveTintColor: '#9CA3AF',
         tabBarLabelStyle: styles.tabBarLabel,
         tabBarIconStyle: styles.tabBarIcon,
@@ -47,7 +49,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="home"
         options={{
-          title: 'Home',
+          title: 'Inicio',
           tabBarIcon: ({ color, focused }) => (
             <TabBarIcon name="home" color={color} focused={focused} />
           ),
@@ -56,7 +58,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="favorites"
         options={{
-          title: 'Favorites',
+          title: 'Favoritos',
           tabBarIcon: ({ color, focused }) => (
             <TabBarIcon name="favorites" color={color} focused={focused} />
           ),
@@ -77,7 +79,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="restobars"
         options={{
-          title: 'Restobars',
+          title: 'Lugares',
           tabBarIcon: ({ color, focused }) => (
             <TabBarIcon name="restobars" color={color} focused={focused} />
           ),
@@ -86,7 +88,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="profile"
         options={{
-          title: 'Profile',
+          title: 'Perfil',
           tabBarIcon: ({ color, focused }) => (
             <TabBarIcon name="profile" color={color} focused={focused} />
           ),
@@ -101,9 +103,9 @@ const styles = StyleSheet.create({
     height: 80,
     paddingBottom: 20,
     paddingTop: 12,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: COLORS.background,
     borderTopWidth: 1,
-    borderTopColor: '#F3F4F6',
+    borderTopColor: COLORS.borderLight,
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
@@ -132,11 +134,11 @@ const styles = StyleSheet.create({
     width: 56,
     height: 56,
     borderRadius: 28,
-    backgroundColor: '#FF6B35',
+    backgroundColor: COLORS.PRIMARY_COLOR,
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 8,
-    shadowColor: '#FF6B35',
+    shadowColor: COLORS.PRIMARY_COLOR,
     shadowOffset: {
       width: 0,
       height: 4,

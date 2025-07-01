@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import restobarPlane from '../assets/images/restobarPlane.webp';
+import { COLORS } from '@/constants/Colors';
 
 interface Table {
   id: number;
@@ -171,7 +172,7 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: COLORS.background,
     margin: 20,
     marginTop: 60,
     marginBottom: 60,
@@ -213,7 +214,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#10B981',
   },
   selected: {
-    backgroundColor: '#FF6B35',
+    backgroundColor: COLORS.PRIMARY_COLOR,
   },
   occupied: {
     backgroundColor: '#EF4444',
@@ -244,7 +245,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderWidth: 2,
-    borderColor: '#fff',
+    borderColor: COLORS.background,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
@@ -252,7 +253,7 @@ const styles = StyleSheet.create({
     elevation: 3,
   },
   tableSelected: {
-    backgroundColor: '#FF6B35',
+    backgroundColor: COLORS.PRIMARY_COLOR,
   },
   tableOccupied: {
     backgroundColor: '#EF4444',
@@ -260,24 +261,24 @@ const styles = StyleSheet.create({
   tableText: {
     fontSize: 12,
     fontWeight: 'bold',
-    color: '#fff',
+    color: COLORS.background,
   },
   tableTextSelected: {
-    color: '#fff',
+    color: COLORS.background,
   },
   tableTextOccupied: {
-    color: '#fff',
+    color: COLORS.background,
   },
   capacityText: {
     fontSize: 8,
-    color: '#fff',
+    color: COLORS.background,
     marginTop: -2,
   },
   capacityTextSelected: {
-    color: '#fff',
+    color: COLORS.background,
   },
   capacityTextOccupied: {
-    color: '#fff',
+    color: COLORS.background,
   },
   element: {
     position: 'absolute',
@@ -319,7 +320,7 @@ const styles = StyleSheet.create({
     marginTop: 4,
   },
   confirmButton: {
-    backgroundColor: '#FF6B35',
+    backgroundColor: COLORS.PRIMARY_COLOR,
     paddingVertical: 16,
     margin: 16,
     borderRadius: 8,
@@ -329,7 +330,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#E5E7EB',
   },
   confirmButtonText: {
-    color: '#fff',
+    color: COLORS.background,
     fontSize: 16,
     fontWeight: 'bold',
   },

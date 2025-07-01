@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Image, StyleSheet } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { Restaurant } from '@/data/restaurants';
+import { COLORS } from '@/constants/Colors';
 
 interface MapComponentProps {
   initialRegion: any;
@@ -65,11 +66,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   marker: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: COLORS.background,
     borderRadius: 20,
     padding: 2,
     borderWidth: 2,
-    borderColor: '#FFFFFF',
+    borderColor: COLORS.background,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.3,
@@ -87,11 +88,11 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: -2,
     right: -2,
-    backgroundColor: '#FF6B35',
+    backgroundColor: COLORS.PRIMARY_COLOR,
     borderRadius: 10,
     padding: 2,
     borderWidth: 1,
-    borderColor: '#FFFFFF',
+    borderColor: COLORS.background,
   },
 });
 

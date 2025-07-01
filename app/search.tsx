@@ -14,6 +14,7 @@ import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { restaurants, Restaurant } from '@/data/restaurants';
+import { COLORS } from '@/constants/Colors';
 
 const { width } = Dimensions.get('window');
 
@@ -197,7 +198,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingVertical: 12,
     borderRadius: 25,
-    backgroundColor: '#FFF',
+    backgroundColor: COLORS.background,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
@@ -277,7 +278,7 @@ const styles = StyleSheet.create({
     marginRight: 12,
   },
   trendRankText: {
-    color: '#FFF',
+    color: COLORS.background,
     fontWeight: '700',
     fontSize: 14,
   },
@@ -297,7 +298,7 @@ const styles = StyleSheet.create({
   resultItem: {
     marginHorizontal: 20,
     marginBottom: 16,
-    backgroundColor: '#FFF',
+    backgroundColor: COLORS.background,
     borderRadius: 16,
     overflow: 'hidden',
     shadowColor: '#000',
@@ -333,7 +334,7 @@ const styles = StyleSheet.create({
     borderRadius: 12,
   },
   discountText: {
-    color: '#FFF',
+    color: COLORS.background,
     fontSize: 12,
     fontWeight: '600',
   },

@@ -1,18 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { 
-  StyleSheet, 
-  View, 
-  Text, 
-  ScrollView, 
-  TouchableOpacity, 
-  Image,
-  TextInput,
-  FlatList,
-  Dimensions
-} from 'react-native';
+import { StyleSheet, View, Text, ScrollView, TouchableOpacity, Image, TextInput, FlatList, Dimensions } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useLocalSearchParams, router } from 'expo-router';
-import { MaterialIcons, Ionicons } from '@expo/vector-icons';
+import { MaterialIcons } from '@expo/vector-icons';
 import { ArrowLeft, Star, MapPin, Clock } from 'lucide-react-native';
 import { COLORS } from '@/constants/Colors';
 import { useRestaurantFilters } from '@/hooks/useRestaurantFilters';
@@ -221,7 +211,7 @@ export default function RestobarsScreen() {
             <MaterialIcons 
               name={option.icon as any} 
               size={16} 
-              color={selectedFilter === option.id ? '#FFFFFF' : '#6B7280'} 
+              color={selectedFilter === option.id ? COLORS.background : '#6B7280'} 
             />
             <Text style={[
               styles.filterText,
@@ -271,7 +261,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 20,
     paddingVertical: 16,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: COLORS.background,
     borderBottomWidth: 1,
     borderBottomColor: '#E5E7EB',
   },
@@ -291,7 +281,7 @@ const styles = StyleSheet.create({
   searchContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#FFFFFF',
+    backgroundColor: COLORS.background,
     marginHorizontal: 20,
     marginTop: 16,
     borderRadius: 12,
@@ -333,7 +323,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#F3F4F6',
+    backgroundColor: COLORS.borderLight,
     borderRadius: 20,
     paddingVertical: 8,
     paddingHorizontal: 12,
@@ -344,8 +334,8 @@ const styles = StyleSheet.create({
     minHeight: 36,
   },
   filterButtonActive: {
-    backgroundColor: '#FF6B35',
-    borderColor: '#FF6B35',
+    backgroundColor: COLORS.PRIMARY_COLOR,
+    borderColor: COLORS.PRIMARY_COLOR,
   },
   filterText: {
     fontFamily: 'Inter-Medium',
@@ -355,12 +345,12 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   filterTextActive: {
-    color: '#FFFFFF',
+    color: COLORS.background,
   },
   resultsContainer: {
     paddingHorizontal: 20,
     paddingVertical: 12,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: COLORS.background,
   },
   resultsText: {
     fontSize: 14,
@@ -372,7 +362,7 @@ const styles = StyleSheet.create({
   },
   restaurantCard: {
     flexDirection: 'row',
-    backgroundColor: '#FFFFFF',
+    backgroundColor: COLORS.background,
     borderRadius: 12,
     padding: 12,
     marginBottom: 12,
@@ -407,21 +397,21 @@ const styles = StyleSheet.create({
   discountBadge: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#FF6B35',
+    backgroundColor: COLORS.PRIMARY_COLOR,
     borderRadius: 4,
     paddingHorizontal: 6,
     paddingVertical: 2,
     gap: 2,
   },
   discountText: {
-    color: '#FFFFFF',
+    color: COLORS.background,
     fontSize: 10,
     fontFamily: 'Inter-Bold',
   },
   restaurantCategory: {
     fontSize: 14,
     fontFamily: 'Inter-Medium',
-    color: '#FF6B35',
+    color: COLORS.PRIMARY_COLOR,
     marginBottom: 8,
   },
   restaurantDetails: {

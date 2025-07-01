@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, StyleSheet, ScrollView, Image, Dimensions, TouchableOpacity, Text } from 'react-native';
 import { router } from 'expo-router';
 import { getAllPromotions } from '@/data/promotions';
+import { COLORS } from '@/constants/Colors';
 
 const { width } = Dimensions.get('window');
 
@@ -105,32 +106,32 @@ const styles = StyleSheet.create({
   },
   discountBadge: {
     alignSelf: 'flex-start',
-    backgroundColor: '#F59439',
+    backgroundColor: COLORS.PRIMARY_COLOR,
     borderRadius: 12,
     paddingHorizontal: 12,
     paddingVertical: 6,
     marginBottom: 8,
   },
   discountText: {
-    color: '#FFF',
+    color: COLORS.background,
     fontSize: 14,
     fontWeight: 'bold',
   },
   promoTitle: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: '#FFF',
+    color: COLORS.background,
     marginBottom: 4,
   },
   promoDescription: {
     fontSize: 14,
-    color: '#FFF',
+    color: COLORS.background,
     marginBottom: 4,
     opacity: 0.9,
   },
   restaurantName: {
     fontSize: 12,
-    color: '#FFF',
+    color: COLORS.background,
     opacity: 0.8,
   },
   pagination: {
@@ -150,7 +151,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 4,
   },
   paginationDotActive: {
-    backgroundColor: '#FFF',
+    backgroundColor: COLORS.background,
     width: 16,
   },
 });

@@ -1,29 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { 
-  StyleSheet, 
-  View, 
-  Text, 
-  TouchableOpacity, 
-  KeyboardAvoidingView, 
-  Platform,
-  ScrollView, 
-  ActivityIndicator,
-  Image,
-  Dimensions
-} from 'react-native';
-import { Link, router } from 'expo-router';
-import Animated, { 
-  useSharedValue, 
-  useAnimatedStyle,
-  withTiming,
-  Easing,
-  FadeIn
-} from 'react-native-reanimated';
+import { StyleSheet, View, Text, TouchableOpacity, KeyboardAvoidingView, Platform, ScrollView, ActivityIndicator, Image, Dimensions } from 'react-native';
+import { Link } from 'expo-router';
+import Animated, { useSharedValue, useAnimatedStyle, withTiming, Easing, FadeIn } from 'react-native-reanimated';
 import { COLORS } from '@/constants/Colors';
 import Input from '@/components/ui/Input';
 import Button from '@/components/ui/Button';
 import { useAuth } from '@/hooks/useAuth';
 import { Eye, EyeOff } from 'lucide-react-native';
+import { LinearGradient } from 'expo-linear-gradient';
 
 const { width, height } = Dimensions.get('window');
 
@@ -42,7 +26,7 @@ export default function Login() {
   useEffect(() => {
     // Animación al montar el componente
     circleScale.value = withTiming(0, {
-      duration: 5200,
+      duration: 3200,
       easing: Easing.out(Easing.exp)
     });
     
@@ -79,16 +63,21 @@ export default function Login() {
   }));
 
   return (
-    <View style={styles.backgroundContainer}>
+    <View style={{ flex: 1 }}>
+      <LinearGradient
+        colors={[COLORS.PRIMARY_COLOR, '#fffbe6', COLORS.background]}
+        style={StyleSheet.absoluteFill}
+        start={{ x: 0.2, y: 0 }}
+        end={{ x: 1, y: 1 }}
+      />
       {/* Círculo naranja que se contrae */}
       <Animated.View style={[
-        styles.backgroundCircle, 
+        styles.backgroundCircle,
         circleStyle,
-        { backgroundColor: COLORS.PRIMARY_COLOR }
+        { backgroundColor: COLORS.PRIMARY_COLOR, zIndex: 1 }
       ]} />
-
       <KeyboardAvoidingView 
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        behavior={'height'}
         style={styles.keyboardAvoid}
       >
         <ScrollView 
@@ -98,16 +87,14 @@ export default function Login() {
           <View style={styles.centerContainer}>
             {/* Logo de la app */}
             <Animated.View entering={FadeIn.delay(300)}>
-              <Animated.View 
-                style={[styles.logoContainer]}
-                entering={FadeIn.delay(300)}
-              >
+              <View style={styles.logoCenterContainer}>
+                <View style={styles.logoBgCircle} />
                 <Image
                   source={require('@/assets/images/spacely1.png')}
                   style={styles.logoImage}
                   resizeMode="contain"
                 />
-              </Animated.View>
+              </View>
             </Animated.View>
 
             {/* Formulario */}
@@ -122,11 +109,11 @@ export default function Login() {
                   </View>
                 ) : null}
 
-                <Text style={styles.appTagline}>Discover the best restaurants</Text>
+                <Text style={styles.appTagline}>Descubre los mejores restaurantes</Text>
 
                 <Input
-                  label="Email"
-                  placeholder="your@email.com"
+                  label="Correo electrónico"
+                  placeholder="tu@email.com"
                   value={email}
                   onChangeText={setEmail}
                   keyboardType="email-address"
@@ -135,7 +122,7 @@ export default function Login() {
                 />
 
                 <Input
-                  label="Password"
+                  label="Contraseña"
                   placeholder="••••••••"
                   value={password}
                   onChangeText={setPassword}
@@ -153,11 +140,11 @@ export default function Login() {
                 />
 
                 <TouchableOpacity style={styles.forgotPassword}>
-                  <Text style={styles.forgotPasswordText}>Forgot Password?</Text>
+                  <Text style={styles.forgotPasswordText}>¿Olvidaste tu contraseña?</Text>
                 </TouchableOpacity>
 
                 <Button 
-                  label={isLoading ? "Signing in..." : "Sign In"}
+                  label={isLoading ? "Ingresando..." : "Iniciar sesión"}
                   onPress={handleLogin}
                   disabled={isLoading}
                   style={styles.loginButton}
@@ -165,10 +152,10 @@ export default function Login() {
                 />
 
                 <View style={styles.signupContainer}>
-                  <Text style={styles.signupText}>Don't have an account? </Text>
+                  <Text style={styles.signupText}>¿No tienes una cuenta? </Text>
                   <Link href="/(auth)/register" asChild>
                     <TouchableOpacity>
-                      <Text style={styles.signupLink}>Sign Up</Text>
+                      <Text style={styles.signupLink}>Regístrate</Text>
                     </TouchableOpacity>
                   </Link>
                 </View>
@@ -182,17 +169,13 @@ export default function Login() {
 }
 
 const styles = StyleSheet.create({
-  backgroundContainer: {
-    flex: 1,
-    backgroundColor: '#FFF',
-  },
   keyboardAvoid: {
     flex: 1,
   },
   scrollContainer: {
     flexGrow: 1,
     justifyContent: 'center',
-    minHeight: height - 100, // Asegura que ocupe toda la pantalla
+    minHeight: height - 100,
   },
   centerContainer: {
     flex: 1,
@@ -200,22 +183,32 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 24,
   },
-  backgroundCircle: {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    width: width * 2,
-    height: width * 2,
-    borderRadius: width,
-    transform: [{ translateX: -width }, { translateY: -width }],
-  },
-  logoContainer: {
+  logoCenterContainer: {
     alignItems: 'center',
-    marginBottom: 24,
+    justifyContent: 'center',
+    width: 140,
+    height: 140,
+    marginBottom: 12,
+    position: 'relative',
+  },
+  logoBgCircle: {
+    position: 'absolute',
+    width: 120,
+    height: 120,
+    borderRadius: 60,
+    backgroundColor: COLORS.PRIMARY_COLOR_DARK,
+    opacity: 0.92,
+    zIndex: 0,
+    shadowColor: COLORS.PRIMARY_COLOR_DARK,
+    shadowOffset: { width: 0, height: 8 },
+    shadowOpacity: 0.25,
+    shadowRadius: 24,
+    elevation: 12,
   },
   logoImage: {
-    width: 180,
-    height: 180,
+    width: 140,
+    height: 140,
+    zIndex: 1,
   },
   appTagline: {
     fontFamily: 'Inter-Regular',
@@ -228,7 +221,7 @@ const styles = StyleSheet.create({
   formContainer: {
     width: '100%',
     maxWidth: 400,
-    backgroundColor: '#FFF',
+    backgroundColor: COLORS.background,
     padding: 24,
     borderRadius: 24,
     shadowColor: '#000',
@@ -286,5 +279,15 @@ const styles = StyleSheet.create({
     fontFamily: 'Inter-Medium',
     fontSize: 14,
     color: COLORS.PRIMARY_COLOR,
+  },
+  backgroundCircle: {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    width: width * 2,
+    height: width * 2,
+    borderRadius: width,
+    transform: [{ translateX: -width }, { translateY: -width }],
+    zIndex: 0,
   },
 });

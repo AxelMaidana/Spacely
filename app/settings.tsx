@@ -7,56 +7,46 @@ import { Bell, Moon, Shield, CircleHelp as HelpCircle, Info, ArrowLeft } from 'l
 import { useRouter } from 'expo-router';
 
 export default function SettingsScreen() {
-  const [notifications, setNotifications] = useState(true);
   const [darkMode, setDarkMode] = useState(false);
   const [biometrics, setBiometrics] = useState(false);
   const router = useRouter();
 
-  const toggleNotifications = () => setNotifications(previous => !previous);
-  const toggleDarkMode = () => setDarkMode(previous => !previous);
-  const toggleBiometrics = () => setBiometrics(previous => !previous);
+  const toggleDarkMode = () => setDarkMode(prev => !prev);
+  const toggleBiometrics = () => setBiometrics(prev => !prev);
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={{ flexDirection: 'row', alignItems: 'center', paddingHorizontal: 16, paddingTop: 16 }}>
-        <TouchableOpacity onPress={() => router.back()} style={{ marginRight: 16 }}>
+      <View style={styles.header}>
+        <TouchableOpacity onPress={router.back} style={{ marginRight: 16 }}>
           <ArrowLeft size={28} color={COLORS.text} />
         </TouchableOpacity>
         <Text style={styles.title}>Configuración</Text>
       </View>
-      
       <ScrollView style={styles.scrollView}>
         <Animated.View 
           entering={FadeInUp.delay(200).duration(500)}
           style={styles.section}
         >
-          <Text style={styles.sectionTitle}>Preferences</Text>
-          
+          <Text style={styles.sectionTitle}>Preferencias</Text>
+          <TouchableOpacity
+            style={[styles.settingButton, { paddingHorizontal: 0 }]}
+            onPress={() => router.push('/notifications')}
+          >
+            <View style={styles.settingIconContainer}>
+              <Bell size={20} color={COLORS.PRIMARY_COLOR} />
+            </View>
+            <View style={styles.settingContent}>
+              <Text style={styles.settingTitle}>Notificaciones</Text>
+              <Text style={styles.settingDescription}>Ver configuración de notificaciones</Text>
+            </View>
+          </TouchableOpacity>
           <View style={styles.settingItem}>
-  
-         <TouchableOpacity
-  style={[styles.settingItem, { paddingHorizontal: 0 }]}  // ← anula el padding horizontal
-  onPress={() => router.push('/notifications')}
->
-  <View style={styles.settingIconContainer}>
-    <Bell size={20} color={COLORS.PRIMARY_COLOR} />
-  </View>
-  <View style={styles.settingContent}>
-    <Text style={styles.settingTitle}>Notificaciones</Text>
-    <Text style={styles.settingDescription}>Ver configuración de notificaciones</Text>
-  </View>
-</TouchableOpacity>
-
-
-          </View>
-          <View style={styles.settingItem}>
-
             <View style={styles.settingIconContainer}>
               <Moon size={20} color={COLORS.PRIMARY_COLOR} />
             </View>
             <View style={styles.settingContent}>
-              <Text style={styles.settingTitle}>Dark Mode</Text>
-              <Text style={styles.settingDescription}>Switch to dark theme</Text>
+              <Text style={styles.settingTitle}>Modo oscuro</Text>
+              <Text style={styles.settingDescription}>Activar tema oscuro</Text>
             </View>
             <Switch
               trackColor={{ false: COLORS.border, true: COLORS.PRIMARY_COLOR_DARK }}
@@ -66,21 +56,18 @@ export default function SettingsScreen() {
             />
           </View>
         </Animated.View>
-        
         <Animated.View 
           entering={FadeInUp.delay(300).duration(500)}
           style={styles.section}
         >
-          <Text style={styles.sectionTitle}>Security</Text>
-          
+          <Text style={styles.sectionTitle}>Seguridad</Text>
           <View style={styles.settingItem}>
             <View style={styles.settingIconContainer}>
               <Shield size={20} color={COLORS.PRIMARY_COLOR} />
-              <Shield size={20} color={COLORS.PRIMARY_COLOR} />
             </View>
             <View style={styles.settingContent}>
-              <Text style={styles.settingTitle}>Biometric Login</Text>
-              <Text style={styles.settingDescription}>Login with Face ID or Touch ID</Text>
+              <Text style={styles.settingTitle}>Inicio biométrico</Text>
+              <Text style={styles.settingDescription}>Iniciar sesión con Face ID o Touch ID</Text>
             </View>
             <Switch
               trackColor={{ false: COLORS.border, true: COLORS.PRIMARY_COLOR_DARK }}
@@ -89,58 +76,48 @@ export default function SettingsScreen() {
               value={biometrics}
             />
           </View>
-          
           <TouchableOpacity 
-  style={styles.settingButton}
-  onPress={() => router.push('/changePassword')}
->
-  {/* Iconos y texto aquí */}
-  <View style={styles.settingIconContainer}>
-    <Shield size={20} color={COLORS.PRIMARY_COLOR} />
-    <Shield size={20} color={COLORS.PRIMARY_COLOR} />
-  </View>
-  <View style={styles.settingContent}>
-    <Text style={styles.settingTitle}>Change Password</Text>
-    <Text style={styles.settingDescription}>Update your password</Text>
-  </View>
-</TouchableOpacity>
-
+            style={styles.settingButton}
+            onPress={() => router.push('/changePassword')}
+          >
+            <View style={styles.settingIconContainer}>
+              <Shield size={20} color={COLORS.PRIMARY_COLOR} />
+            </View>
+            <View style={styles.settingContent}>
+              <Text style={styles.settingTitle}>Cambiar contraseña</Text>
+              <Text style={styles.settingDescription}>Actualiza tu contraseña</Text>
+            </View>
+          </TouchableOpacity>
         </Animated.View>
-        
         <Animated.View 
           entering={FadeInUp.delay(400).duration(500)}
           style={styles.section}
         >
-          <Text style={styles.sectionTitle}>About</Text>
-          
-          <TouchableOpacity style={styles.settingButton}
-           onPress={() => router.push('/help')}          
+          <Text style={styles.sectionTitle}>Acerca de</Text>
+          <TouchableOpacity 
+            style={styles.settingButton}
+            onPress={() => router.push('/help')}
           >
             <View style={styles.settingIconContainer}>
               <HelpCircle size={20} color={COLORS.PRIMARY_COLOR} />
-              <HelpCircle size={20} color={COLORS.PRIMARY_COLOR} />
             </View>
             <View style={styles.settingContent}>
-              <Text style={styles.settingTitle}>Help & Support</Text>
-              <Text style={styles.settingDescription}>Get help with the app</Text>
+              <Text style={styles.settingTitle}>Ayuda y soporte</Text>
+              <Text style={styles.settingDescription}>Obtén ayuda con la app</Text>
             </View>
           </TouchableOpacity>
-
-          
           <TouchableOpacity
-  style={styles.settingButton}
-  onPress={() => router.push('/about')}   // <--- acá vas a la pantalla About
->
-  <View style={styles.settingIconContainer}>
-    <Info size={20} color={COLORS.PRIMARY_COLOR} />
-    <Info size={20} color={COLORS.PRIMARY_COLOR} />
-  </View>
-  <View style={styles.settingContent}>
-    <Text style={styles.settingTitle}>About App</Text>
-    <Text style={styles.settingDescription}>Version 1.0.0</Text>
-  </View>
-</TouchableOpacity>
-
+            style={styles.settingButton}
+            onPress={() => router.push('/about')}
+          >
+            <View style={styles.settingIconContainer}>
+              <Info size={20} color={COLORS.PRIMARY_COLOR} />
+            </View>
+            <View style={styles.settingContent}>
+              <Text style={styles.settingTitle}>Sobre la app</Text>
+              <Text style={styles.settingDescription}>Versión 1.0.0</Text>
+            </View>
+          </TouchableOpacity>
         </Animated.View>
       </ScrollView>
     </SafeAreaView>
@@ -153,6 +130,8 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.background,
   },
   header: {
+    flexDirection: 'row',
+    alignItems: 'center',
     paddingHorizontal: 16,
     paddingTop: 16,
     marginBottom: 16,

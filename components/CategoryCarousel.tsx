@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Dimensions } from 'react-native';
 import { router } from 'expo-router';
 import { getAllCategories } from '@/data/categories';
+import { COLORS } from '@/constants/Colors';
 
 const { width } = Dimensions.get('window');
 
@@ -114,7 +115,7 @@ const styles = StyleSheet.create({
   },
   seeAll: {
     fontSize: 14,
-    color: '#FF6B35',
+    color: COLORS.PRIMARY_COLOR,
     fontWeight: '500',
   },
   scrollContainer: {
@@ -129,7 +130,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 5,
     alignItems: 'center',
     paddingVertical: 10,
-    backgroundColor: '#FFF',
+    backgroundColor: COLORS.background,
     borderRadius: 12,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },

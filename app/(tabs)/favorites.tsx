@@ -1,20 +1,11 @@
 import React from 'react';
-import { 
-  StyleSheet, 
-  View, 
-  Text, 
-  ScrollView, 
-  TouchableOpacity, 
-  Image,
-  FlatList,
-  Alert
-} from 'react-native';
+import { StyleSheet, View, Text, ScrollView, TouchableOpacity, Image, FlatList, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { router } from 'expo-router';
-import { MaterialIcons } from '@expo/vector-icons';
 import { Heart, Star, MapPin, Clock, Trash2 } from 'lucide-react-native';
 import { useFavorites } from '@/contexts/FavoritesContext';
 import { getAllRestaurants, Restaurant } from '@/data/restaurants';
+import { COLORS } from '@/constants/Colors';
 
 export default function FavoritesScreen() {
   const { favoriteRestaurants, removeFromFavorites, clearFavorites } = useFavorites();
@@ -164,7 +155,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 20,
     paddingVertical: 16,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: COLORS.background,
     borderBottomWidth: 1,
     borderBottomColor: '#E5E7EB',
   },
@@ -189,7 +180,7 @@ const styles = StyleSheet.create({
   },
   restaurantCard: {
     flexDirection: 'row',
-    backgroundColor: '#FFFFFF',
+    backgroundColor: COLORS.background,
     borderRadius: 12,
     padding: 12,
     marginBottom: 12,
@@ -227,7 +218,7 @@ const styles = StyleSheet.create({
   restaurantCategory: {
     fontSize: 14,
     fontFamily: 'Inter-Medium',
-    color: '#FF6B35',
+    color: COLORS.PRIMARY_COLOR,
     marginBottom: 8,
   },
   restaurantDetails: {
@@ -267,13 +258,13 @@ const styles = StyleSheet.create({
   },
   discountBadge: {
     alignSelf: 'flex-start',
-    backgroundColor: '#FF6B35',
+    backgroundColor: COLORS.PRIMARY_COLOR,
     borderRadius: 4,
     paddingHorizontal: 6,
     paddingVertical: 2,
   },
   discountText: {
-    color: '#FFFFFF',
+    color: COLORS.background,
     fontSize: 10,
     fontFamily: 'Inter-Bold',
   },
@@ -287,7 +278,7 @@ const styles = StyleSheet.create({
     width: 120,
     height: 120,
     borderRadius: 60,
-    backgroundColor: '#F3F4F6',
+    backgroundColor: COLORS.borderLight,
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 24,
@@ -308,13 +299,13 @@ const styles = StyleSheet.create({
     marginBottom: 32,
   },
   exploreButton: {
-    backgroundColor: '#FF6B35',
+    backgroundColor: COLORS.PRIMARY_COLOR,
     paddingHorizontal: 24,
     paddingVertical: 12,
     borderRadius: 8,
   },
   exploreButtonText: {
-    color: '#FFFFFF',
+    color: COLORS.background,
     fontSize: 16,
     fontFamily: 'Inter-Bold',
   },

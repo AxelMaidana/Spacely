@@ -72,21 +72,24 @@ export const restaurants: Restaurant[] = [
         name: 'Hamburguesa Mula Mala',
         description: 'Hamburguesa con queso cheddar, bacon y salsa especial',
         price: '$8.500',
-        category: 'Hamburguesas'
+        category: 'Hamburguesas',
+        image: { uri: 'https://images.pexels.com/photos/1633578/pexels-photo-1633578.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' }
       },
       {
         id: '1-2',
         name: 'IPA Artesanal',
         description: 'Cerveza IPA de la casa con lúpulo aromático',
         price: '$2.800',
-        category: 'Cervezas'
+        category: 'Cervezas',
+        image: { uri: 'https://images.pexels.com/photos/1267244/pexels-photo-1267244.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' }
       },
       {
         id: '1-3',
         name: 'Nachos con Guacamole',
         description: 'Nachos con guacamole casero y queso fundido',
         price: '$5.200',
-        category: 'Entradas'
+        category: 'Entradas',
+        image: { uri: 'https://images.pexels.com/photos/2097090/pexels-photo-2097090.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' }
       }
     ],
     tags: ['Cerveza Artesanal', 'Hamburguesas', 'Bar'],
@@ -139,21 +142,24 @@ export const restaurants: Restaurant[] = [
         name: 'Café de Especialidad',
         description: 'Café de origen único con métodos artesanales',
         price: '$2.500',
-        category: 'Cafés'
+        category: 'Cafés',
+        image: { uri: 'https://images.pexels.com/photos/312418/pexels-photo-312418.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' }
       },
       {
         id: '2-2',
         name: 'Tostado de Aguacate',
         description: 'Tostado con aguacate, huevo y semillas',
         price: '$6.800',
-        category: 'Sandwiches'
+        category: 'Sandwiches',
+        image: { uri: 'https://images.pexels.com/photos/566566/pexels-photo-566566.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' }
       },
       {
         id: '2-3',
         name: 'Tarta de Manzana',
         description: 'Tarta casera con manzanas y canela',
         price: '$4.200',
-        category: 'Pastelería'
+        category: 'Pastelería',
+        image: { uri: 'https://images.pexels.com/photos/1126359/pexels-photo-1126359.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' }
       }
     ],
     tags: ['Café', 'Especialidad', 'Bohemio'],
@@ -205,21 +211,24 @@ export const restaurants: Restaurant[] = [
         name: 'Risotto de Hongos',
         description: 'Risotto cremoso con hongos portobello y parmesano',
         price: '$12.500',
-        category: 'Platos Principales'
+        category: 'Platos Principales',
+        image: { uri: 'https://images.pexels.com/photos/723198/pexels-photo-723198.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' }
       },
       {
         id: '3-2',
         name: 'Ceviche de Pescado',
         description: 'Ceviche fresco con limón, cebolla y cilantro',
         price: '$9.800',
-        category: 'Entradas'
+        category: 'Entradas',
+        image: { uri: 'https://images.pexels.com/photos/2097090/pexels-photo-2097090.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' }
       },
       {
         id: '3-3',
         name: 'Cocktail La Fábrica',
         description: 'Cocktail signature con gin y frutos rojos',
         price: '$4.500',
-        category: 'Bebidas'
+        category: 'Bebidas',
+        image: { uri: 'https://images.pexels.com/photos/1283219/pexels-photo-1283219.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' }
       }
     ],
     tags: ['Gastronomía', 'Cocktails', 'Industrial'],
@@ -272,21 +281,24 @@ export const restaurants: Restaurant[] = [
         name: 'Coq au Vin',
         description: 'Pollo al vino tinto con vegetales y hierbas',
         price: '$15.800',
-        category: 'Platos Principales'
+        category: 'Platos Principales',
+        image: { uri: 'https://images.pexels.com/photos/699953/pexels-photo-699953.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' }
       },
       {
         id: '4-2',
         name: 'Croque Monsieur',
         description: 'Sándwich de jamón y queso gratinado',
         price: '$8.200',
-        category: 'Entradas'
+        category: 'Entradas',
+        image: { uri: 'https://images.pexels.com/photos/566566/pexels-photo-566566.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' }
       },
       {
         id: '4-3',
         name: 'Crème Brûlée',
         description: 'Postre clásico francés con caramelo quemado',
         price: '$6.500',
-        category: 'Postres'
+        category: 'Postres',
+        image: { uri: 'https://images.pexels.com/photos/1126359/pexels-photo-1126359.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' }
       }
     ],
     tags: ['Francesa', 'Brasserie', 'Parisino'],
@@ -338,21 +350,24 @@ export const restaurants: Restaurant[] = [
         name: 'Café con Leche',
         description: 'Café con leche caliente tradicional',
         price: '$2.800',
-        category: 'Cafés'
+        category: 'Cafés',
+        image: { uri: 'https://images.pexels.com/photos/312418/pexels-photo-312418.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' }
       },
       {
         id: '5-2',
         name: 'Medialunas',
         description: 'Medialunas recién horneadas',
         price: '$2.500',
-        category: 'Pastelería'
+        category: 'Pastelería',
+        image: { uri: 'https://images.pexels.com/photos/1126359/pexels-photo-1126359.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' }
       },
       {
         id: '5-3',
         name: 'Tostado de Jamón y Queso',
         description: 'Tostado con jamón cocido y queso mozzarella',
         price: '$4.800',
-        category: 'Sandwiches'
+        category: 'Sandwiches',
+        image: { uri: 'https://images.pexels.com/photos/566566/pexels-photo-566566.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' }
       }
     ],
     tags: ['Café', 'Tradicional', 'Familiar'],
@@ -403,39 +418,41 @@ export const restaurants: Restaurant[] = [
       {
         id: '6-1',
         name: 'Pasta Carbonara',
-        description: 'Espagueti con huevo, queso parmesano y panceta',
-        price: '$12.500',
-        category: 'Pastas'
+        description: 'Pasta con salsa cremosa, panceta y parmesano',
+        price: '$14.200',
+        category: 'Platos Principales',
+        image: { uri: 'https://images.pexels.com/photos/723198/pexels-photo-723198.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' }
       },
       {
         id: '6-2',
         name: 'Ensalada César',
-        description: 'Lechuga romana, crutones, parmesano y aderezo César',
-        price: '$8.200',
-        category: 'Ensaladas'
+        description: 'Lechuga, crutones, parmesano y aderezo César',
+        price: '$8.500',
+        category: 'Ensaladas',
+        image: { uri: 'https://images.pexels.com/photos/1213710/pexels-photo-1213710.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' }
       },
       {
         id: '6-3',
-        name: 'Cocktail Marco Aurelio',
-        description: 'Cocktail signature con vodka y frutos rojos',
-        price: '$4.800',
-        category: 'Bebidas'
+        name: 'Tiramisú',
+        description: 'Postre italiano con café y mascarpone',
+        price: '$6.800',
+        category: 'Postres',
+        image: { uri: 'https://images.pexels.com/photos/1126359/pexels-photo-1126359.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' }
       }
     ],
-    tags: ['Internacional', 'Elegante', 'Cocktails'],
-    discount: '15% OFF',
+    tags: ['Internacional', 'Elegante', 'Pasta'],
     reviewCount: 167,
     isOpen: true,
     location: {
-      address: 'Av. Sarmiento, Resistencia',
-      coordinates: { lat: -27.44821, lng: -58.98129 },
+      address: 'Av. Paraguay 112, Resistencia',
+      coordinates: { lat: -27.44810, lng: -58.98182 },
     },
     images: [
       'https://images.pexels.com/photos/1639562/pexels-photo-1639562.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
-      'https://images.pexels.com/photos/1633578/pexels-photo-1633578.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
-      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDBSxwxLpvUi_oGCyG9XOf4_O4YqWFUQ2fUQ&s',
+      'https://images.pexels.com/photos/958545/pexels-photo-958545.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
+      'https://images.pexels.com/photos/958545/pexels-photo-958545.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
     ],
-    amenities: ['WiFi', 'Terraza', 'Cocktails', 'Ambiente Elegante'],
+    amenities: ['WiFi', 'Terraza', 'Vinos', 'Ambiente Elegante'],
     openingHoursDetailed: {
       'Lunes': 'Cerrado',
       'Martes': '7:00 PM - 2:00 AM',
@@ -472,21 +489,24 @@ export const restaurants: Restaurant[] = [
         name: 'Tacos al Pastor',
         description: 'Tacos con carne de cerdo marinada y piña',
         price: '$6.500',
-        category: 'Tacos'
+        category: 'Tacos',
+        image: { uri: 'https://images.pexels.com/photos/2097090/pexels-photo-2097090.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' }
       },
       {
         id: '7-2',
         name: 'Guacamole Fresco',
         description: 'Guacamole casero con aguacate, tomate y cilantro',
         price: '$4.200',
-        category: 'Entradas'
+        category: 'Entradas',
+        image: { uri: 'https://images.pexels.com/photos/2097090/pexels-photo-2097090.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' }
       },
       {
         id: '7-3',
         name: 'Margarita Clásica',
         description: 'Margarita con tequila, limón y triple sec',
         price: '$3.800',
-        category: 'Bebidas'
+        category: 'Bebidas',
+        image: { uri: 'https://images.pexels.com/photos/1283219/pexels-photo-1283219.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' }
       }
     ],
     tags: ['Mexicana', 'Tequila', 'Tacos'],
@@ -539,21 +559,24 @@ export const restaurants: Restaurant[] = [
         name: 'Cerveza Artesanal',
         description: 'Cerveza artesanal de la casa',
         price: '$2.500',
-        category: 'Cervezas'
+        category: 'Cervezas',
+        image: { uri: 'https://images.pexels.com/photos/1267244/pexels-photo-1267244.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' }
       },
       {
         id: '8-2',
         name: 'Hamburguesa Local',
         description: 'Hamburguesa con queso, lechuga y tomate',
         price: '$6.800',
-        category: 'Hamburguesas'
+        category: 'Hamburguesas',
+        image: { uri: 'https://images.pexels.com/photos/1633578/pexels-photo-1633578.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' }
       },
       {
         id: '8-3',
         name: 'Papas Fritas',
         description: 'Papas fritas caseras con sal',
         price: '$3.200',
-        category: 'Snacks'
+        category: 'Snacks',
+        image: { uri: 'https://images.pexels.com/photos/1583884/pexels-photo-1583884.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' }
       }
     ],
     tags: ['Bar', 'Cerveza', 'Barrio'],
@@ -605,21 +628,24 @@ export const restaurants: Restaurant[] = [
         name: 'Milanesa Napolitana',
         description: 'Milanesa con jamón, queso y salsa de tomate',
         price: '$8.500',
-        category: 'Platos Principales'
+        category: 'Platos Principales',
+        image: { uri: 'https://images.pexels.com/photos/699953/pexels-photo-699953.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' }
       },
       {
         id: '9-2',
         name: 'Pizza Margherita',
         description: 'Pizza con tomate, mozzarella y albahaca',
         price: '$7.200',
-        category: 'Pizzas'
+        category: 'Pizzas',
+        image: { uri: 'https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' }
       },
       {
         id: '9-3',
         name: 'Cerveza Nacional',
         description: 'Cerveza nacional de barril',
         price: '$2.800',
-        category: 'Bebidas'
+        category: 'Bebidas',
+        image: { uri: 'https://images.pexels.com/photos/1267244/pexels-photo-1267244.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' }
       }
     ],
     tags: ['Deportivo', 'Variado', 'Bar'],
@@ -806,42 +832,48 @@ export const restaurants: Restaurant[] = [
         name: 'Classic Burger',
         description: 'Hamburguesa con carne, lechuga, tomate, cebolla y queso',
         price: '$6.500',
-        category: 'Hamburguesas'
+        category: 'Hamburguesas',
+        image: { uri: 'https://images.pexels.com/photos/1633578/pexels-photo-1633578.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' }
       },
       {
         id: '6-2',
         name: 'Bacon Cheeseburger',
         description: 'Hamburguesa con bacon, queso cheddar y salsa especial',
         price: '$8.200',
-        category: 'Hamburguesas'
+        category: 'Hamburguesas',
+        image: { uri: 'https://images.pexels.com/photos/1633578/pexels-photo-1633578.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' }
       },
       {
         id: '6-3',
         name: 'Mushroom Swiss',
         description: 'Hamburguesa con champiñones salteados y queso suizo',
         price: '$7.800',
-        category: 'Hamburguesas'
+        category: 'Hamburguesas',
+        image: { uri: 'https://images.pexels.com/photos/1633578/pexels-photo-1633578.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' }
       },
       {
         id: '6-4',
         name: 'Veggie Burger',
         description: 'Hamburguesa vegetariana con quinoa y vegetales',
         price: '$6.800',
-        category: 'Hamburguesas'
+        category: 'Hamburguesas',
+        image: { uri: 'https://images.pexels.com/photos/1633578/pexels-photo-1633578.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' }
       },
       {
         id: '6-5',
         name: 'Papas Fritas',
         description: 'Papas fritas caseras con sal y especias',
         price: '$3.200',
-        category: 'Acompañamientos'
+        category: 'Acompañamientos',
+        image: { uri: 'https://images.pexels.com/photos/1583884/pexels-photo-1583884.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' }
       },
       {
         id: '6-6',
         name: 'Milkshake de Vainilla',
         description: 'Milkshake cremoso de vainilla con crema batida',
         price: '$4.500',
-        category: 'Bebidas'
+        category: 'Bebidas',
+        image: { uri: 'https://images.pexels.com/photos/1126359/pexels-photo-1126359.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' }
       }
     ],
     tags: ['Hamburguesas', 'Papas', 'Milkshakes'],
@@ -893,42 +925,48 @@ export const restaurants: Restaurant[] = [
         name: 'Helado de Vainilla',
         description: 'Helado cremoso de vainilla natural',
         price: '$2.000',
-        category: 'Helados'
+        category: 'Helados',
+        image: { uri: 'https://images.pexels.com/photos/1352281/pexels-photo-1352281.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' }
       },
       {
         id: '7-2',
         name: 'Helado de Chocolate',
         description: 'Helado de chocolate belga con chips de chocolate',
         price: '$2.500',
-        category: 'Helados'
+        category: 'Helados',
+        image: { uri: 'https://images.pexels.com/photos/1352281/pexels-photo-1352281.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' }
       },
       {
         id: '7-3',
         name: 'Helado de Frutilla',
         description: 'Helado de frutilla con frutas reales',
         price: '$2.200',
-        category: 'Helados'
+        category: 'Helados',
+        image: { uri: 'https://images.pexels.com/photos/1352281/pexels-photo-1352281.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' }
       },
       {
         id: '7-4',
         name: 'Helado de Dulce de Leche',
         description: 'Helado de dulce de leche casero',
         price: '$2.300',
-        category: 'Helados'
+        category: 'Helados',
+        image: { uri: 'https://images.pexels.com/photos/1352281/pexels-photo-1352281.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' }
       },
       {
         id: '7-5',
         name: 'Copa Banana Split',
         description: 'Copa con helados variados, banana y crema',
         price: '$4.000',
-        category: 'Copas Especiales'
+        category: 'Copas Especiales',
+        image: { uri: 'https://images.pexels.com/photos/1352280/pexels-photo-1352280.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' }
       },
       {
         id: '7-6',
         name: 'Sundae de Chocolate',
         description: 'Helado con salsa de chocolate y crema batida',
         price: '$3.500',
-        category: 'Copas Especiales'
+        category: 'Copas Especiales',
+        image: { uri: 'https://images.pexels.com/photos/1352279/pexels-photo-1352279.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' }
       }
     ],
     tags: ['Helados', 'Postres', 'Sin gluten'],
@@ -980,42 +1018,48 @@ export const restaurants: Restaurant[] = [
         name: 'Bowl de Quinoa',
         description: 'Quinoa con vegetales de estación y aderezo de limón',
         price: '$8.500',
-        category: 'Platos Principales'
+        category: 'Platos Principales',
+        image: { uri: 'https://images.pexels.com/photos/1640772/pexels-photo-1640772.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' }
       },
       {
         id: '8-2',
         name: 'Pasta Integral con Pesto',
         description: 'Pasta integral con pesto de albahaca y piñones',
         price: '$9.200',
-        category: 'Platos Principales'
+        category: 'Platos Principales',
+        image: { uri: 'https://images.pexels.com/photos/723198/pexels-photo-723198.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' }
       },
       {
         id: '8-3',
         name: 'Ensalada César Vegana',
         description: 'Lechuga romana, crutones, aderezo vegano',
         price: '$6.800',
-        category: 'Ensaladas'
+        category: 'Ensaladas',
+        image: { uri: 'https://images.pexels.com/photos/1213710/pexels-photo-1213710.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' }
       },
       {
         id: '8-4',
         name: 'Hamburguesa de Lentejas',
         description: 'Hamburguesa de lentejas con vegetales y salsa tahini',
         price: '$7.500',
-        category: 'Platos Principales'
+        category: 'Platos Principales',
+        image: { uri: 'https://images.pexels.com/photos/1633578/pexels-photo-1633578.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' }
       },
       {
         id: '8-5',
         name: 'Sopa de Verduras',
         description: 'Sopa casera con vegetales orgánicos',
         price: '$5.500',
-        category: 'Entradas'
+        category: 'Entradas',
+        image: { uri: 'https://images.pexels.com/photos/1640772/pexels-photo-1640772.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' }
       },
       {
         id: '8-6',
         name: 'Postre Vegano de Chocolate',
         description: 'Postre de chocolate sin lácteos con frutos rojos',
         price: '$4.800',
-        category: 'Postres'
+        category: 'Postres',
+        image: { uri: 'https://images.pexels.com/photos/1126359/pexels-photo-1126359.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' }
       }
     ],
     tags: ['Vegetariano', 'Gourmet', 'Sin TACC'],
@@ -1156,42 +1200,48 @@ export const restaurants: Restaurant[] = [
         name: 'Spaghetti Carbonara',
         description: 'Espagueti con huevo, queso parmesano y panceta',
         price: '$12.000',
-        category: 'Pastas'
+        category: 'Pastas',
+        image: { uri: 'https://images.pexels.com/photos/723198/pexels-photo-723198.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' }
       },
       {
         id: '10-2',
         name: 'Fettuccine Alfredo',
         description: 'Fettuccine con salsa cremosa y parmesano',
         price: '$11.500',
-        category: 'Pastas'
+        category: 'Pastas',
+        image: { uri: 'https://images.pexels.com/photos/723198/pexels-photo-723198.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' }
       },
       {
         id: '10-3',
         name: 'Lasagna Bolognese',
         description: 'Lasagna con salsa boloñesa y bechamel',
         price: '$13.500',
-        category: 'Pastas'
+        category: 'Pastas',
+        image: { uri: 'https://images.pexels.com/photos/723198/pexels-photo-723198.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' }
       },
       {
         id: '10-4',
         name: 'Ravioles de Ricotta',
         description: 'Ravioles caseros con ricotta y salsa de tomate',
         price: '$12.800',
-        category: 'Pastas'
+        category: 'Pastas',
+        image: { uri: 'https://images.pexels.com/photos/723198/pexels-photo-723198.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' }
       },
       {
         id: '10-5',
         name: 'Penne Arrabbiata',
         description: 'Penne con salsa picante de tomate y ajo',
         price: '$10.500',
-        category: 'Pastas'
+        category: 'Pastas',
+        image: { uri: 'https://images.pexels.com/photos/723198/pexels-photo-723198.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' }
       },
       {
         id: '10-6',
         name: 'Tiramisú',
         description: 'Tiramisú casero con café y mascarpone',
         price: '$5.200',
-        category: 'Postres'
+        category: 'Postres',
+        image: { uri: 'https://images.pexels.com/photos/1126359/pexels-photo-1126359.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' }
       }
     ],
     tags: ['Pasta', 'Vino', 'Casero'],
@@ -1243,42 +1293,48 @@ export const restaurants: Restaurant[] = [
         name: 'Empanadas Salteñas',
         description: 'Empanadas de carne con papa, huevo y aceitunas',
         price: '$3.200',
-        category: 'Entradas'
+        category: 'Entradas',
+        image: { uri: 'https://images.pexels.com/photos/2097090/pexels-photo-2097090.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' }
       },
       {
         id: '11-2',
         name: 'Locro Chaqueño',
         description: 'Locro tradicional con maíz, porotos y carne',
         price: '$6.500',
-        category: 'Platos Principales'
+        category: 'Platos Principales',
+        image: { uri: 'https://images.pexels.com/photos/699953/pexels-photo-699953.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' }
       },
       {
         id: '11-3',
         name: 'Milanesa Napolitana',
         description: 'Milanesa con jamón, queso y salsa de tomate',
         price: '$7.800',
-        category: 'Platos Principales'
+        category: 'Platos Principales',
+        image: { uri: 'https://images.pexels.com/photos/699953/pexels-photo-699953.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' }
       },
       {
         id: '11-4',
         name: 'Choripán Criollo',
         description: 'Chorizo casero en pan de campo con chimichurri',
         price: '$4.500',
-        category: 'Entradas'
+        category: 'Entradas',
+        image: { uri: 'https://images.pexels.com/photos/566566/pexels-photo-566566.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' }
       },
       {
         id: '11-5',
         name: 'Humita en Chala',
         description: 'Humita tradicional con choclo rallado y especias',
         price: '$5.200',
-        category: 'Platos Principales'
+        category: 'Platos Principales',
+        image: { uri: 'https://images.pexels.com/photos/699953/pexels-photo-699953.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' }
       },
       {
         id: '11-6',
         name: 'Postre de Miel',
         description: 'Postre casero con miel de caña',
         price: '$2.800',
-        category: 'Postres'
+        category: 'Postres',
+        image: { uri: 'https://images.pexels.com/photos/1126359/pexels-photo-1126359.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' }
       }
     ],
     tags: ['Empanadas', 'Locro', 'Choripán', 'Casero'],
@@ -1331,42 +1387,48 @@ export const restaurants: Restaurant[] = [
         name: 'Milanesa a la Suiza',
         description: 'Milanesa con jamón, queso y salsa bechamel',
         price: '$8.500',
-        category: 'Platos Principales'
+        category: 'Platos Principales',
+        image: { uri: 'https://images.pexels.com/photos/699953/pexels-photo-699953.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' }
       },
       {
         id: '12-2',
         name: 'Pasta Casera',
         description: 'Fideos caseros con salsa de tomate y albahaca',
         price: '$6.200',
-        category: 'Platos Principales'
+        category: 'Platos Principales',
+        image: { uri: 'https://images.pexels.com/photos/723198/pexels-photo-723198.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' }
       },
       {
         id: '12-3',
         name: 'Ensalada de la Casa',
         description: 'Lechuga, tomate, cebolla y aceite de oliva',
         price: '$3.500',
-        category: 'Acompañamientos'
+        category: 'Acompañamientos',
+        image: { uri: 'https://images.pexels.com/photos/1213710/pexels-photo-1213710.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' }
       },
       {
         id: '12-4',
         name: 'Sopa de Verduras',
         description: 'Sopa casera con vegetales de estación',
         price: '$4.800',
-        category: 'Entradas'
+        category: 'Entradas',
+        image: { uri: 'https://images.pexels.com/photos/1640772/pexels-photo-1640772.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' }
       },
       {
         id: '12-5',
         name: 'Pollo al Horno',
         description: 'Pollo entero al horno con hierbas aromáticas',
         price: '$9.000',
-        category: 'Platos Principales'
+        category: 'Platos Principales',
+        image: { uri: 'https://images.pexels.com/photos/699953/pexels-photo-699953.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' }
       },
       {
         id: '12-6',
         name: 'Flan Casero',
         description: 'Flan casero con dulce de leche',
         price: '$2.500',
-        category: 'Postres'
+        category: 'Postres',
+        image: { uri: 'https://images.pexels.com/photos/1126359/pexels-photo-1126359.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' }
       }
     ],
     tags: ['Milanesas', 'Pasta', 'Ensaladas', 'Familiar'],
@@ -1418,43 +1480,49 @@ export const restaurants: Restaurant[] = [
         id: '13-1',
         name: 'Empanadas Salteñas',
         description: 'Empanadas de carne con papa, huevo y aceitunas',
-        price: '$2.800',
-        category: 'Entradas'
+        price: '$3.200',
+        category: 'Entradas',
+        image: { uri: 'https://images.pexels.com/photos/2097090/pexels-photo-2097090.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' }
       },
       {
         id: '13-2',
-        name: 'Empanadas de Pollo',
-        description: 'Empanadas de pollo con cebolla y especias',
-        price: '$2.600',
-        category: 'Entradas'
+        name: 'Humita en Chala',
+        description: 'Humita tradicional con choclo rallado y especias',
+        price: '$4.800',
+        category: 'Platos Principales',
+        image: { uri: 'https://images.pexels.com/photos/699953/pexels-photo-699953.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' }
       },
       {
         id: '13-3',
-        name: 'Empanadas de Humita',
-        description: 'Empanadas de humita con choclo rallado',
-        price: '$2.400',
-        category: 'Entradas'
+        name: 'Milanesa Napolitana',
+        description: 'Milanesa con jamón, queso y salsa de tomate',
+        price: '$7.500',
+        category: 'Platos Principales',
+        image: { uri: 'https://images.pexels.com/photos/699953/pexels-photo-699953.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' }
       },
       {
         id: '13-4',
         name: 'Locro Tradicional',
         description: 'Locro con maíz, porotos y carne de cerdo',
         price: '$5.800',
-        category: 'Platos Principales'
+        category: 'Platos Principales',
+        image: { uri: 'https://images.pexels.com/photos/699953/pexels-photo-699953.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' }
       },
       {
         id: '13-5',
         name: 'Tamales Chaqueños',
         description: 'Tamales de maíz con carne y especias',
         price: '$4.200',
-        category: 'Platos Principales'
+        category: 'Platos Principales',
+        image: { uri: 'https://images.pexels.com/photos/699953/pexels-photo-699953.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' }
       },
       {
         id: '13-6',
         name: 'Chipá Casero',
         description: 'Chipá tradicional de mandioca y queso',
         price: '$1.800',
-        category: 'Acompañamientos'
+        category: 'Acompañamientos',
+        image: { uri: 'https://images.pexels.com/photos/1583884/pexels-photo-1583884.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' }
       }
     ],
     tags: ['Empanadas Salteñas', 'Locro', 'Humita', 'Tradicional'],
@@ -1507,42 +1575,48 @@ export const restaurants: Restaurant[] = [
         name: 'Carbonada Criolla',
         description: 'Carbonada con carne, zapallo y choclo',
         price: '$7.200',
-        category: 'Platos Principales'
+        category: 'Platos Principales',
+        image: { uri: 'https://images.pexels.com/photos/699953/pexels-photo-699953.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' }
       },
       {
         id: '14-2',
         name: 'Tamales del Norte',
         description: 'Tamales de maíz con carne y especias del norte',
         price: '$4.800',
-        category: 'Platos Principales'
+        category: 'Platos Principales',
+        image: { uri: 'https://images.pexels.com/photos/699953/pexels-photo-699953.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' }
       },
       {
         id: '14-3',
         name: 'Empanadas Tucumanas',
         description: 'Empanadas de carne con cebolla y comino',
         price: '$3.500',
-        category: 'Entradas'
+        category: 'Entradas',
+        image: { uri: 'https://images.pexels.com/photos/2097090/pexels-photo-2097090.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' }
       },
       {
         id: '14-4',
         name: 'Locro Norteño',
         description: 'Locro con maíz blanco y carne de cerdo',
         price: '$6.800',
-        category: 'Platos Principales'
+        category: 'Platos Principales',
+        image: { uri: 'https://images.pexels.com/photos/699953/pexels-photo-699953.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' }
       },
       {
         id: '14-5',
         name: 'Humita en Olla',
         description: 'Humita cremosa con choclo rallado',
         price: '$5.500',
-        category: 'Platos Principales'
+        category: 'Platos Principales',
+        image: { uri: 'https://images.pexels.com/photos/699953/pexels-photo-699953.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' }
       },
       {
         id: '14-6',
         name: 'Postre de Cayote',
         description: 'Postre tradicional con dulce de cayote',
         price: '$2.800',
-        category: 'Postres'
+        category: 'Postres',
+        image: { uri: 'https://images.pexels.com/photos/1126359/pexels-photo-1126359.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' }
       }
     ],
     tags: ['Criollo', 'Tamales', 'Carbonada', 'Regional'],
@@ -1595,14 +1669,16 @@ export const restaurants: Restaurant[] = [
         name: 'Sopa Paraguaya',
         description: 'Sopa paraguaya casera con queso y cebolla',
         price: '$4.200',
-        category: 'Platos Principales'
+        category: 'Platos Principales',
+        image: { uri: 'https://images.pexels.com/photos/699953/pexels-photo-699953.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' }
       },
       {
         id: '15-2',
         name: 'Chipá Guazú',
         description: 'Chipá guazú con choclo rallado y queso',
         price: '$3.800',
-        category: 'Platos Principales'
+        category: 'Platos Principales',
+        image: { uri: 'https://images.pexels.com/photos/699953/pexels-photo-699953.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' }
       },
       {
         id: '15-3',
@@ -1771,42 +1847,48 @@ export const restaurants: Restaurant[] = [
         name: 'Surubí a la Parrilla',
         description: 'Surubí fresco del Paraná a la parrilla con limón',
         price: '$11.500',
-        category: 'Platos Principales'
+        category: 'Platos Principales',
+        image: { uri: 'https://images.pexels.com/photos/699953/pexels-photo-699953.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' }
       },
       {
         id: '17-2',
         name: 'Pacú al Horno',
         description: 'Pacú al horno con hierbas aromáticas',
         price: '$10.800',
-        category: 'Platos Principales'
+        category: 'Platos Principales',
+        image: { uri: 'https://images.pexels.com/photos/699953/pexels-photo-699953.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' }
       },
       {
         id: '17-3',
         name: 'Dorado Frito',
         description: 'Dorado frito con papas fritas',
         price: '$9.200',
-        category: 'Platos Principales'
+        category: 'Platos Principales',
+        image: { uri: 'https://images.pexels.com/photos/699953/pexels-photo-699953.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' }
       },
       {
         id: '17-4',
         name: 'Ensalada de Pescado',
         description: 'Ensalada con pescado ahumado y vegetales',
         price: '$6.500',
-        category: 'Entradas'
+        category: 'Entradas',
+        image: { uri: 'https://images.pexels.com/photos/1213710/pexels-photo-1213710.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' }
       },
       {
         id: '17-5',
         name: 'Sopa de Pescado',
         description: 'Sopa casera con pescados del río',
         price: '$5.500',
-        category: 'Entradas'
+        category: 'Entradas',
+        image: { uri: 'https://images.pexels.com/photos/1640772/pexels-photo-1640772.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' }
       },
       {
         id: '17-6',
         name: 'Postre de Limón',
         description: 'Postre de limón con merengue',
         price: '$3.200',
-        category: 'Postres'
+        category: 'Postres',
+        image: { uri: 'https://images.pexels.com/photos/1126359/pexels-photo-1126359.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' }
       }
     ],
     tags: ['Pescado', 'Río', 'Parrilla', 'Regional'],
@@ -1859,42 +1941,48 @@ export const restaurants: Restaurant[] = [
         name: 'Empanadas de Carne',
         description: 'Empanadas de carne con cebolla y especias',
         price: '$2.800',
-        category: 'Entradas'
+        category: 'Entradas',
+        image: { uri: 'https://images.pexels.com/photos/2097090/pexels-photo-2097090.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' }
       },
       {
         id: '18-2',
         name: 'Empanadas de Pollo',
         description: 'Empanadas de pollo con cebolla y comino',
         price: '$2.600',
-        category: 'Entradas'
+        category: 'Entradas',
+        image: { uri: 'https://images.pexels.com/photos/2097090/pexels-photo-2097090.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' }
       },
       {
         id: '18-3',
         name: 'Asado de Tira',
         description: 'Asado de tira tradicional con costra crujiente',
         price: '$6.500',
-        category: 'Platos Principales'
+        category: 'Platos Principales',
+        image: { uri: 'https://images.pexels.com/photos/699953/pexels-photo-699953.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' }
       },
       {
         id: '18-4',
         name: 'Choripán Criollo',
         description: 'Chorizo casero en pan de campo',
         price: '$3.800',
-        category: 'Entradas'
+        category: 'Entradas',
+        image: { uri: 'https://images.pexels.com/photos/566566/pexels-photo-566566.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' }
       },
       {
         id: '18-5',
         name: 'Vacío a la Parrilla',
         description: 'Vacío marinado con hierbas y especias',
         price: '$5.800',
-        category: 'Platos Principales'
+        category: 'Platos Principales',
+        image: { uri: 'https://images.pexels.com/photos/699953/pexels-photo-699953.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' }
       },
       {
         id: '18-6',
         name: 'Postre de Miel',
         description: 'Postre casero con miel de caña',
         price: '$2.200',
-        category: 'Postres'
+        category: 'Postres',
+        image: { uri: 'https://images.pexels.com/photos/1126359/pexels-photo-1126359.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' }
       }
     ],
     tags: ['Gauchesco', 'Empanadas', 'Asado', 'Tradicional'],
@@ -1947,42 +2035,48 @@ export const restaurants: Restaurant[] = [
         name: 'Helado de Dulce de Leche',
         description: 'Helado cremoso de dulce de leche casero',
         price: '$2.000',
-        category: 'Helados'
+        category: 'Helados',
+        image: { uri: 'https://images.pexels.com/photos/1352281/pexels-photo-1352281.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' }
       },
       {
         id: '19-2',
         name: 'Helado de Vainilla',
         description: 'Helado de vainilla natural con vainas',
         price: '$1.800',
-        category: 'Helados'
+        category: 'Helados',
+        image: { uri: 'https://images.pexels.com/photos/1352281/pexels-photo-1352281.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' }
       },
       {
         id: '19-3',
         name: 'Helado de Chocolate',
         description: 'Helado de chocolate con chips de chocolate',
         price: '$2.200',
-        category: 'Helados'
+        category: 'Helados',
+        image: { uri: 'https://images.pexels.com/photos/1352281/pexels-photo-1352281.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' }
       },
       {
         id: '19-4',
         name: 'Helado de Frutilla',
         description: 'Helado de frutilla con frutas reales',
         price: '$2.000',
-        category: 'Helados'
+        category: 'Helados',
+        image: { uri: 'https://images.pexels.com/photos/1352281/pexels-photo-1352281.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' }
       },
       {
         id: '19-5',
         name: 'Copa Helada',
         description: 'Copa con helados variados y crema',
         price: '$3.500',
-        category: 'Copas Especiales'
+        category: 'Copas Especiales',
+        image: { uri: 'https://images.pexels.com/photos/1352281/pexels-photo-1352281.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' }
       },
       {
         id: '19-6',
         name: 'Granizado de Limón',
         description: 'Granizado refrescante de limón',
         price: '$1.500',
-        category: 'Granizados'
+        category: 'Granizados',
+        image: { uri: 'https://images.pexels.com/photos/1352281/pexels-photo-1352281.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' }
       }
     ],
     tags: ['Helados', 'Casero', 'Esquina', 'Tradicional'],
@@ -2625,6 +2719,1072 @@ export const restaurants: Restaurant[] = [
   },
   {
     id: '33',
+    title: 'Amore mio',
+    category: 'Cafeterías',
+    categoryId: '7',
+    rating: 4.5,
+    distance: '0.6 km',
+    image: { uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNCfNnrNoShVat-it0i-GtH7A80NyCvgmmSg&s' },
+    address: 'Av. 25 de Mayo 345, Resistencia',
+    subtitle: 'Café con terraza y vista panorámica, perfecto para desayunos',
+    phone: '+54 362 4456-7909',
+    website: 'www.cafedelsol.com',
+    openingHours: 'Lun-Dom 8:00-20:00',
+    priceRange: '$$',
+    prices: {
+      minPrice: 2500,
+      maxPrice: 7500,
+      currency: 'ARS',
+      description: 'Desayunos y cafés entre $2.500 y $7.500'
+    },
+    menu: [
+      {
+        id: '27-1',
+        name: 'Desayuno Completo',
+        description: 'Café, jugo de naranja, tostadas y mermelada',
+        price: '$6.500',
+        category: 'Desayunos'
+      },
+      {
+        id: '27-2',
+        name: 'Café Americano',
+        description: 'Café negro con agua caliente',
+        price: '$2.800',
+        category: 'Cafés'
+      },
+      {
+        id: '27-3',
+        name: 'Latte Macchiato',
+        description: 'Leche con shot de espresso',
+        price: '$4.200',
+        category: 'Cafés'
+      },
+      {
+        id: '27-4',
+        name: 'Croissant de Mantequilla',
+        description: 'Croissant recién horneado',
+        price: '$3.500',
+        category: 'Pastelería'
+      },
+      {
+        id: '27-5',
+        name: 'Tostado de Aguacate',
+        description: 'Tostado con aguacate, huevo y semillas',
+        price: '$7.200',
+        category: 'Sandwiches'
+      },
+      {
+        id: '27-6',
+        name: 'Smoothie de Frutas',
+        description: 'Smoothie con frutas frescas y yogurt',
+        price: '$5.800',
+        category: 'Bebidas'
+      }
+    ],
+    tags: ['Desayunos', 'Terraza', 'Vista Panorámica', 'Saludable'],
+    discount: '10% OFF',
+    reviewCount: 189,
+    isOpen: true,
+    location: {
+      address: 'Av. 25 de Mayo 345, Resistencia',
+      coordinates: { lat: -27.45008, lng: -58.98392 },
+    },
+    images: [
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQAwPqm2OlXv0YQXI6YVXUTIdXTMASjlqDNCw&s',
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQPBMHiZmrfN1b00V-m90n8gNXXp3kDnbh4A&s',
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNCfNnrNoShVat-it0i-GtH7A80NyCvgmmSg&s',
+    ],
+    amenities: ['WiFi', 'Terraza', 'Vista Panorámica', 'Desayunos'],
+    openingHoursDetailed: {
+      'Lunes': '8:00 AM - 8:00 PM',
+      'Martes': '8:00 AM - 8:00 PM',
+      'Miércoles': '8:00 AM - 8:00 PM',
+      'Jueves': '8:00 AM - 8:00 PM',
+      'Viernes': '8:00 AM - 8:00 PM',
+      'Sábado': '8:00 AM - 8:00 PM',
+      'Domingo': 'Cerrado',
+    },
+  },
+  {
+    id: '34',
+    title: 'Bodegón El Rincón',
+    category: 'Bodegones',
+    categoryId: '10',
+    rating: 4.6,
+    distance: '1.2 km',
+    image: { uri: 'https://images.pexels.com/photos/958560/pexels-photo-958560.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' },
+    address: 'Av. 9 de Julio 789, Resistencia',
+    subtitle: 'Bodegón de barrio con las mejores milanesas napolitanas',
+    phone: '+54 362 4456-7898',
+    website: 'www.bodegonelrincon.com',
+    openingHours: 'Lun-Dom 12:00-22:00',
+    priceRange: '$',
+    prices: {
+      minPrice: 3200,
+      maxPrice: 7800,
+      currency: 'ARS',
+      description: 'Milanesas y platos entre $3.200 y $7.800'
+    },
+    menu: [
+      {
+        id: '16-1',
+        name: 'Milanesa Napolitana',
+        description: 'Milanesa con jamón, queso y salsa de tomate',
+        price: '$7.800',
+        category: 'Platos Principales',
+        image: { uri: 'https://images.pexels.com/photos/699953/pexels-photo-699953.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' }
+      },
+      {
+        id: '16-2',
+        name: 'Milanesa a la Suiza',
+        description: 'Milanesa con jamón, queso y salsa bechamel',
+        price: '$8.200',
+        category: 'Platos Principales',
+        image: { uri: 'https://images.pexels.com/photos/699953/pexels-photo-699953.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' }
+      },
+      {
+        id: '16-3',
+        name: 'Milanesa Completa',
+        description: 'Milanesa con huevo frito y papas fritas',
+        price: '$7.500',
+        category: 'Platos Principales',
+        image: { uri: 'https://images.pexels.com/photos/699953/pexels-photo-699953.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' }
+      },
+      {
+        id: '16-4',
+        name: 'Pasta con Milanesa',
+        description: 'Fideos con milanesa picada y salsa de tomate',
+        price: '$6.800',
+        category: 'Platos Principales',
+        image: { uri: 'https://images.pexels.com/photos/723198/pexels-photo-723198.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' }
+      },
+      {
+        id: '16-5',
+        name: 'Ensalada de la Casa',
+        description: 'Lechuga, tomate, cebolla y aceite de oliva',
+        price: '$3.200',
+        category: 'Acompañamientos',
+        image: { uri: 'https://images.pexels.com/photos/1213710/pexels-photo-1213710.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' }
+      },
+      {
+        id: '16-6',
+        name: 'Papas Fritas',
+        description: 'Papas fritas caseras con sal',
+        price: '$2.800',
+        category: 'Acompañamientos',
+        image: { uri: 'https://images.pexels.com/photos/1583884/pexels-photo-1583884.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' }
+      }
+    ],
+    tags: ['Milanesas', 'Pasta', 'Barrio', 'Casero'],
+    discount: '20% OFF',
+    reviewCount: 178,
+    isOpen: true,
+    location: {
+      address: 'Av. 9 de Julio 789, Resistencia',
+      coordinates: { lat: -27.4512, lng: -58.9862 },
+    },
+    images: [
+      'https://images.pexels.com/photos/958560/pexels-photo-958560.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
+      'https://images.pexels.com/photos/958561/pexels-photo-958561.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
+      'https://images.pexels.com/photos/958562/pexels-photo-958562.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
+    ],
+    amenities: ['WiFi', 'Delivery', 'Take Away', 'Ambiente Familiar'],
+    openingHoursDetailed: {
+      'Lunes': '12:00 PM - 10:00 PM',
+      'Martes': '12:00 PM - 10:00 PM',
+      'Miércoles': '12:00 PM - 10:00 PM',
+      'Jueves': '12:00 PM - 10:00 PM',
+      'Viernes': '12:00 PM - 11:00 PM',
+      'Sábado': '11:00 AM - 11:00 PM',
+      'Domingo': 'Cerrado',
+    },
+  },
+  {
+    id: '35',
+    title: 'Bodegón Los Pinos',
+    category: 'Bodegones',
+    categoryId: '10',
+    rating: 4.3,
+    distance: '2.0 km',
+    image: { uri: 'https://images.pexels.com/photos/958563/pexels-photo-958563.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' },
+    address: 'Av. Alberdi 876, Resistencia',
+    subtitle: 'Bodegón con especialidades en pescados del río Paraná',
+    phone: '+54 362 4456-7899',
+    website: 'www.bodegonlospinos.com',
+    openingHours: 'Mar-Dom 12:00-22:00',
+    priceRange: '$$',
+    prices: {
+      minPrice: 5500,
+      maxPrice: 12000,
+      currency: 'ARS',
+      description: 'Pescados y platos entre $5.500 y $12.000'
+    },
+    menu: [
+      {
+        id: '17-1',
+        name: 'Surubí a la Parrilla',
+        description: 'Surubí fresco del Paraná a la parrilla con limón',
+        price: '$11.500',
+        category: 'Platos Principales'
+      },
+      {
+        id: '17-2',
+        name: 'Pacú al Horno',
+        description: 'Pacú al horno con hierbas aromáticas',
+        price: '$10.800',
+        category: 'Platos Principales'
+      },
+      {
+        id: '17-3',
+        name: 'Dorado Frito',
+        description: 'Dorado frito con papas fritas',
+        price: '$9.200',
+        category: 'Platos Principales'
+      },
+      {
+        id: '17-4',
+        name: 'Ensalada de Pescado',
+        description: 'Ensalada con pescado ahumado y vegetales',
+        price: '$6.500',
+        category: 'Entradas'
+      },
+      {
+        id: '17-5',
+        name: 'Sopa de Pescado',
+        description: 'Sopa casera con pescados del río',
+        price: '$5.500',
+        category: 'Entradas'
+      },
+      {
+        id: '17-6',
+        name: 'Postre de Limón',
+        description: 'Postre de limón con merengue',
+        price: '$3.200',
+        category: 'Postres'
+      }
+    ],
+    tags: ['Pescado', 'Río', 'Parrilla', 'Regional'],
+    discount: '15% OFF',
+    reviewCount: 98,
+    isOpen: true,
+    location: {
+      address: 'Av. Alberdi 876, Resistencia',
+      coordinates: { lat: -27.4495, lng: -58.9875 },
+    },
+    images: [
+      'https://images.pexels.com/photos/958563/pexels-photo-958563.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
+      'https://images.pexels.com/photos/958564/pexels-photo-958564.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
+      'https://images.pexels.com/photos/958565/pexels-photo-958565.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
+    ],
+    amenities: ['WiFi', 'Terraza', 'Vista al Río', 'Parrilla'],
+    openingHoursDetailed: {
+      'Lunes': 'Cerrado',
+      'Martes': '12:00 PM - 10:00 PM',
+      'Miércoles': '12:00 PM - 10:00 PM',
+      'Jueves': '12:00 PM - 10:00 PM',
+      'Viernes': '12:00 PM - 11:00 PM',
+      'Sábado': '11:00 AM - 11:00 PM',
+      'Domingo': 'Cerrado',
+    },
+  },
+  {
+    id: '36',
+    title: 'Bodegón El Gaucho',
+    category: 'Bodegones',
+    categoryId: '10',
+    rating: 4.7,
+    distance: '1.6 km',
+    image: { uri: 'https://images.pexels.com/photos/958566/pexels-photo-958566.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' },
+    address: 'Av. 25 de Mayo 543, Resistencia',
+    subtitle: 'Bodegón gauchesco con las mejores empanadas de carne',
+    phone: '+54 362 4456-7900',
+    website: 'www.bodegonelgaucho.com',
+    openingHours: 'Lun-Dom 11:00-23:00',
+    priceRange: '$',
+    prices: {
+      minPrice: 2200,
+      maxPrice: 6500,
+      currency: 'ARS',
+      description: 'Empanadas y platos entre $2.200 y $6.500'
+    },
+    menu: [
+      {
+        id: '18-1',
+        name: 'Empanadas de Carne',
+        description: 'Empanadas de carne con cebolla y especias',
+        price: '$2.800',
+        category: 'Entradas'
+      },
+      {
+        id: '18-2',
+        name: 'Empanadas de Pollo',
+        description: 'Empanadas de pollo con cebolla y comino',
+        price: '$2.600',
+        category: 'Entradas'
+      },
+      {
+        id: '18-3',
+        name: 'Asado de Tira',
+        description: 'Asado de tira tradicional con costra crujiente',
+        price: '$6.500',
+        category: 'Platos Principales'
+      },
+      {
+        id: '18-4',
+        name: 'Choripán Criollo',
+        description: 'Chorizo casero en pan de campo',
+        price: '$3.800',
+        category: 'Entradas'
+      },
+      {
+        id: '18-5',
+        name: 'Vacío a la Parrilla',
+        description: 'Vacío marinado con hierbas y especias',
+        price: '$5.800',
+        category: 'Platos Principales'
+      },
+      {
+        id: '18-6',
+        name: 'Postre de Miel',
+        description: 'Postre casero con miel de caña',
+        price: '$2.200',
+        category: 'Postres'
+      }
+    ],
+    tags: ['Gauchesco', 'Empanadas', 'Asado', 'Tradicional'],
+    discount: '25% OFF',
+    reviewCount: 156,
+    isOpen: true,
+    location: {
+      address: 'Av. 25 de Mayo 543, Resistencia',
+      coordinates: { lat: -27.4487, lng: -58.9802 },
+    },
+    images: [
+      'https://images.pexels.com/photos/958566/pexels-photo-958566.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
+      'https://images.pexels.com/photos/958567/pexels-photo-958567.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
+      'https://images.pexels.com/photos/958568/pexels-photo-958568.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
+    ],
+    amenities: ['Delivery', 'Take Away', 'Música Folklórica', 'Ambiente Gauchesco'],
+    openingHoursDetailed: {
+      'Lunes': '11:00 AM - 11:00 PM',
+      'Martes': '11:00 AM - 11:00 PM',
+      'Miércoles': '11:00 AM - 11:00 PM',
+      'Jueves': '11:00 AM - 11:00 PM',
+      'Viernes': '11:00 AM - 12:00 AM',
+      'Sábado': '10:00 AM - 12:00 AM',
+      'Domingo': 'Cerrado',
+    },
+  },
+  {
+    id: '37',
+    title: 'Luigi heladeria',
+    category: 'Heladerías',
+    categoryId: '6',
+    rating: 4.3,
+    distance: '1.3 km',
+    image: { uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIh7CqUHUdcls0CA2OQ6NT51GMwGfYHk9B1A&s' },
+    address: 'Av Sarmiento y Marcelo T.de Alvear, Resistencia',
+    subtitle: 'Heladería con sabores tradicionales y caseros',
+    phone: '+54 362 4456-7901',
+    website: 'www.heladerialaesquina.com',
+    openingHours: 'Lun-Dom 10:00-23:00',
+    priceRange: '$',
+    prices: {
+      minPrice: 1200,
+      maxPrice: 3500,
+      currency: 'ARS',
+      description: 'Helados entre $1.200 y $3.500'
+    },
+    menu: [
+      {
+        id: '19-1',
+        name: 'Helado de Dulce de Leche',
+        description: 'Helado cremoso de dulce de leche casero',
+        price: '$2.000',
+        category: 'Helados',
+        image: { uri: 'https://images.pexels.com/photos/1352281/pexels-photo-1352281.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' }
+      },
+      {
+        id: '19-2',
+        name: 'Helado de Vainilla',
+        description: 'Helado de vainilla natural con vainas',
+        price: '$1.800',
+        category: 'Helados',
+        image: { uri: 'https://images.pexels.com/photos/1352281/pexels-photo-1352281.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' }
+      },
+      {
+        id: '19-3',
+        name: 'Helado de Chocolate',
+        description: 'Helado de chocolate con chips de chocolate',
+        price: '$2.200',
+        category: 'Helados',
+        image: { uri: 'https://images.pexels.com/photos/1352281/pexels-photo-1352281.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' }
+      },
+      {
+        id: '19-4',
+        name: 'Helado de Frutilla',
+        description: 'Helado de frutilla con frutas reales',
+        price: '$2.000',
+        category: 'Helados',
+        image: { uri: 'https://images.pexels.com/photos/1352281/pexels-photo-1352281.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' }
+      },
+      {
+        id: '19-5',
+        name: 'Copa Helada',
+        description: 'Copa con helados variados y crema',
+        price: '$3.500',
+        category: 'Copas Especiales',
+        image: { uri: 'https://images.pexels.com/photos/1352281/pexels-photo-1352281.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' }
+      },
+      {
+        id: '19-6',
+        name: 'Granizado de Limón',
+        description: 'Granizado refrescante de limón',
+        price: '$1.500',
+        category: 'Granizados',
+        image: { uri: 'https://images.pexels.com/photos/1352281/pexels-photo-1352281.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' }
+      }
+    ],
+    tags: ['Helados', 'Casero', 'Esquina', 'Tradicional'],
+    discount: '10% OFF',
+    reviewCount: 87,
+    isOpen: true,
+    location: {
+      address: 'Esquina de Av. Alberdi y San Martín, Resistencia',
+      coordinates: { lat: -27.44991, lng: -58.98565 },
+    },
+    images: [
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTE3d2stbTlO-9qZxqdk2fMocZWEmLCvXY-Gg&s',
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvw9rQ5nvSySkh1nQEKp-YbBI3MXPfWJz-PA&s',
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9gPbTtJF22_t6jVLf-sKD4jjrXxv-wDjquw&s',
+    ],
+    amenities: ['Take Away', 'Delivery', 'Esquina', 'Sabores Caseros'],
+    openingHoursDetailed: {
+      'Lunes': '10:00 AM - 11:00 PM',
+      'Martes': '10:00 AM - 11:00 PM',
+      'Miércoles': '10:00 AM - 11:00 PM',
+      'Jueves': '10:00 AM - 11:00 PM',
+      'Viernes': '10:00 AM - 12:00 AM',
+      'Sábado': '9:00 AM - 12:00 AM',
+      'Domingo': 'Cerrado',
+    },
+  },
+  {
+    id: '38',
+    title: 'Heladería El Paraíso',
+    category: 'Heladerías',
+    categoryId: '6',
+    rating: 4.6,
+    distance: '0.9 km',
+    image: { uri: 'https://images.pexels.com/photos/1352285/pexels-photo-1352285.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' },
+    address: 'Av. 9 de Julio 567, Resistencia',
+    subtitle: 'Heladería gourmet con sabores únicos y artesanales',
+    phone: '+54 362 4456-7902',
+    website: 'www.heladeriaelparaiso.com',
+    openingHours: 'Lun-Dom 11:00-22:00',
+    priceRange: '$$',
+    prices: {
+      minPrice: 2500,
+      maxPrice: 6000,
+      currency: 'ARS',
+      description: 'Helados gourmet entre $2.500 y $6.000'
+    },
+    menu: [
+      {
+        id: '20-1',
+        name: 'Helado de Pistacho',
+        description: 'Helado de pistacho con nueces reales',
+        price: '$4.500',
+        category: 'Helados Gourmet'
+      },
+      {
+        id: '20-2',
+        name: 'Helado de Menta con Chocolate',
+        description: 'Helado de menta con chips de chocolate negro',
+        price: '$3.800',
+        category: 'Helados Gourmet'
+      },
+      {
+        id: '20-3',
+        name: 'Helado de Cookies & Cream',
+        description: 'Helado de vainilla con galletas Oreo',
+        price: '$3.200',
+        category: 'Helados Gourmet'
+      },
+      {
+        id: '20-4',
+        name: 'Helado de Brownie',
+        description: 'Helado de chocolate con trozos de brownie',
+        price: '$4.200',
+        category: 'Helados Gourmet'
+      },
+      {
+        id: '20-5',
+        name: 'Copa Banana Split Gourmet',
+        description: 'Copa con helados variados, banana y toppings premium',
+        price: '$6.000',
+        category: 'Copas Especiales'
+      },
+      {
+        id: '20-6',
+        name: 'Sundae de Caramelo',
+        description: 'Helado con salsa de caramelo y crema batida',
+        price: '$4.800',
+        category: 'Copas Especiales'
+      }
+    ],
+    tags: ['Gourmet', 'Artesanal', 'Sabores Únicos', 'Premium'],
+    discount: '15% OFF',
+    reviewCount: 134,
+    isOpen: true,
+    location: {
+      address: 'Av. 9 de Julio 567, Resistencia',
+      coordinates: { lat: -27.4510, lng: -58.9868 },
+    },
+    images: [
+      'https://images.pexels.com/photos/1352285/pexels-photo-1352285.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
+      'https://images.pexels.com/photos/1352286/pexels-photo-1352286.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
+      'https://images.pexels.com/photos/1352287/pexels-photo-1352287.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
+    ],
+    amenities: ['WiFi', 'Terraza', 'Sabores Gourmet', 'Ambiente Premium'],
+    openingHoursDetailed: {
+      'Lunes': '11:00 AM - 10:00 PM',
+      'Martes': '11:00 AM - 10:00 PM',
+      'Miércoles': '11:00 AM - 10:00 PM',
+      'Jueves': '11:00 AM - 10:00 PM',
+      'Viernes': '11:00 AM - 11:00 PM',
+      'Sábado': '10:00 AM - 11:00 PM',
+      'Domingo': 'Cerrado',
+    },
+  },
+  {
+    id: '39',
+    title: 'Pizzería Don Corleone',
+    category: 'Italiana',
+    categoryId: '2',
+    rating: 4.5,
+    distance: '1.1 km',
+    image: { uri: 'https://images.pexels.com/photos/1565983/pexels-photo-1565983.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' },
+    address: 'Av. San Martín 234, Resistencia',
+    subtitle: 'Pizza estilo Nueva York con masa gruesa y sabores intensos',
+    phone: '+54 362 4456-7903',
+    website: 'www.pizzeriadoncorleone.com',
+    openingHours: 'Lun-Dom 18:00-23:00',
+    priceRange: '$$',
+    prices: {
+      minPrice: 4500,
+      maxPrice: 12000,
+      currency: 'ARS',
+      description: 'Pizzas entre $4.500 y $12.000'
+    },
+    menu: [
+      {
+        id: '21-1',
+        name: 'Pizza Pepperoni',
+        description: 'Pizza con pepperoni, mozzarella y salsa de tomate',
+        price: '$8.500',
+        category: 'Pizzas Clásicas'
+      },
+      {
+        id: '21-2',
+        name: 'Pizza Hawaiana',
+        description: 'Pizza con jamón, piña y mozzarella',
+        price: '$9.200',
+        category: 'Pizzas Especiales'
+      },
+      {
+        id: '21-3',
+        name: 'Pizza BBQ Chicken',
+        description: 'Pizza con pollo, salsa BBQ y cebolla caramelizada',
+        price: '$10.500',
+        category: 'Pizzas Especiales'
+      },
+      {
+        id: '21-4',
+        name: 'Pizza Vegetariana',
+        description: 'Pizza con vegetales frescos y mozzarella',
+        price: '$8.800',
+        category: 'Pizzas Vegetarianas'
+      },
+      {
+        id: '21-5',
+        name: 'Pizza Suprema',
+        description: 'Pizza con pepperoni, salchicha, pimientos y aceitunas',
+        price: '$11.500',
+        category: 'Pizzas Especiales'
+      },
+      {
+        id: '21-6',
+        name: 'Pizza Margherita',
+        description: 'Pizza clásica con tomate, mozzarella y albahaca',
+        price: '$7.200',
+        category: 'Pizzas Clásicas'
+      }
+    ],
+    tags: ['Estilo NY', 'Masa Gruesa', 'Sabores Intensos', 'Delivery'],
+    discount: '20% OFF',
+    reviewCount: 156,
+    isOpen: true,
+    location: {
+      address: 'Av. San Martín 234, Resistencia',
+      coordinates: { lat: -27.4493, lng: -58.9842 },
+    },
+    images: [
+      'https://images.pexels.com/photos/1565983/pexels-photo-1565983.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
+      'https://images.pexels.com/photos/1565984/pexels-photo-1565984.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
+      'https://images.pexels.com/photos/1565985/pexels-photo-1565985.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
+    ],
+    amenities: ['Delivery', 'Take Away', 'Horno de Piedra', 'Estilo NY'],
+    openingHoursDetailed: {
+      'Lunes': '6:00 PM - 11:00 PM',
+      'Martes': '6:00 PM - 11:00 PM',
+      'Miércoles': '6:00 PM - 11:00 PM',
+      'Jueves': '6:00 PM - 11:00 PM',
+      'Viernes': '6:00 PM - 12:00 AM',
+      'Sábado': '5:00 PM - 12:00 AM',
+      'Domingo': '5:00 PM - 11:00 PM',
+    },
+  },
+  {
+    id: '40',
+    title: 'Pizzería La Toscana',
+    category: 'Italiana',
+    categoryId: '2',
+    rating: 4.7,
+    distance: '0.8 km',
+    image: { uri: 'https://images.pexels.com/photos/1565986/pexels-photo-1565986.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' },
+    address: 'Av. 25 de Mayo 876, Resistencia',
+    subtitle: 'Pizza auténtica italiana con ingredientes importados',
+    phone: '+54 362 4456-7904',
+    website: 'www.pizzerialatoscana.com',
+    openingHours: 'Mar-Dom 19:00-23:00',
+    priceRange: '$$$',
+    prices: {
+      minPrice: 8000,
+      maxPrice: 18000,
+      currency: 'ARS',
+      description: 'Pizzas gourmet entre $8.000 y $18.000'
+    },
+    menu: [
+      {
+        id: '22-1',
+        name: 'Pizza Prosciutto e Funghi',
+        description: 'Pizza con jamón crudo italiano y champiñones',
+        price: '$15.500',
+        category: 'Pizzas Gourmet'
+      },
+      {
+        id: '22-2',
+        name: 'Pizza Quattro Stagioni',
+        description: 'Pizza con jamón, champiñones, alcachofas y aceitunas',
+        price: '$16.800',
+        category: 'Pizzas Gourmet'
+      },
+      {
+        id: '22-3',
+        name: 'Pizza Diavola',
+        description: 'Pizza picante con salami y chile',
+        price: '$14.200',
+        category: 'Pizzas Gourmet'
+      },
+      {
+        id: '22-4',
+        name: 'Pizza Burrata',
+        description: 'Pizza con burrata fresca, tomate cherry y albahaca',
+        price: '$17.500',
+        category: 'Pizzas Gourmet'
+      },
+      {
+        id: '22-5',
+        name: 'Pizza Tartufo',
+        description: 'Pizza con trufa negra, mozzarella y rúcula',
+        price: '$18.000',
+        category: 'Pizzas Gourmet'
+      },
+      {
+        id: '22-6',
+        name: 'Tiramisú Casero',
+        description: 'Tiramisú tradicional con mascarpone italiano',
+        price: '$6.500',
+        category: 'Postres'
+      }
+    ],
+    tags: ['Auténtica', 'Ingredientes Importados', 'Gourmet', 'Vinos Italianos'],
+    reviewCount: 98,
+    isOpen: true,
+    location: {
+      address: 'Av. 25 de Mayo 876, Resistencia',
+      coordinates: { lat: -27.4486, lng: -58.9798 },
+    },
+    images: [
+      'https://images.pexels.com/photos/1565986/pexels-photo-1565986.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
+      'https://images.pexels.com/photos/1565987/pexels-photo-1565987.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
+      'https://images.pexels.com/photos/1565988/pexels-photo-1565988.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
+    ],
+    amenities: ['WiFi', 'Terraza', 'Bar de Vinos', 'Reservas'],
+    openingHoursDetailed: {
+      'Lunes': 'Cerrado',
+      'Martes': '7:00 PM - 11:00 PM',
+      'Miércoles': '7:00 PM - 11:00 PM',
+      'Jueves': '7:00 PM - 11:00 PM',
+      'Viernes': '7:00 PM - 12:00 AM',
+      'Sábado': '6:00 PM - 12:00 AM',
+      'Domingo': '6:00 PM - 11:00 PM',
+    },
+  },
+  {
+    id: '41',
+    title: 'Café Martinez',
+    category: 'Cafeterías',
+    categoryId: '7',
+    rating: 4.4,
+    distance: '0.4 km',
+    image: { uri: 'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1c/a9/e6/87/renovaron-el-salon-para.jpg?w=900&h=500&s=1' },
+    address: 'Güemes 425, Resistencia',
+    subtitle: 'Tu pausa ideal, todos los dias',
+    phone: '+54 362 4456-7905',
+    website: 'www.cafecentral.com',
+    openingHours: 'Lun-Dom 7:00-23:00',
+    priceRange: '$$',
+    prices: {
+      minPrice: 2000,
+      maxPrice: 8000,
+      currency: 'ARS',
+      description: 'Cafés y pastelería entre $2.000 y $8.000'
+    },
+    menu: [
+      {
+        id: '23-1',
+        name: 'Café Expresso',
+        description: 'Café expresso italiano tradicional',
+        price: '$2.500',
+        category: 'Cafés'
+      },
+      {
+        id: '23-2',
+        name: 'Cappuccino Clásico',
+        description: 'Cappuccino con leche espumada y cacao',
+        price: '$3.800',
+        category: 'Cafés'
+      },
+      {
+        id: '23-3',
+        name: 'Café con Leche',
+        description: 'Café con leche caliente',
+        price: '$3.200',
+        category: 'Cafés'
+      },
+      {
+        id: '23-4',
+        name: 'Medialunas',
+        description: 'Medialunas recién horneadas',
+        price: '$2.800',
+        category: 'Pastelería'
+      },
+      {
+        id: '23-5',
+        name: 'Tostado de Jamón y Queso',
+        description: 'Tostado con jamón cocido y queso mozzarella',
+        price: '$5.500',
+        category: 'Sandwiches'
+      },
+      {
+        id: '23-6',
+        name: 'Té de la Tarde',
+        description: 'Té con selección de pasteles caseros',
+        price: '$7.500',
+        category: 'Bebidas'
+      }
+    ],
+    tags: ['Histórico', 'Bohemio', 'Plaza Central', 'Tradicional'],
+    discount: '15% OFF',
+    reviewCount: 234,
+    isOpen: true,
+    location: {
+      address: 'Güemes 425, Resistencia',
+      coordinates: { lat: -27.44833, lng: -58.98194 },
+    },
+    images: [
+      'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1c/a9/e6/87/renovaron-el-salon-para.jpg?w=900&h=500&s=1',
+      'https://media-cdn.tripadvisor.com/media/photo-s/10/0c/46/87/desayuno.jpg',
+      'https://esa-cdn.carta.menu/storage/media/company_gallery/82138584/conversions/contribution_gallery.jpg',
+    ],
+    amenities: ['WiFi', 'Terraza', 'Vista a la Plaza', 'Música en Vivo'],
+    openingHoursDetailed: {
+      'Lunes': '7:00 AM - 11:00 PM',
+      'Martes': '7:00 AM - 11:00 PM',
+      'Miércoles': '7:00 AM - 11:00 PM',
+      'Jueves': '7:00 AM - 11:00 PM',
+      'Viernes': '7:00 AM - 12:00 AM',
+      'Sábado': '7:00 AM - 12:00 AM',
+      'Domingo': '7:00 AM - 11:00 PM',
+    },
+  },
+  {
+    id: '42',
+    title: 'Serafin Cafe de especialidad',
+    category: 'Cafeterías',
+    categoryId: '7',
+    rating: 4.6,
+    distance: '1.2 km',
+    image: { uri: 'https://cafedeespecialidad.info/wp-content/uploads/2023/11/AF1QipOgTdtr2TXBEha1cZ15X3CDV0oa5B1ZWdM5z8DUw426-h240-k-no.jpeg' },
+    address: 'Av. Sarmiento 456, Resistencia',
+    subtitle: 'Café cultural con exposiciones de arte y música en vivo',
+    phone: '+54 362 4456-7906',
+    website: 'www.cafedelasartes.com',
+    openingHours: 'Mar-Dom 16:00-01:00',
+    priceRange: '$$',
+    prices: {
+      minPrice: 3000,
+      maxPrice: 9000,
+      currency: 'ARS',
+      description: 'Cafés y bebidas entre $3.000 y $9.000'
+    },
+    menu: [
+      {
+        id: '24-1',
+        name: 'Café de Especialidad',
+        description: 'Café de origen único con métodos artesanales',
+        price: '$4.500',
+        category: 'Cafés de Especialidad'
+      },
+      {
+        id: '24-2',
+        name: 'Cold Brew',
+        description: 'Café frío extraído lentamente por 24 horas',
+        price: '$5.200',
+        category: 'Cafés de Especialidad'
+      },
+      {
+        id: '24-3',
+        name: 'Café Turco',
+        description: 'Café turco tradicional con especias',
+        price: '$4.800',
+        category: 'Cafés de Especialidad'
+      },
+      {
+        id: '24-4',
+        name: 'Tarta de Manzana',
+        description: 'Tarta casera con manzanas y canela',
+        price: '$4.200',
+        category: 'Pastelería'
+      },
+      {
+        id: '24-5',
+        name: 'Sándwich Club',
+        description: 'Sándwich con pollo, bacon, lechuga y tomate',
+        price: '$6.800',
+        category: 'Sandwiches'
+      },
+      {
+        id: '24-6',
+        name: 'Vino de la Casa',
+        description: 'Copa de vino tinto o blanco de la casa',
+        price: '$8.500',
+        category: 'Bebidas'
+      }
+    ],
+    tags: ['Cultural', 'Arte', 'Música en Vivo', 'Bohemio'],
+    reviewCount: 167,
+    isOpen: true,
+    location: {
+      address: 'Av. Sarmiento 456, Resistencia',
+      coordinates: { lat: -27.44838, lng: -58.98330 },
+    },
+    images: [
+      'https://cafedeespecialidad.info/wp-content/uploads/2023/11/AF1QipOgTdtr2TXBEha1cZ15X3CDV0oa5B1ZWdM5z8DUw426-h240-k-no.jpeg',
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2QHqr8VYw0dEmPGwjECeB31aNCrWJf1kymA&s',
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRg7S4KKLty4Cf20GX5ZVkoPTI7hdj8YT78XQ&s',
+    ],
+    amenities: ['WiFi', 'Exposiciones de Arte', 'Música en Vivo', 'Bar Completo'],
+    openingHoursDetailed: {
+      'Lunes': 'Cerrado',
+      'Martes': '4:00 PM - 1:00 AM',
+      'Miércoles': '4:00 PM - 1:00 AM',
+      'Jueves': '4:00 PM - 1:00 AM',
+      'Viernes': '4:00 PM - 2:00 AM',
+      'Sábado': '3:00 PM - 2:00 AM',
+      'Domingo': '3:00 PM - 12:00 AM',
+    },
+  },
+  {
+    id: '43',
+    title: 'Heladería Los Sabores',
+    category: 'Heladerías',
+    categoryId: '6',
+    rating: 4.2,
+    distance: '1.7 km',
+    image: { uri: 'https://images.pexels.com/photos/1352288/pexels-photo-1352288.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' },
+    address: 'Av. Alberdi 789, Resistencia',
+    subtitle: 'Heladería con más de 50 sabores diferentes y combinaciones únicas',
+    phone: '+54 362 4456-7907',
+    website: 'www.heladerialossabores.com',
+    openingHours: 'Lun-Dom 11:00-22:00',
+    priceRange: '$',
+    prices: {
+      minPrice: 1800,
+      maxPrice: 4500,
+      currency: 'ARS',
+      description: 'Helados entre $1.800 y $4.500'
+    },
+    menu: [
+      {
+        id: '25-1',
+        name: 'Helado de Limón',
+        description: 'Helado refrescante de limón natural',
+        price: '$2.200',
+        category: 'Helados'
+      },
+      {
+        id: '25-2',
+        name: 'Helado de Menta',
+        description: 'Helado de menta con chips de chocolate',
+        price: '$2.500',
+        category: 'Helados'
+      },
+      {
+        id: '25-3',
+        name: 'Helado de Coco',
+        description: 'Helado de coco con ralladura de coco',
+        price: '$2.300',
+        category: 'Helados'
+      },
+      {
+        id: '25-4',
+        name: 'Helado de Maracuyá',
+        description: 'Helado de maracuyá con semillas',
+        price: '$2.400',
+        category: 'Helados'
+      },
+      {
+        id: '25-5',
+        name: 'Copa Triple',
+        description: 'Copa con tres sabores a elección',
+        price: '$4.500',
+        category: 'Copas Especiales'
+      },
+      {
+        id: '25-6',
+        name: 'Granizado de Frutilla',
+        description: 'Granizado de frutilla con crema',
+        price: '$2.000',
+        category: 'Granizados'
+      }
+    ],
+    tags: ['50 Sabores', 'Combinaciones', 'Variedad', 'Familiar'],
+    discount: '20% OFF',
+    reviewCount: 145,
+    isOpen: true,
+    location: {
+      address: 'Av. Alberdi 789, Resistencia',
+      coordinates: { lat: -27.4496, lng: -58.9882 },
+    },
+    images: [
+      'https://images.pexels.com/photos/1352288/pexels-photo-1352288.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
+      'https://images.pexels.com/photos/1352289/pexels-photo-1352289.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
+      'https://images.pexels.com/photos/1352290/pexels-photo-1352290.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
+    ],
+    amenities: ['Take Away', 'Delivery', '50 Sabores', 'Ambiente Familiar'],
+    openingHoursDetailed: {
+      'Lunes': '11:00 AM - 10:00 PM',
+      'Martes': '11:00 AM - 10:00 PM',
+      'Miércoles': '11:00 AM - 10:00 PM',
+      'Jueves': '11:00 AM - 10:00 PM',
+      'Viernes': '11:00 AM - 11:00 PM',
+      'Sábado': '10:00 AM - 11:00 PM',
+      'Domingo': 'Cerrado',
+    },
+  },
+  {
+    id: '44',
+    title: 'Pizzería El Horno',
+    category: 'Italiana',
+    categoryId: '2',
+    rating: 4.3,
+    distance: '1.4 km',
+    image: { uri: 'https://images.pexels.com/photos/1565989/pexels-photo-1565989.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop' },
+    address: 'Av. 9 de Julio 234, Resistencia',
+    subtitle: 'Pizza de horno de leña con masa fina y crujiente',
+    phone: '+54 362 4456-7908',
+    website: 'www.pizzeriadelhorno.com',
+    openingHours: 'Lun-Dom 12:00-22:00',
+    priceRange: '$$',
+    prices: {
+      minPrice: 3500,
+      maxPrice: 10000,
+      currency: 'ARS',
+      description: 'Pizzas entre $3.500 y $10.000'
+    },
+    menu: [
+      {
+        id: '26-1',
+        name: 'Pizza Margherita',
+        description: 'Pizza clásica con tomate, mozzarella y albahaca',
+        price: '$6.500',
+        category: 'Pizzas Clásicas'
+      },
+      {
+        id: '26-2',
+        name: 'Pizza Napolitana',
+        description: 'Pizza con mozzarella, jamón, tomate y orégano',
+        price: '$7.800',
+        category: 'Pizzas Clásicas'
+      },
+      {
+        id: '26-3',
+        name: 'Pizza Fugazzeta',
+        description: 'Pizza con cebolla caramelizada y mozzarella',
+        price: '$6.800',
+        category: 'Pizzas Clásicas'
+      },
+      {
+        id: '26-4',
+        name: 'Pizza Calabresa',
+        description: 'Pizza con salami picante y mozzarella',
+        price: '$8.200',
+        category: 'Pizzas Especiales'
+      },
+      {
+        id: '26-5',
+        name: 'Pizza Cuatro Quesos',
+        description: 'Pizza con mozzarella, gorgonzola, parmesano y provolone',
+        price: '$9.500',
+        category: 'Pizzas Especiales'
+      },
+      {
+        id: '26-6',
+        name: 'Faina',
+        description: 'Faina tradicional de garbanzos',
+        price: '$2.500',
+        category: 'Acompañamientos'
+      }
+    ],
+    tags: ['Horno de Leña', 'Masa Fina', 'Crujiente', 'Tradicional'],
+    discount: '25% OFF',
+    reviewCount: 123,
+    isOpen: true,
+    location: {
+      address: 'Av. 9 de Julio 234, Resistencia',
+      coordinates: { lat: -27.4509, lng: -58.9858 },
+    },
+    images: [
+      'https://images.pexels.com/photos/1565989/pexels-photo-1565989.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
+      'https://images.pexels.com/photos/1565990/pexels-photo-1565990.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
+      'https://images.pexels.com/photos/1565991/pexels-photo-1565991.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
+    ],
+    amenities: ['Horno de Leña', 'Delivery', 'Take Away', 'Masa Fina'],
+    openingHoursDetailed: {
+      'Lunes': '12:00 PM - 10:00 PM',
+      'Martes': '12:00 PM - 10:00 PM',
+      'Miércoles': '12:00 PM - 10:00 PM',
+      'Jueves': '12:00 PM - 10:00 PM',
+      'Viernes': '12:00 PM - 11:00 PM',
+      'Sábado': '11:00 AM - 11:00 PM',
+      'Domingo': 'Cerrado',
+    },
+  },
+  {
+    id: '45',
     title: 'Amore mio',
     category: 'Cafeterías',
     categoryId: '7',

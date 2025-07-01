@@ -1,14 +1,5 @@
 import React, { useState } from 'react';
-import { 
-  StyleSheet, 
-  View, 
-  Text, 
-  ScrollView, 
-  TouchableOpacity, 
-  Image,
-  TextInput,
-  FlatList
-} from 'react-native';
+import { StyleSheet, View, Text, ScrollView, TouchableOpacity, TextInput } from 'react-native';
 import Animated, { FadeInUp } from 'react-native-reanimated';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useAuth } from '@/hooks/useAuth';
@@ -22,10 +13,7 @@ import { navigate } from 'expo-router/build/global-state/routing';
 import { CategoryCarousel } from '@/components/CategoryCarousel';
 import { PromoCarousel } from '@/components/PromoCarousel';
 import { RestaurantSection } from '@/components/RestaurantSection';
-import { 
-  getFeaturedRestaurant,
-  Restaurant 
-} from '@/data/restaurants';
+import { getFeaturedRestaurant, Restaurant } from '@/data/restaurants';
 import { HighlightCard } from '@/components/HighlightCard';
 
 export default function HomeScreen() {
@@ -111,8 +99,8 @@ export default function HomeScreen() {
           filterType="bodegones"
         />
 
-{/* Beneficio exclusivo */}
-<HighlightCard
+        {/* Beneficio exclusivo */}
+        <HighlightCard
           image={require('@/assets/images/mapa.jpg')}
           badgeText="Exclusivo"
           title="Mapa interactivo"
@@ -177,7 +165,7 @@ const styles = StyleSheet.create({
   searchInputContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#FFF',
+    backgroundColor: COLORS.background,
     borderRadius: 25,
     paddingHorizontal: 16,
     paddingVertical: 12,
@@ -196,147 +184,5 @@ const styles = StyleSheet.create({
     fontFamily: 'Inter-Regular',
     fontSize: 16,
     color: COLORS.text,
-  },
-  filterButton: {
-    backgroundColor: '#F59439',
-    borderRadius: 8,
-    padding: 6,
-  },
-  sectionTitle: {
-    fontFamily: 'Inter-Bold',
-    fontSize: 20,
-    color: COLORS.text,
-    marginBottom: 16,
-  },
-  categoriesContainer: {
-    paddingBottom: 8,
-    marginBottom: 24,
-  },
-  categoryButton: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#FFF',
-    borderRadius: 20,
-    paddingVertical: 8,
-    paddingHorizontal: 16,
-    marginRight: 10,
-    borderWidth: 1,
-    borderColor: '#EAEAEA',
-  },
-  categoryButtonActive: {
-    backgroundColor: '#F59439',
-    borderColor: '#F59439',
-  },
-  categoryText: {
-    fontFamily: 'Inter-Medium',
-    fontSize: 14,
-    color: COLORS.textSecondary,
-    marginLeft: 8,
-  },
-  categoryTextActive: {
-    color: '#FFF',
-  },
-  featuredCard: {
-    height: 200,
-    borderRadius: 16,
-    overflow: 'hidden',
-    marginBottom: 24,
-    position: 'relative',
-  },
-  featuredImage: {
-    width: '100%',
-    height: '100%',
-  },
-  featuredOverlay: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    backgroundColor: 'rgba(0,0,0,0.3)',
-  },
-  featuredContent: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
-    padding: 16,
-  },
-  featuredTitle: {
-    fontFamily: 'Inter-Bold',
-    fontSize: 24,
-    color: '#FFF',
-    marginBottom: 8,
-  },
-  featuredInfo: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  ratingBadge: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#F59439',
-    borderRadius: 20,
-    paddingVertical: 4,
-    paddingHorizontal: 10,
-    marginRight: 10,
-  },
-  ratingText: {
-    fontFamily: 'Inter-Bold',
-    fontSize: 14,
-    color: '#FFF',
-    marginLeft: 4,
-  },
-  featuredCategory: {
-    fontFamily: 'Inter-Medium',
-    fontSize: 14,
-    color: '#FFF',
-    marginRight: 10,
-  },
-  featuredDistance: {
-    fontFamily: 'Inter-Regular',
-    fontSize: 14,
-    color: '#FFF',
-  },
-  restaurantCard: {
-    flexDirection: 'row',
-    backgroundColor: '#FFF',
-    borderRadius: 12,
-    overflow: 'hidden',
-    marginBottom: 16,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 2,
-  },
-  restaurantImage: {
-    width: 100,
-    height: 100,
-  },
-  restaurantInfo: {
-    flex: 1,
-    padding: 12,
-  },
-  restaurantName: {
-    fontFamily: 'Inter-Bold',
-    fontSize: 16,
-    color: COLORS.text,
-    marginBottom: 8,
-  },
-  restaurantDetails: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  restaurantCategory: {
-    fontFamily: 'Inter-Regular',
-    fontSize: 14,
-    color: COLORS.textSecondary,
-    marginRight: 10,
-  },
-  restaurantDistance: {
-    fontFamily: 'Inter-Regular',
-    fontSize: 14,
-    color: COLORS.textSecondary,
   },
 });

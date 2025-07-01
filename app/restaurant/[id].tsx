@@ -1,39 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { 
-  StyleSheet, 
-  View, 
-  Text, 
-  ScrollView, 
-  TouchableOpacity, 
-  Image,
-  Linking,
-  FlatList,
-  Dimensions,
-  Alert
-} from 'react-native';
+import { StyleSheet, View, Text, ScrollView, TouchableOpacity, Image, Linking, FlatList, Dimensions, Alert, Modal, TextInput } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useLocalSearchParams, router } from 'expo-router';
 import { MaterialIcons, Ionicons } from '@expo/vector-icons';
-import { 
-  ArrowLeft, 
-  Heart, 
-  Share, 
-  Star, 
-  MapPin, 
-  Clock, 
-  Phone,
-  Wifi,
-  Car,
-  Accessibility,
-  TreePine,
-  ThumbsUp,
-} from 'lucide-react-native';
+import { ArrowLeft, Heart, Share, Star, MapPin, Clock, Phone, Wifi, Car, Accessibility, TreePine, ThumbsUp } from 'lucide-react-native';
 import { COLORS } from '@/constants/Colors';
 import { getRestaurantById, MenuItem } from '@/data/restaurants';
-import { getPromotionsByCategory } from '@/data/promotions';
+import { getAllPromotions } from '@/data/promotions';
 import { getReviewsByRestaurantId, Review } from '@/data/reviews';
 import { useFavorites } from '@/contexts/FavoritesContext';
 import { useCart } from '@/contexts/CartContext';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const { width } = Dimensions.get('window');
 
@@ -44,6 +21,13 @@ export default function RestaurantScreen() {
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const { isFavorite, addToFavorites, removeFromFavorites } = useFavorites();
   const { addItem, cartItems } = useCart();
+  const [showReviewModal, setShowReviewModal] = useState(false);
+  const [newReview, setNewReview] = useState({
+    userName: '',
+    rating: 0,
+    comment: '',
+  });
+  const [localReviews, setLocalReviews] = useState<Review[]>([]);
 
   if (!restaurant) {
     return (
@@ -58,11 +42,29 @@ export default function RestaurantScreen() {
     );
   }
 
-  const promotions = getPromotionsByCategory(restaurant.category);
-  const reviews = getReviewsByRestaurantId(restaurant.id);
+  const promotions = getAllPromotions().filter(promo => promo.restaurantId === restaurant.id);
+  const reviews = [
+    ...getReviewsByRestaurantId(restaurant.id),
+    ...localReviews
+  ];
   const images = restaurant.images || [restaurant.image];
   const isRestaurantFavorite = isFavorite(restaurant.id);
   const menuItems = restaurant.menu || [];
+
+  useEffect(() => {
+    const loadLocalReviews = async () => {
+      try {
+        const stored = await AsyncStorage.getItem(`reviews_${restaurant.id}`);
+        if (stored) {
+          setLocalReviews(JSON.parse(stored));
+        }
+      } catch (e) {
+        // Error al leer
+      }
+    };
+    loadLocalReviews();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [restaurant.id]);
 
   const toggleFavorite = () => {
     if (isRestaurantFavorite) {
@@ -201,6 +203,34 @@ export default function RestaurantScreen() {
       </View>
     </View>
   );
+
+  const handleAddReview = async () => {
+    if (!newReview.userName || !newReview.comment || newReview.rating === 0) {
+      Alert.alert('Completa todos los campos y selecciona una calificación.');
+      return;
+    }
+    const newLocalReviews = [
+      {
+        id: Date.now().toString(),
+        restaurantId: restaurant.id,
+        userName: newReview.userName,
+        userAvatar: 'https://ui-avatars.com/api/?name=' + encodeURIComponent(newReview.userName),
+        rating: newReview.rating,
+        comment: newReview.comment,
+        date: new Date().toLocaleDateString('es-ES'),
+        helpful: 0,
+      },
+      ...localReviews
+    ];
+    setLocalReviews(newLocalReviews);
+    try {
+      await AsyncStorage.setItem(`reviews_${restaurant.id}` , JSON.stringify(newLocalReviews));
+    } catch (e) {
+      // Error al guardar
+    }
+    setShowReviewModal(false);
+    setNewReview({ userName: '', rating: 0, comment: '' });
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -418,6 +448,63 @@ export default function RestaurantScreen() {
             </View>
           ) : (
             <View style={styles.reviewsContainer}>
+              <TouchableOpacity
+                style={{
+                  backgroundColor: COLORS.PRIMARY_COLOR,
+                  borderRadius: 8,
+                  paddingVertical: 12,
+                  paddingHorizontal: 20,
+                  alignItems: 'center',
+                  marginBottom: 16,
+                  alignSelf: 'center',
+                }}
+                onPress={() => setShowReviewModal(true)}
+              >
+                <Text style={{ color: COLORS.background, fontFamily: 'Inter-Bold', fontSize: 16 }}>
+                  Agregar reseña
+                </Text>
+              </TouchableOpacity>
+              <Modal
+                visible={showReviewModal}
+                animationType="slide"
+                transparent
+                onRequestClose={() => setShowReviewModal(false)}
+              >
+                <View style={{ flex: 1, backgroundColor: 'rgba(0,0,0,0.3)', justifyContent: 'center', alignItems: 'center' }}>
+                  <View style={{ backgroundColor: COLORS.background, borderRadius: 16, padding: 24, width: '85%' }}>
+                    <Text style={{ fontFamily: 'Inter-Bold', fontSize: 20, marginBottom: 16, color: COLORS.text }}>Agregar reseña</Text>
+                    <TextInput
+                      placeholder="Tu nombre"
+                      value={newReview.userName}
+                      onChangeText={text => setNewReview({ ...newReview, userName: text })}
+                      style={{ borderWidth: 1, borderColor: COLORS.border, borderRadius: 8, padding: 10, marginBottom: 12, fontFamily: 'Inter-Regular', color: COLORS.text }}
+                    />
+                    <Text style={{ fontFamily: 'Inter-Medium', fontSize: 16, marginBottom: 8, color: COLORS.text }}>Calificación</Text>
+                    <View style={{ flexDirection: 'row', marginBottom: 12 }}>
+                      {[1,2,3,4,5].map(star => (
+                        <TouchableOpacity key={star} onPress={() => setNewReview({ ...newReview, rating: star })}>
+                          <Star size={28} color={star <= newReview.rating ? '#FFB830' : COLORS.border} fill={star <= newReview.rating ? '#FFB830' : 'none'} />
+                        </TouchableOpacity>
+                      ))}
+                    </View>
+                    <TextInput
+                      placeholder="Escribe tu comentario"
+                      value={newReview.comment}
+                      onChangeText={text => setNewReview({ ...newReview, comment: text })}
+                      style={{ borderWidth: 1, borderColor: COLORS.border, borderRadius: 8, padding: 10, minHeight: 60, fontFamily: 'Inter-Regular', color: COLORS.text, marginBottom: 16 }}
+                      multiline
+                    />
+                    <View style={{ flexDirection: 'row', justifyContent: 'flex-end', gap: 12 }}>
+                      <TouchableOpacity onPress={() => setShowReviewModal(false)} style={{ paddingVertical: 10, paddingHorizontal: 18 }}>
+                        <Text style={{ color: COLORS.textSecondary, fontFamily: 'Inter-Bold', fontSize: 16 }}>Cancelar</Text>
+                      </TouchableOpacity>
+                      <TouchableOpacity onPress={handleAddReview} style={{ backgroundColor: COLORS.PRIMARY_COLOR, borderRadius: 8, paddingVertical: 10, paddingHorizontal: 18 }}>
+                        <Text style={{ color: COLORS.background, fontFamily: 'Inter-Bold', fontSize: 16 }}>Enviar</Text>
+                      </TouchableOpacity>
+                    </View>
+                  </View>
+                </View>
+              </Modal>
               {reviews.length > 0 ? (
                 <FlatList
                   data={reviews}
@@ -469,7 +556,7 @@ export default function RestaurantScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: COLORS.background,
   },
   imageContainer: {
     position: 'relative',
@@ -477,7 +564,7 @@ const styles = StyleSheet.create({
   headerImage: {
     width,
     height: 300,
-    backgroundColor: '#F3F4F6',
+    backgroundColor: COLORS.borderLight,
   },
   imageIndicators: {
     position: 'absolute',
@@ -495,7 +582,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(255, 255, 255, 0.5)',
   },
   activeIndicator: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: COLORS.background,
   },
   headerActions: {
     position: 'absolute',
@@ -527,7 +614,7 @@ const styles = StyleSheet.create({
     elevation: 4,
   },
   favoriteButton: {
-    backgroundColor: '#FF6B35',
+    backgroundColor: COLORS.PRIMARY_COLOR,
   },
   content: {
     padding: 20,
@@ -547,7 +634,7 @@ const styles = StyleSheet.create({
   category: {
     fontSize: 14,
     fontFamily: 'Inter-SemiBold',
-    color: '#FF6B35',
+    color: COLORS.PRIMARY_COLOR,
     textTransform: 'uppercase',
     letterSpacing: 0.5,
   },
@@ -636,7 +723,7 @@ const styles = StyleSheet.create({
   amenityText: {
     fontSize: 12,
     fontFamily: 'Inter-SemiBold',
-    color: '#FF6B35',
+    color: COLORS.PRIMARY_COLOR,
   },
   hoursContainer: {
     gap: 8,
@@ -671,7 +758,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
   },
   tabActive: {
-    backgroundColor: '#FF6B35',
+    backgroundColor: COLORS.PRIMARY_COLOR,
   },
   tabText: {
     fontSize: 14,
@@ -679,24 +766,27 @@ const styles = StyleSheet.create({
     color: '#6B7280',
   },
   tabTextActive: {
-    color: '#FFFFFF',
+    color: COLORS.background,
   },
   menuContainer: {
     gap: 12,
   },
   menuItem: {
     flexDirection: 'row',
-    backgroundColor: '#FFFFFF',
-    borderRadius: 12,
+    backgroundColor: COLORS.background,
+    borderRadius: 16,
     padding: 16,
+    marginBottom: 12,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 4,
     elevation: 2,
+    alignItems: 'center',
   },
   menuItemInfo: {
     flex: 1,
+    marginRight: 8,
   },
   menuItemName: {
     fontSize: 16,
@@ -713,13 +803,18 @@ const styles = StyleSheet.create({
   menuItemPrice: {
     fontSize: 16,
     fontFamily: 'Inter-Bold',
-    color: '#FF6B35',
+    color: COLORS.PRIMARY_COLOR,
   },
   menuItemImage: {
-    width: 80,
-    height: 80,
-    borderRadius: 8,
+    width: 90,
+    height: 90,
+    borderRadius: 12,
     marginLeft: 12,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 3,
   },
   menuItemActions: {
     flexDirection: 'row',
@@ -727,7 +822,7 @@ const styles = StyleSheet.create({
     gap: 8,
   },
   addToCartButton: {
-    backgroundColor: '#FF6B35',
+    backgroundColor: COLORS.PRIMARY_COLOR,
     padding: 8,
     borderRadius: 8,
   },
@@ -735,7 +830,7 @@ const styles = StyleSheet.create({
     gap: 12,
   },
   promotionCard: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: COLORS.background,
     borderRadius: 12,
     overflow: 'hidden',
     shadowColor: '#000',
@@ -766,13 +861,13 @@ const styles = StyleSheet.create({
   },
   discountBadge: {
     alignSelf: 'flex-start',
-    backgroundColor: '#FF6B35',
+    backgroundColor: COLORS.PRIMARY_COLOR,
     borderRadius: 4,
     paddingHorizontal: 8,
     paddingVertical: 4,
   },
   discountText: {
-    color: '#FFFFFF',
+    color: COLORS.background,
     fontSize: 12,
     fontFamily: 'Inter-Bold',
   },
@@ -788,9 +883,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 20,
     paddingVertical: 16,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: COLORS.background,
     borderTopWidth: 1,
-    borderTopColor: '#F3F4F6',
+    borderTopColor: COLORS.borderLight,
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
@@ -821,11 +916,11 @@ const styles = StyleSheet.create({
     marginTop: 4,
   },
   reserveButton: {
-    backgroundColor: '#FF6B35',
+    backgroundColor: COLORS.PRIMARY_COLOR,
     paddingHorizontal: 32,
     paddingVertical: 16,
     borderRadius: 12,
-    shadowColor: '#FF6B35',
+    shadowColor: COLORS.PRIMARY_COLOR,
     shadowOffset: {
       width: 0,
       height: 4,
@@ -835,12 +930,12 @@ const styles = StyleSheet.create({
     elevation: 8,
   },
   reserveButtonDisabled: {
-    backgroundColor: '#F3F4F6',
+    backgroundColor: COLORS.borderLight,
   },
   reserveButtonText: {
     fontSize: 16,
     fontFamily: 'Inter-Bold',
-    color: '#FFFFFF',
+    color: COLORS.background,
   },
   errorContainer: {
     flex: 1,
@@ -849,7 +944,7 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   backButton: {
-    backgroundColor: '#FF6B35',
+    backgroundColor: COLORS.PRIMARY_COLOR,
     paddingHorizontal: 16,
     paddingVertical: 8,
     borderRadius: 8,
@@ -863,13 +958,13 @@ const styles = StyleSheet.create({
   backButtonText: {
     fontSize: 16,
     fontFamily: 'Inter-Bold',
-    color: '#FF6B35',
+    color: COLORS.PRIMARY_COLOR,
   },
   reviewsContainer: {
     gap: 12,
   },
   reviewItem: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: COLORS.background,
     borderRadius: 12,
     padding: 16,
     shadowColor: '#000',

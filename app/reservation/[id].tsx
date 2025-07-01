@@ -1,21 +1,12 @@
 import React, { useState } from "react";
-import { 
-  View, 
-  Text, 
-  ScrollView, 
-  TouchableOpacity, 
-  StyleSheet, 
-  Alert, 
-  TextInput,
-  Modal,
-  Platform
-} from "react-native";
+import { View, Text, ScrollView, TouchableOpacity, StyleSheet, Alert, TextInput, Modal, Platform } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { router, useLocalSearchParams } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { getRestaurantById } from "@/data/restaurants";
 import TableSelector from "@/components/TableSelector";
+import { useReservations } from "@/contexts/ReservationsContext";
 
 interface Table {
   id: number;
@@ -42,6 +33,7 @@ const tables: Table[] = [
 export default function Reservation() {
   const { id } = useLocalSearchParams();
   const restaurant = getRestaurantById(id as string);
+  const { addReservation } = useReservations();
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [selectedTime, setSelectedTime] = useState("");
@@ -93,6 +85,22 @@ export default function Reservation() {
         { 
           text: "Confirmar", 
           onPress: () => {
+            // Guardar la reserva en el contexto
+            addReservation({
+              restaurantId: restaurant.id,
+              restaurantName: restaurant.title,
+              restaurantAddress: restaurant.address,
+              restaurantImage: restaurant.image,
+              date: selectedDate.toISOString().split('T')[0], // Formato YYYY-MM-DD
+              time: selectedTime,
+              tableId: selectedTable,
+              tableCapacity: capacity,
+              customerName: name,
+              customerPhone: phone,
+              notes: notes.trim() || undefined,
+              status: 'confirmed'
+            });
+            
             setShowSuccessModal(true);
           }
         },

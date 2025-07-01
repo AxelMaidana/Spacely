@@ -1,26 +1,12 @@
 import React, { useEffect } from 'react';
-import { 
-  View, 
-  Text, 
-  StyleSheet, 
-  SafeAreaView, 
-  Image,
-  Dimensions,
-  ActivityIndicator
-} from 'react-native';
+import { Text, StyleSheet, SafeAreaView, Image, Dimensions, ActivityIndicator, View } from 'react-native';
 import { router } from 'expo-router';
-import Animated, { 
-  useSharedValue, 
-  useAnimatedStyle, 
-  withTiming,
-  withSequence,
-  withDelay,
-  runOnJS,
-  Easing
-} from 'react-native-reanimated';
+import Animated, { useSharedValue, useAnimatedStyle, withTiming, withSequence, withDelay, runOnJS, Easing } from 'react-native-reanimated';
 import { useAuth } from '@/hooks/useAuth';
 import imagePath from '@/constants/imagePath';
 import { moderateScale, moderateVerticalScale } from 'react-native-size-matters';
+import { COLORS } from '@/constants/Colors';
+import { LinearGradient } from 'expo-linear-gradient';
 
 const { width } = Dimensions.get('window');
 
@@ -43,9 +29,8 @@ export default function SplashScreen() {
   };
 
   useEffect(() => {
-    // Animación principal (logo) - Más lenta
     fadeAnim.value = withSequence(
-      withTiming(1, { duration: 1500, easing: Easing.out(Easing.exp) }),
+      withTiming(1, { duration: 1200, easing: Easing.out(Easing.exp) }),
       withDelay(
         2000,
         withTiming(0, { duration: 1000 }, (finished) => {
@@ -57,13 +42,12 @@ export default function SplashScreen() {
     );
 
     scaleAnim.value = withSequence(
-      withTiming(1, { duration: 1500, easing: Easing.out(Easing.exp) }),
+      withTiming(1.1, { duration: 1200, easing: Easing.out(Easing.exp) }),
       withDelay(
         2000,
-        withTiming(1.1, { duration: 1000, easing: Easing.out(Easing.exp) })
+        withTiming(1.2, { duration: 1000, easing: Easing.out(Easing.exp) })
     ));
 
-    // Animación del loader (después de 1 segundo)
     setTimeout(() => {
       loaderAnim.value = withTiming(1, { 
         duration: 1000,
@@ -71,12 +55,8 @@ export default function SplashScreen() {
       });
     }, 1000);
 
-    // Animación del círculo de fondo (después de 3 segundos)
     setTimeout(() => {
-      // Primero ocultamos el contenido
       contentOpacity.value = withTiming(0, { duration: 300 });
-      
-      // Luego expandimos el círculo naranja
       setTimeout(() => {
         backgroundCircleScale.value = withTiming(4, { 
           duration: 3000,
@@ -89,6 +69,11 @@ export default function SplashScreen() {
   const logoStyle = useAnimatedStyle(() => ({
     opacity: fadeAnim.value,
     transform: [{ scale: scaleAnim.value }],
+    shadowColor: COLORS.PRIMARY_COLOR,
+    shadowOffset: { width: 0, height: 8 },
+    shadowOpacity: 0.25,
+    shadowRadius: 24,
+    elevation: 12,
   }));
 
   const backgroundStyle = useAnimatedStyle(() => ({
@@ -104,65 +89,83 @@ export default function SplashScreen() {
   }));
 
   return (
-    <SafeAreaView style={styles.container}>
-      {/* Contenido principal (logo, texto, loader) */}
+    <SafeAreaView style={{ flex: 1 }}>
+      <LinearGradient
+        colors={[COLORS.PRIMARY_COLOR, '#fffbe6', COLORS.background]}
+        style={StyleSheet.absoluteFill}
+        start={{ x: 0.2, y: 0 }}
+        end={{ x: 1, y: 1 }}
+      />
+      {/* Contenido principal */}
       <Animated.View style={[styles.content, contentStyle]}>
-        <Animated.View style={[styles.logoContainer, logoStyle]}>
+        <View style={styles.logoCenterContainer}>
+          <View style={styles.logoBgCircle} />
           <Image
             source={imagePath.logo}
             style={styles.logo}
             resizeMode='contain'
           />
-        </Animated.View>
-
-        {/* Círculo de carga simple */}
+        </View>
         <Animated.View style={[styles.loaderContainer, loaderStyle]}>
-          <ActivityIndicator size="large" color="#FFA500" />
+          <ActivityIndicator size="large" color={COLORS.PRIMARY_COLOR} />
         </Animated.View>
+        <Text style={styles.slogan}>¡Tu mesa, tu momento!</Text>
       </Animated.View>
-
-      {/* Círculo de fondo expandible - Ahora encima de todo */}
+      {/* Círculo de fondo expandible */}
       <Animated.View
         style={[
           styles.backgroundCircle,
           backgroundStyle,
-          { zIndex: 10 } // Asegura que esté por encima
+          { zIndex: 10 }
         ]}
       />
-
-      {/* Footer - También debe estar detrás del círculo naranja */}
+      {/* Footer */}
       <Animated.View style={[styles.footer, contentStyle]}>
-        <Text style={styles.headFooterText}>from</Text>
-        <Text style={styles.footerText}>UTN STUDENTS</Text>
+        <Text style={styles.headFooterText}>de</Text>
+        <Text style={styles.footerText}>ESTUDIANTES UTN</Text>
       </Animated.View>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#0B141A',
-    paddingVertical: moderateVerticalScale(40),
-    paddingHorizontal: moderateScale(20),
-  },
   content: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
   },
-  logoContainer: {
+  logoCenterContainer: {
     alignItems: 'center',
     justifyContent: 'center',
+    width: moderateScale(140),
+    height: moderateScale(140),
+    marginBottom: 32,
+  },
+  logoBgCircle: {
+    position: 'absolute',
+    width: moderateScale(120),
+    height: moderateScale(120),
+    borderRadius: moderateScale(60),
+    backgroundColor: COLORS.PRIMARY_COLOR_DARK,
+    opacity: 0.92,
+    zIndex: 0,
+    shadowColor: COLORS.PRIMARY_COLOR_DARK,
+    shadowOffset: { width: 0, height: 12 },
+    shadowOpacity: 0.35,
+    shadowRadius: 32,
+    elevation: 18,
   },
   logo: {
-    width: moderateScale(200),
-    height: moderateScale(200),
+    width: moderateScale(170),
+    height: moderateScale(170),
+    zIndex: 1,
   },
   loaderContainer: {
-    height: moderateVerticalScale(40),
+    height: moderateVerticalScale(80),
     justifyContent: 'center',
     alignItems: 'center',
+    marginTop: 16,
+    marginBottom: 16,
   },
   backgroundCircle: {
     position: 'absolute',
@@ -170,7 +173,7 @@ const styles = StyleSheet.create({
     left: '50%',
     width: width * 2,
     height: width * 2,
-    backgroundColor: '#FFA500',
+    backgroundColor: COLORS.PRIMARY_COLOR,
     borderRadius: width,
     transform: [{ translateX: -width }, { translateY: -width }],
   },
@@ -180,10 +183,26 @@ const styles = StyleSheet.create({
   },
   headFooterText: {
     fontSize: moderateScale(12),
-    color: 'white',
+    color: COLORS.PRIMARY_COLOR_DARK,
+    fontFamily: 'Inter-Regular',
+    marginBottom: 2,
   },
   footerText: {
     fontSize: moderateScale(16),
-    color: 'white',
+    color: COLORS.PRIMARY_COLOR_DARK,
+    fontFamily: 'Inter-Bold',
+    letterSpacing: 2,
+  },
+  slogan: {
+    fontFamily: 'Inter-Bold',
+    fontSize: 18,
+    color: COLORS.PRIMARY_COLOR_DARK,
+    marginTop: 0,
+    marginBottom: 8,
+    textAlign: 'center',
+    letterSpacing: 1.2,
+    textShadowColor: 'rgba(0,0,0,0.08)',
+    textShadowOffset: { width: 0, height: 2 },
+    textShadowRadius: 4,
   },
 });

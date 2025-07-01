@@ -4,6 +4,7 @@ import { router } from 'expo-router';
 import { MaterialIcons } from '@expo/vector-icons';
 import { Restaurant } from '@/data/restaurants';
 import DiscountSVG from '@/assets/icons/discount.svg';
+import { COLORS } from '@/constants/Colors';
 
 interface CarouselItem {
   id: string;
@@ -135,7 +136,7 @@ const styles = StyleSheet.create({
   },
   actionText: {
     fontSize: 14,
-    color: '#FF6B35',
+    color: COLORS.PRIMARY_COLOR,
     fontWeight: '500',
   },
   scrollContent: {
@@ -143,7 +144,7 @@ const styles = StyleSheet.create({
   },
   card: {
     width: 220,
-    backgroundColor: '#FFF',
+    backgroundColor: COLORS.background,
     borderRadius: 12,
     padding: 12,
     marginBottom: 12,
@@ -177,7 +178,7 @@ const styles = StyleSheet.create({
     height: 100,
     borderRadius: 8,
     marginBottom: 10,
-    backgroundColor: '#F3F4F6',
+    backgroundColor: COLORS.borderLight,
   },
   cardFooter: {
     flexDirection: 'row',
@@ -185,7 +186,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   discountBadge: {
-    backgroundColor: '#FF6B35',
+    backgroundColor: COLORS.PRIMARY_COLOR,
     borderRadius: 25,
     paddingHorizontal: 8,
     paddingVertical: 4,
@@ -196,7 +197,7 @@ const styles = StyleSheet.create({
     marginRight: 4,
   },
   discountText: {
-    color: '#FFF',
+    color: COLORS.background,
     fontSize: 12,
     fontWeight: 'bold',
   },
@@ -206,7 +207,7 @@ const styles = StyleSheet.create({
   },
   extraInfo: {
     fontSize: 12,
-    color: '#FF6B35',
+    color: COLORS.PRIMARY_COLOR,
     fontWeight: '500',
   },
 });

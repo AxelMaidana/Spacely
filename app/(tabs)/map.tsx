@@ -1,19 +1,8 @@
 import React, { useState, useEffect, lazy, Suspense } from 'react';
-import { 
-  View, 
-  Text, 
-  StyleSheet, 
-  TouchableOpacity, 
-  TextInput,
-  ScrollView,
-  Image,
-  Dimensions,
-  Alert,
-  Platform
-} from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, TextInput, ScrollView, Image, Dimensions, Alert, Platform } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { MaterialIcons, Ionicons } from '@expo/vector-icons';
-import { ArrowLeft, Star, MapPin, Clock } from 'lucide-react-native';
+import { MaterialIcons } from '@expo/vector-icons';
+import { Star, MapPin, Clock } from 'lucide-react-native';
 import { router } from 'expo-router';
 import { COLORS } from '@/constants/Colors';
 import { useRestaurantFilters } from '@/hooks/useRestaurantFilters';
@@ -191,7 +180,7 @@ export default function MapViewScreen() {
               <MaterialIcons 
                 name={option.icon as any} 
                 size={16} 
-                color={selectedFilter === option.id ? '#FFFFFF' : '#6B7280'} 
+                color={selectedFilter === option.id ? COLORS.background : '#6B7280'} 
               />
               <Text style={[
                 styles.filterText,
@@ -327,7 +316,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#F3F4F6',
+    backgroundColor: COLORS.borderLight,
     borderRadius: 20,
     paddingVertical: 8,
     paddingHorizontal: 12,
@@ -338,8 +327,8 @@ const styles = StyleSheet.create({
     minHeight: 36,
   },
   filterButtonActive: {
-    backgroundColor: '#FF6B35',
-    borderColor: '#FF6B35',
+    backgroundColor: COLORS.PRIMARY_COLOR,
+    borderColor: COLORS.PRIMARY_COLOR,
   },
   filterText: {
     fontFamily: 'Inter-Medium',
@@ -349,14 +338,14 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   filterTextActive: {
-    color: '#FFFFFF',
+    color: COLORS.background,
   },
   restaurantCard: {
     position: 'absolute',
     bottom: 20,
     left: 20,
     right: 20,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: COLORS.background,
     borderRadius: 16,
     padding: 16,
     flexDirection: 'row',
@@ -384,7 +373,7 @@ const styles = StyleSheet.create({
   restaurantCategory: {
     fontSize: 14,
     fontFamily: 'Inter-Medium',
-    color: '#FF6B35',
+    color: COLORS.PRIMARY_COLOR,
     marginBottom: 8,
   },
   restaurantDetails: {
@@ -429,7 +418,7 @@ const styles = StyleSheet.create({
   actionButton: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#FF6B35',
+    backgroundColor: COLORS.PRIMARY_COLOR,
     borderRadius: 8,
     paddingHorizontal: 12,
     paddingVertical: 6,
@@ -442,7 +431,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#3B82F6',
   },
   actionButtonText: {
-    color: '#FFFFFF',
+    color: COLORS.background,
     fontSize: 12,
     fontFamily: 'Inter-Medium',
   },
