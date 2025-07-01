@@ -1,6 +1,6 @@
 # 🍽️ Spacely App
 
-## ¿Qué es Spacely App?
+## ¿Qué es?
 
 **Spacely App** es una aplicación móvil desarrollada con **React Native y Expo** que permite a los usuarios **descubrir, explorar y reservar en restaurantes y restobares** cercanos, todo desde una misma plataforma.
 
